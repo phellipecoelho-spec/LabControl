@@ -25,19 +25,27 @@
 
     <!-- Notifications placeholder -->
     <OverlayBadge value="0" severity="info">
-      <i class="pi pi-bell app-topbar__action" style="font-size: 1.25rem"></i>
+      <i
+        class="pi pi-bell app-topbar__action"
+        style="font-size: 1.25rem"
+        aria-label="Notificações"
+      ></i>
     </OverlayBadge>
 
-    <!-- User avatar menu -->
-    <Avatar
-      :image="userAvatar"
-      :label="userInitials"
-      shape="circle"
-      class="app-topbar__avatar"
+    <!-- User avatar menu (keyboard-accessible button wrapper) -->
+    <button
+      class="app-topbar__avatar-wrapper p-link"
       @click="toggleUserMenu"
+      @keydown.enter="toggleUserMenu"
       aria-haspopup="true"
       :aria-label="auth.user?.name || 'Menu do usuário'"
-    />
+    >
+      <Avatar
+        :image="userAvatar"
+        :label="userInitials"
+        shape="circle"
+      />
+    </button>
     <Menu ref="userMenuRef" :model="userMenuItems" :popup="true" />
   </header>
 </template>
@@ -94,5 +102,21 @@ function toggleUserMenu(event: Event) {
 <style scoped>
 .app-topbar__avatar {
   cursor: pointer;
+  pointer-events: none;
+}
+
+.app-topbar__avatar-wrapper {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.app-topbar__avatar-wrapper:focus-visible {
+  outline: 2px solid var(--app-accent);
+  outline-offset: 2px;
 }
 </style>

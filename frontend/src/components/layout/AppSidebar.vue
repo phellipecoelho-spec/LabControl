@@ -11,12 +11,13 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="app-sidebar__nav">
+    <nav class="app-sidebar__nav" role="navigation" aria-label="Navegação principal">
       <!-- Dashboard link (fixed top, outside PanelMenu) -->
       <router-link
         to="/"
         class="app-sidebar__dashboard"
         :class="{ 'app-sidebar__dashboard--active': isDashboardActive }"
+        v-tooltip.right="collapsed ? 'Dashboard' : undefined"
         aria-label="Dashboard"
       >
         <i class="pi pi-home"></i>
@@ -118,5 +119,10 @@ watch(
   color: var(--app-accent) !important;
   background: var(--app-accent-soft) !important;
   border-radius: 6px;
+}
+
+.app-sidebar__nav :deep(.p-panelmenu-item-active) {
+  color: var(--app-accent);
+  background: var(--app-accent-soft);
 }
 </style>
