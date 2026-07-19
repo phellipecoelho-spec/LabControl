@@ -1,0 +1,51 @@
+{
+  "ecosystem": "packagist",
+  "config": {
+    "exa_search": false,
+    "brave_search": false,
+    "firecrawl": false,
+    "tavily_search": false
+  },
+  "questions": [
+    {
+      "text": "Laravel Sanctum SPA authentication configuration best practices: session cookie settings (SameSite, Secure, domain), CSRF protection with Vue 3, remember_token handling for 30-day remember me",
+      "kind": "docs",
+      "library": "laravel/sanctum",
+      "version": "^4.0"
+    },
+    {
+      "text": "Laravel built-in email verification implementation: MustVerifyEmail interface, signed URL generation with FRONTEND_URL, verification routes, resend verification throttle configuration",
+      "kind": "docs",
+      "library": "laravel/framework",
+      "version": "^12.0"
+    },
+    {
+      "text": "Laravel built-in password reset flow: token generation, 60-minute expiration, remember_token invalidation on password reset, secure token storage, reset email templates",
+      "kind": "docs",
+      "library": "laravel/framework",
+      "version": "^12.0"
+    },
+    {
+      "text": "Laravel Sanctum session persistence: remember_token (60 chars), cookie lifetime 30 days, session regeneration on login/logout, secure flag in production, Redis session driver configuration",
+      "kind": "docs",
+      "library": "laravel/sanctum",
+      "version": "^4.0"
+    },
+    {
+      "text": "Vue 3 + Pinia authentication store patterns: state management for user/isAuthenticated/loading, actions for login/register/logout/fetchUser/checkAuth, axios interceptors for 401/403/422 handling, XSRF-TOKEN cookie reading, router guards (requiresAuth, requiresVerified, roles)",
+      "kind": "web"
+    },
+    {
+      "text": "Laravel rate limiting for auth endpoints: throttle middleware configuration, per-IP limits (5 req/min), custom key resolver for auth endpoints, Redis-backed rate limiter",
+      "kind": "docs",
+      "library": "laravel/framework",
+      "version": "^12.0"
+    },
+    {
+      "text": "Laravel security hardening for SPA auth: secure headers, SameSite=Lax vs Strict, HttpOnly cookies, CSRF token rotation, bcrypt rounds configuration, secure password reset tokens, Sanctum CSRF protection",
+      "kind": "docs",
+      "library": "laravel/sanctum",
+      "version": "^4.0"
+    }
+  ]
+}
