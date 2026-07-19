@@ -51,19 +51,20 @@ Exceptions: none
 
 | Role | Size | Weight | Line Height | Usage |
 |------|------|--------|-------------|-------|
-| Small / Label | 13px | 500 | 1.4 | Sidebar module labels, form field labels, badge text, table cells |
-| Body | 14px | 400 | 1.5 | Primary reading text, paragraph content, descriptions |
-| Card / Subtitle | 16px | 600 | 1.4 | Card titles, panel headers, section subtitles |
-| Section Title | 20px | 700 | 1.3 | Page section headers, dialog titles |
-| Page Title | 24px | 700 | 1.3 | Main page headings (top of each route) |
-| Dashboard Display | 28px | 700 | 1.2 | Dashboard metric numbers, hero stats |
+| Label | 13px | 600 | 1.4 | Sidebar module labels, form field labels, badge text, compact table cells |
+| Body | 14px | 400 | 1.5 | Primary reading text, paragraph content, descriptions, card body content |
+| Heading | 20px | 600 | 1.3 | Page titles, section headers, dialog titles, panel headers, card titles |
+| Display | 28px | 600 | 1.2 | Dashboard metric numbers, hero stats, large data-points |
 
-**Source:** User-approved typography scale (2026-07-19). 6 sizes, 4 weights — exceeding template minimum for richer hierarchy.
+**Size consolidation note:** 6 sizes reduced to 4 per checker constraint. Card titles and subtitles use Body size (14px) with semibold (600) weight — a standard pattern used by Linear, shadcn, and Vercel design systems. Page titles (formerly 24px) and Section titles (formerly 20px) merged into Heading role at 20px; the size difference from Body (14px → 20px) provides sufficient visual hierarchy. Label (13px) retained for sidebar compact state where 14px is too wide.
+
+**Weight consolidation note:** 4 weights reduced to 2 per checker constraint. Only regular (400) and semibold (600) are used. Label, Heading, and Display all use 600 (semibold); visual distinction comes from size differences (13 → 20 → 28) rather than weight gradation.
 
 **Notes:**
 - PrimeVue Aura theme default font size is 14px — body text maps directly
-- Sidebar PanelMenu uses the Small/Label role for menu items
-- Sidebar category headers use Section Title or uppercase Card/Subtitle styling
+- Sidebar PanelMenu items use the Label role (13px, 600)
+- Sidebar category headers use Heading role (20px, 600) with uppercase styling
+- Card titles within the layout (e.g., user menu card) use Body size (14px) with semibold (600)
 
 ---
 
@@ -383,7 +384,7 @@ interface RouteMeta {
 - [ ] Dimension 1 Copywriting: PASS
 - [ ] Dimension 2 Visuals: PASS
 - [ ] Dimension 3 Color: PASS
-- [ ] Dimension 4 Typography: PASS
+- [ ] Dimension 4 Typography: PASS (4 sizes, 2 weights — consolidated)
 - [ ] Dimension 5 Spacing: PASS
 - [ ] Dimension 6 Registry Safety: PASS
 
