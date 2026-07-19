@@ -3,16 +3,16 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: Foundation
 current_phase: 4 — Layout e Navegacao
-status: planned
-stopped_at: Phase 4 planned — ready for execution
-last_updated: "2026-07-19T20:15:00.000Z"
-last_activity: Phase 4 planned — Layout e Navegacao (2026-07-19)
+status: executing
+stopped_at: Plan 01 complete — ready for Plan 02
+last_updated: "2026-07-19T16:47:00.000Z"
+last_activity: Plan 01 — Foundation layer completed (2026-07-19)
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 14
-  completed_plans: 11
-  percent: 79
+  completed_plans: 12
+  percent: 86
 ---
 
 # State: LabControl
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 ## Current Status
 
 **Current Phase:** 4 — Layout e Navegação
-**Status:** ✅ Planned (3 plans, 3 waves)
-**Last activity:** Phase 4 plans verified and approved (2026-07-19)
+**Status:** ✅ Executing (1/3 plans complete)
+**Last activity:** Plan 01 — Foundation layer completed (2026-07-19)
 
 ## Plan Progress
 
@@ -47,17 +47,17 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 | 03 - Profile & Avatar | ✅ Completed | Profile page, AvatarService, password change |
 | 04 - Activity Logging | ✅ Completed | ActivityLog model, LogsActivity trait, auth event hooks, Timeline viewer, 10 tests |
 
-## Phase 4 — Layout e Navegação (3 Plans Created ✓)
+## Phase 4 — Layout e Navegação (3 Plans ✓)
 
-**3 plans created** em 2026-07-19 para execução sequencial por wave.
+**Plan 01 completed** 2026-07-19 — Navigation types, useTheme composable, layout.css
 
 ### Plans
 
-| Plan | Wave | Description |
-|------|------|-------------|
-| 01 — Foundation | 1 | Navigation types, useTheme composable, layout.css, main.ts import |
-| 02 — App Shell | 2 | AppSidebar, AppTopbar, AppLayout, App.vue conditional layout, routes.ts meta |
-| 03 — Polish | 3 | Permission filtering, mobile Drawer, accessibility, build verification |
+| Plan | Wave | Status | Description |
+|------|------|--------|-------------|
+| 01 — Foundation | 1 | ✅ Completed | Navigation types, useTheme composable, layout.css, main.ts import |
+| 02 — App Shell | 2 | Planned | AppSidebar, AppTopbar, AppLayout, App.vue conditional layout, routes.ts meta |
+| 03 — Polish | 3 | Planned | Permission filtering, mobile Drawer, accessibility, build verification |
 
 **Decisões de design:**
 - **Sidebar:** PanelMenu accordion (PrimeVue), colapsável 240px/64px, mobile drawer overlay
@@ -83,6 +83,10 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 | Session middleware on API routes | ✓ Implemented |
 | LogsActivity trait for model event logging | ✓ Implemented (reusable bootable trait) |
 | ActivityLogService for non-model events | ✓ Implemented (auth events, custom logging) |
+| Navigation types: NavCategory + NavModule for PanelMenu | ✓ Implemented |
+| useTheme composable with readonly(isDark) | ✓ Implemented |
+| layout.css uses CSS Grid with grid-template-areas | ✓ Implemented |
+| Collapsed sidebar hides PanelMenu labels via CSS display:none | ✓ Implemented |
 
 ## Blockers
 
@@ -105,6 +109,6 @@ Phase 3 (Usuários e Permissões) — Planos 01-04 concluídos:
 
 ## Session
 
-**Last session:** 2026-07-19T20:15:00.000Z
-**Stopped at:** Phase 4 planned — ready for execution
-**Resume file:** .planning/phases/04-layout-navegacao/04-01-PLAN.md
+**Last session:** 2026-07-19T16:47:00.000Z
+**Stopped at:** Plan 01 complete — ready for Plan 02
+**Resume file:** .planning/phases/04-layout-navegacao/04-01-SUMMARY.md
