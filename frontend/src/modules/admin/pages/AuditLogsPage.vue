@@ -25,7 +25,7 @@
         allowEmpty
       />
 
-      <Calendar
+      <DatePicker
         v-model="dateRange"
         selectionMode="range"
         placeholder="Período"
@@ -133,7 +133,7 @@
 import { onMounted, ref } from 'vue'
 import { useActivityLogsStore } from '@/stores/activityLogs'
 import Button from 'primevue/button'
-import Calendar from 'primevue/calendar'
+import DatePicker from 'primevue/datepicker'
 import Card from 'primevue/card'
 import Message from 'primevue/message'
 import Paginator from 'primevue/paginator'
