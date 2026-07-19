@@ -25,9 +25,9 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 
 ## Current Status
 
-**Current Phase:** 2 — Autenticação
-**Status:** ✅ Complete
-**Last activity:** Phase 2 concluída (2026-07-19)
+**Current Phase:** 3 — Usuários e Permissões
+**Status:** 📋 Planned
+**Last activity:** Phase 3 planned (2026-07-19)
 
 ## Plan Progress
 

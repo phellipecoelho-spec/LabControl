@@ -11,9 +11,9 @@
 
 ### 🚧 v0.1 Foundation (In Progress)
 
-- [ ] **Phase 1**: Infraestrutura (3 plans)
-- [ ] **Phase 2**: Autenticação (4 plans)
-- [ ] **Phase 3**: Usuários e Permissões (5 plans)
+- [x] **Phase 1**: Infraestrutura (3 plans)
+- [x] **Phase 2**: Autenticação (4 plans)
+- [ ] **Phase 3**: Usuários e Permissões (4 plans)
 - [ ] **Phase 4**: Layout e Navegação (3 plans)
 
 ### 📋 v0.2 Core Business (Planned)
@@ -40,8 +40,8 @@
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|---------------|--------|-----------|
 | 1. Infraestrutura | v0.1 | 3/3 | Complete | 2026-07-19 |
-| 2. Autenticação | v0.1 | 0/4 | Context Gathered | - |
-| 3. Usuários e Permissões | v0.1 | 0/5 | Not started | - |
+| 2. Autenticação | v0.1 | 4/4 | Complete | 2026-07-19 |
+| 3. Usuários e Permissões | v0.1 | 4/4 | Planned | - |
 | 4. Layout e Navegação | v0.1 | 0/3 | Not started | - |
 | 5. Equipamentos | v0.2 | 0/4 | Not started | - |
 | 6. Estoque | v0.2 | 0/3 | Not started | - |
