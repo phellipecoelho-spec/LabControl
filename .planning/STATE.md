@@ -4,15 +4,15 @@ milestone: v0.1
 milestone_name: Foundation
 current_phase: 4 — Layout e Navegacao
 status: executing
-stopped_at: Plan 01 complete — ready for Plan 02
-last_updated: "2026-07-19T16:47:00.000Z"
-last_activity: Plan 01 — Foundation layer completed (2026-07-19)
+stopped_at: Plan 02 complete — ready for Plan 03
+last_updated: "2026-07-19T13:55:41.000Z"
+last_activity: Plan 02 — App Shell completed (2026-07-19)
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 14
-  completed_plans: 12
-  percent: 86
+  completed_plans: 13
+  percent: 93
 ---
 
 # State: LabControl
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 ## Current Status
 
 **Current Phase:** 4 — Layout e Navegação
-**Status:** ✅ Executing (1/3 plans complete)
-**Last activity:** Plan 01 — Foundation layer completed (2026-07-19)
+**Status:** ✅ Executing (2/3 plans complete)
+**Last activity:** Plan 02 — App Shell completed (2026-07-19)
 
 ## Plan Progress
 
@@ -49,14 +49,14 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 
 ## Phase 4 — Layout e Navegação (3 Plans ✓)
 
-**Plan 01 completed** 2026-07-19 — Navigation types, useTheme composable, layout.css
+**Plan 02 completed** 2026-07-19 — App Shell: AppSidebar, AppTopbar, AppLayout, conditional layout, route meta
 
 ### Plans
 
 | Plan | Wave | Status | Description |
 |------|------|--------|-------------|
 | 01 — Foundation | 1 | ✅ Completed | Navigation types, useTheme composable, layout.css, main.ts import |
-| 02 — App Shell | 2 | Planned | AppSidebar, AppTopbar, AppLayout, App.vue conditional layout, routes.ts meta |
+| 02 — App Shell | 2 | ✅ Completed | AppSidebar, AppTopbar, AppLayout, App.vue conditional layout, routes.ts meta |
 | 03 — Polish | 3 | Planned | Permission filtering, mobile Drawer, accessibility, build verification |
 
 **Decisões de design:**
@@ -87,6 +87,11 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 | useTheme composable with readonly(isDark) | ✓ Implemented |
 | layout.css uses CSS Grid with grid-template-areas | ✓ Implemented |
 | Collapsed sidebar hides PanelMenu labels via CSS display:none | ✓ Implemented |
+| AppSidebar uses computed panelMenuModel for reactive permission filtering | ✓ Implemented |
+| Dashboard link rendered outside PanelMenu (fixed at top) per D-16 | ✓ Implemented |
+| App.vue uses v-if/else for conditional layout rendering | ✓ Implemented |
+| sidebarCollapsed state managed in AppLayout, passed as props/events | ✓ Implemented |
+| Route meta module field for sidebar active-state detection | ✓ Implemented |
 
 ## Blockers
 
@@ -109,6 +114,6 @@ Phase 3 (Usuários e Permissões) — Planos 01-04 concluídos:
 
 ## Session
 
-**Last session:** 2026-07-19T16:47:00.000Z
-**Stopped at:** Plan 01 complete — ready for Plan 02
-**Resume file:** .planning/phases/04-layout-navegacao/04-01-SUMMARY.md
+**Last session:** 2026-07-19T13:55:41.000Z
+**Stopped at:** Plan 02 complete — ready for Plan 03
+**Resume file:** .planning/phases/04-layout-navegacao/04-02-SUMMARY.md
