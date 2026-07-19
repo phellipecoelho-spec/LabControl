@@ -1,0 +1,77 @@
+services:
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: labcontrol-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ../backend:/var/www/backend
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - labcontrol
+
+  php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: labcontrol-php
+    volumes:
+      - ../backend:/var/www/backend
+    environment:
+      - APP_ENV=local
+      - DB_CONNECTION=pgsql
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=labcontrol
+      - DB_USERNAME=labcontrol
+      - DB_PASSWORD=labcontrol
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - labcontrol
+
+  postgres:
+    image: postgres:17-alpine
+    container_name: labcontrol-postgres
+    environment:
+      POSTGRES_DB: labcontrol
+      POSTGRES_USER: labcontrol
+      POSTGRES_PASSWORD: labcontrol
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U labcontrol"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - labcontrol
+
+  redis:
+    image: redis:7-alpine
+    container_name: labcontrol-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - labcontrol
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  labcontrol:
+    driver: bridge

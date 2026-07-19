@@ -1,0 +1,61 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Vue / Vite
+frontend/dist/
+frontend/.vite/
+
+# Laravel
+backend/.env
+backend/.env.*.local
+backend/storage/app/public/
+backend/storage/debugbar/
+backend/storage/framework/cache/data/
+backend/storage/framework/sessions/
+backend/storage/framework/testing/
+backend/storage/framework/views/
+backend/storage/logs/*
+backend/vendor/
+backend/bootstrap/cache/*.php
+backend/node_modules/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Docker
+docker/.env
+
+# Logs
+*.log
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Backup
+backups/*
+!backups/.gitkeep
+
+# Uploads
+backend/storage/certificates/*
+backend/storage/photos/*
+backend/storage/manuals/*
+backend/storage/attachments/*
+backend/storage/reports/*
+backend/storage/exports/*
+!backend/storage/*/.gitkeep
