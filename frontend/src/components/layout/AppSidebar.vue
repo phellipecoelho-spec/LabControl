@@ -25,7 +25,7 @@
 
       <!-- PanelMenu for category groups -->
       <PanelMenu
-        :model="panelMenuModel"
+        :model="filteredPanelMenuModel"
         :expandedKeys="expandedKeys"
         :multiple="false"
         @update:expandedKeys="expandedKeys = $event"
@@ -70,10 +70,10 @@ function isModuleVisible(module: NavModule): boolean {
 // Computed: Current active route name for item highlighting
 const activeRouteName = computed(() => route.name as string | undefined)
 
-// Computed: PanelMenu model from navigation tree
-const panelMenuModel = computed(() => {
+// Computed: PanelMenu model from navigation tree with permission/role filtering
+const filteredPanelMenuModel = computed(() => {
   return navigationTree
-    .filter((item): item is NavCategory => 'items' in item)
+    .filter((item): item is NavCategory => 'items' in item && item.key !== undefined)
     .filter(category => {
       const visibleItems = category.items.filter(isModuleVisible)
       return visibleItems.length > 0
