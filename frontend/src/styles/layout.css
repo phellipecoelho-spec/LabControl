@@ -271,3 +271,47 @@ body {
 .skip-to-content:focus {
   top: 0;
 }
+
+/* --------------------------------------------------------------------------
+   11. Mobile Drawer overrides
+   -------------------------------------------------------------------------- */
+.p-drawer {
+  background: var(--app-surface) !important;
+  color: var(--app-text-primary);
+}
+
+.p-drawer-header {
+  background: var(--app-bg);
+  border-bottom: 1px solid var(--app-border);
+}
+
+.p-drawer-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.p-drawer-content {
+  background: var(--app-bg);
+  padding: 0;
+}
+
+/* Drawer close button */
+.p-drawer-close-button {
+  color: var(--app-text-secondary);
+}
+
+.p-drawer-close-button:hover {
+  color: var(--app-text-primary);
+}
+
+/* Drawer backdrop */
+.p-drawer-mask {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   12. Main content focus outline reset
+   -------------------------------------------------------------------------- */
+#main-content:focus {
+  outline: none;
+}
