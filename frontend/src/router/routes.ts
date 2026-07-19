@@ -43,4 +43,16 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('@/views/auth/VerifyEmailPendingView.vue'),
     meta: { guest: true, title: 'Verificar Email' },
   },
+  {
+    path: '/admin/users',
+    name: 'admin.users',
+    component: () => import('@/modules/admin/pages/UsersPage.vue'),
+    meta: { requiresAuth: true, roles: ['admin', 'supervisor'], title: 'Usuários' },
+  },
+  {
+    path: '/admin/roles',
+    name: 'admin.roles',
+    component: () => import('@/modules/admin/pages/RolesPage.vue'),
+    meta: { requiresAuth: true, roles: ['admin'], title: 'Perfis de Acesso' },
+  },
 ]
