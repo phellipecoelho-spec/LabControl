@@ -3,10 +3,10 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: Foundation
 current_phase: 4 — Layout e Navegacao
-status: context_gathered
-stopped_at: Phase 4 context gathered
-last_updated: "2026-07-19T18:52:00.000Z"
-last_activity: Phase 4 context gathered — Layout e Navegacao (2026-07-19)
+status: ui_spec_approved
+stopped_at: Phase 4 UI-SPEC approved
+last_updated: "2026-07-19T19:30:00.000Z"
+last_activity: Phase 4 UI-SPEC approved — Layout e Navegacao (2026-07-19)
 progress:
   total_phases: 4
   completed_phases: 3
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 ## Current Status
 
 **Current Phase:** 4 — Layout e Navegação
-**Status:** 🔍 Context gathered
-**Last activity:** Phase 4 context discussed (2026-07-19)
+**Status:** ✅ UI-SPEC approved
+**Last activity:** Phase 4 UI design contract approved (2026-07-19)
 
 ## Plan Progress
 
@@ -47,14 +47,16 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 | 03 - Profile & Avatar | ✅ Completed | Profile page, AvatarService, password change |
 | 04 - Activity Logging | ✅ Completed | ActivityLog model, LogsActivity trait, auth event hooks, Timeline viewer, 10 tests |
 
-## Phase 4 — Layout e Navegação (Context Gathered)
+## Phase 4 — Layout e Navegação (UI-SPEC Approved ✓)
 
-Decisões discutidas em 2026-07-19:
+**UI design contract aprovado** em 2026-07-19. 6/6 dimensões verificadas (1 FLAG não-bloqueante).
 
-- **Sidebar:** Colapsável estilo Linear (240px expandida, 64px colapsada), mobile drawer overlay
-- **Topbar:** Menu do usuário, dark/light toggle, notificações (placeholder), hamburger toggle
-- **Tema:** Dark mode padrão, toggle manual com persistência localStorage (sem prefers-color-scheme)
-- **Navegação:** Módulos agrupados por categoria (Gestão, Operações, Administração, Relatórios), Dashboard fixo no topo
+**Decisões de design:**
+- **Sidebar:** PanelMenu accordion (PrimeVue), colapsável 240px/64px, mobile drawer overlay
+- **Topbar:** Menu do usuário, dark/light toggle, notificações placeholder, hamburger toggle
+- **Tema:** Dark mode padrão (#0f172a), toggle manual localStorage, accent Indigo (#6366f1)
+- **Tipografia:** 4 sizes (13/14/20/28px), 2 weights (400/600)
+- **Navegação:** Módulos agrupados por categoria (Gestão, Operações, Administração, Relatórios), Dashboard fixo
 
 ## Decisions
 
@@ -95,6 +97,6 @@ Phase 3 (Usuários e Permissões) — Planos 01-04 concluídos:
 
 ## Session
 
-**Last session:** 2026-07-19T18:52:00.000Z
-**Stopped at:** Phase 4 context gathered — Layout e Navegação
-**Resume file:** .planning/phases/04-layout-navegacao/04-CONTEXT.md
+**Last session:** 2026-07-19T19:30:00.000Z
+**Stopped at:** Phase 4 UI-SPEC approved — Layout e Navegação
+**Resume file:** .planning/phases/04-layout-navegacao/04-UI-SPEC.md
