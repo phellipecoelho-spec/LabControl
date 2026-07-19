@@ -1,0 +1,32 @@
+.auth-container .p-card {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.field {
+  margin-bottom: 1.25rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.field-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.field-checkbox label {
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.auth-container {
+  animation: fadeIn 0.3s ease-out;
+}

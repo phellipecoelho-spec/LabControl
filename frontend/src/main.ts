@@ -1,12 +1,14 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config'
+import ToastService from 'primevue/toastservice'
 import Aura from '@primeuix/themes/aura'
 import router from './router'
 import App from './App.vue'
 
 import 'primeicons/primeicons.css'
 import './styles/global.css'
+import './styles/auth.css'
 
 const app = createApp(App)
 
@@ -20,5 +22,6 @@ app.use(PrimeVue, {
     },
   },
 })
+app.use(ToastService)
 
 app.mount('#app')

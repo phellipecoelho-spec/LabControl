@@ -5,27 +5,25 @@
 See: .planning/PROJECT.md (updated 2026-07-19)
 
 **Core value:** Rastreabilidade completa de equipamentos laboratoriais
-**Current focus:** Phase 1 — Infraestrutura
 
 ## Current Status
 
 **Current Phase:** 2 — Autenticação
-**Status:** Context Gathered
-**Last activity:** Phase 2 context captured (2026-07-19)
+**Status:** ✅ Complete
+**Last activity:** Phase 2 concluída (2026-07-19)
 
 ## Plan Progress
 
 | Plan | Status | Summary |
 |------|--------|---------|
-| 01 - Docker/Backend | ✅ Completed | Stack Docker saudável, Laravel + API health checks OK |
-| 02 - Migrations/Seeders | ✅ Completed | 6 roles, 31 permissions, 1 admin user |
-| 03 - Setup Script | ✅ Completed | Scripts setup.ps1/setup.sh robustos, validados |
+| 01 - Backend Auth API | ✅ Completed | AuthController, 6 Form Requests, Sanctum SPA, rate limiting |
+| 02 - Frontend Auth | ✅ Completed | Store, 6 views, router guards, axios interceptor |
+| 03 - Email & Reset Integration | ✅ Completed | Notifications, templates, verify/reset flows |
+| 04 - Tests | ✅ Completed | 18 tests, 47 assertions, all passing |
 
----
+## ✅ Phase 2 Complete
 
-## ✅ Phase 1 Complete
-
-All 3 plans executed successfully. Ready to advance to Phase 2.
+All 4 plans executed successfully. Ready to advance to Phase 3.
 
 ## Decisions
 
@@ -35,16 +33,22 @@ All 3 plans executed successfully. Ready to advance to Phase 2.
 | Laravel + PostgreSQL | ✓ Good |
 | Docker Compose | ✓ Good |
 | UUIDs | ✓ Good |
-| Sanctum | — Pending |
-| Módulos independentes | ✓ Good |
-| PWA | ✓ Good |
+| Sanctum SPA (session cookies) | ✓ Implemented |
+| Rate limiting 5 req/min | ✓ Implemented |
+| Email verification (signed URL) | ✓ Implemented |
+| Password reset (60 min expiry) | ✓ Implemented |
+| Remember me (30 days) | ✓ Implemented |
+| Custom notification classes | ✓ Implemented |
+| Session middleware on API routes | ✓ Implemented |
 
 ## Blockers
 
-- Docker PHP image precisa ser buildada (composer install pendente)
-- PostgreSQL não está rodando (aguardando docker compose up)
-- Migrations não executadas
+- None
 
 ## Accumulated Context
 
-Sprint 0 concluída: estrutura de diretórios, frontend Vue inicializado, backend Laravel inicializado, Docker Compose configurado, migrations iniciais criadas. Codebase mapeado. Proximo passo: infraestrutura funcional.
+Phase 2 (Autenticação) concluída com sucesso:
+- Backend: AuthController com 8 endpoints, Sanctum SPA com cookies HttpOnly, rate limiting, email verification, password reset
+- Frontend: 6 views de autenticação, Pinia store, router guards (guest, requiresAuth, requiresVerified, roles)
+- Testes: 18 testes backend passando (Login, Register, VerifyEmail, PasswordReset, Logout)
+- Próximo: Phase 3 — Usuários e Permissões (CRUD, gerenciamento de roles)

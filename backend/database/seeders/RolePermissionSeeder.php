@@ -130,30 +130,36 @@ class RolePermissionSeeder extends Seeder
 
         DB::statement('SET CONSTRAINTS ALL DEFERRED');
 
+        // Insert permissions using firstOrCreate to be idempotent
         foreach ($permissions as $perm) {
-            DB::table('permissions')->insert([
-                'id' => (string) Str::uuid(),
-                'name' => $perm['name'],
-                'slug' => $perm['slug'],
-                'group' => $perm['group'],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            DB::table('permissions')->updateOrInsert(
+                ['slug' => $perm['slug']],
+                [
+                    'id' => DB::table('permissions')->where('slug', $perm['slug'])->value('id') ?? (string) Str::uuid(),
+                    'name' => $perm['name'],
+                    'group' => $perm['group'],
+                    'updated_at' => now(),
+                ]
+            );
         }
 
         $permMap = DB::table('permissions')->pluck('id', 'slug');
 
         foreach ($roles as $role) {
-            $roleId = (string) Str::uuid();
-            DB::table('roles')->insert([
-                'id' => $roleId,
-                'name' => $role['name'],
-                'slug' => $role['slug'],
-                'description' => $role['description'],
-                'is_system' => $role['is_system'],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            $roleId = DB::table('roles')->where('slug', $role['slug'])->value('id');
+            
+            if (!$roleId) {
+                $roleId = (string) Str::uuid();
+                DB::table('roles')->insert([
+                    'id' => $roleId,
+                    'name' => $role['name'],
+                    'slug' => $role['slug'],
+                    'description' => $role['description'],
+                    'is_system' => $role['is_system'],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             $uniquePerms = array_unique($role['permissions']);
             $rolePerms = [];
@@ -167,6 +173,8 @@ class RolePermissionSeeder extends Seeder
             }
 
             if (!empty($rolePerms)) {
+                // Delete existing role permissions and re-insert
+                DB::table('permission_role')->where('role_id', $roleId)->delete();
                 DB::table('permission_role')->insert($rolePerms);
             }
         }

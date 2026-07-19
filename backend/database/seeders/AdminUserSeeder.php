@@ -17,22 +17,37 @@ class AdminUserSeeder extends Seeder
             return;
         }
 
-        $userId = (string) Str::uuid();
+        // Check if admin user already exists
+        $existingUserId = DB::table('users')->where('email', 'admin@labcontrol.com')->value('id');
 
-        DB::table('users')->insert([
-            'id' => $userId,
-            'name' => 'Administrador',
-            'email' => 'admin@labcontrol.com',
-            'password' => Hash::make('@dmin123'),
-            'is_active' => true,
-            'email_verified_at' => now(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        if (!$existingUserId) {
+            $userId = (string) Str::uuid();
 
-        DB::table('role_user')->insert([
-            'role_id' => $adminRoleId,
-            'user_id' => $userId,
-        ]);
+            DB::table('users')->insert([
+                'id' => $userId,
+                'name' => 'Administrador',
+                'email' => 'admin@labcontrol.com',
+                'password' => Hash::make('@dmin123'),
+                'is_active' => true,
+                'email_verified_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            $existingUserId = $userId;
+        }
+
+        // Ensure the admin role is attached
+        $hasRole = DB::table('role_user')
+            ->where('user_id', $existingUserId)
+            ->where('role_id', $adminRoleId)
+            ->exists();
+
+        if (!$hasRole) {
+            DB::table('role_user')->insert([
+                'role_id' => $adminRoleId,
+                'user_id' => $existingUserId,
+            ]);
+        }
     }
 }
