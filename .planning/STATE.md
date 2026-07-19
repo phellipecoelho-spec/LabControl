@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: Foundation
-current_phase: 3 — Usuários e Permissões
-status: completed
-stopped_at: Phase 3 context gathered
-last_updated: "2026-07-19T15:06:51.690Z"
-last_activity: Phase 3 complete — Usuários e Permissões (2026-07-19)
+current_phase: 4 — Layout e Navegacao
+status: context_gathered
+stopped_at: Phase 4 context gathered
+last_updated: "2026-07-19T18:52:00.000Z"
+last_activity: Phase 4 context gathered — Layout e Navegacao (2026-07-19)
 progress:
-  total_phases: 3
+  total_phases: 4
   completed_phases: 3
   total_plans: 11
   completed_plans: 11
@@ -25,9 +25,9 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 
 ## Current Status
 
-**Current Phase:** 3 — Usuários e Permissões
-**Status:** ✅ Completed
-**Last activity:** Phase 3 execute complete (2026-07-19)
+**Current Phase:** 4 — Layout e Navegação
+**Status:** 🔍 Context gathered
+**Last activity:** Phase 4 context discussed (2026-07-19)
 
 ## Plan Progress
 
@@ -46,6 +46,15 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 | 02 - Frontend User/Role Admin | ✅ Completed | User and Role management pages with CRUD UI |
 | 03 - Profile & Avatar | ✅ Completed | Profile page, AvatarService, password change |
 | 04 - Activity Logging | ✅ Completed | ActivityLog model, LogsActivity trait, auth event hooks, Timeline viewer, 10 tests |
+
+## Phase 4 — Layout e Navegação (Context Gathered)
+
+Decisões discutidas em 2026-07-19:
+
+- **Sidebar:** Colapsável estilo Linear (240px expandida, 64px colapsada), mobile drawer overlay
+- **Topbar:** Menu do usuário, dark/light toggle, notificações (placeholder), hamburger toggle
+- **Tema:** Dark mode padrão, toggle manual com persistência localStorage (sem prefers-color-scheme)
+- **Navegação:** Módulos agrupados por categoria (Gestão, Operações, Administração, Relatórios), Dashboard fixo no topo
 
 ## Decisions
 
@@ -86,6 +95,6 @@ Phase 3 (Usuários e Permissões) — Planos 01-04 concluídos:
 
 ## Session
 
-**Last session:** 2026-07-19T15:33:00.000Z
-**Stopped at:** Phase 3 complete — Usuários e Permissões
-**Resume file:** .planning/phases/03-usuarios-permissoes/03-CONTEXT.md
+**Last session:** 2026-07-19T18:52:00.000Z
+**Stopped at:** Phase 4 context gathered — Layout e Navegação
+**Resume file:** .planning/phases/04-layout-navegacao/04-CONTEXT.md
