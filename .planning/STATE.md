@@ -1,18 +1,18 @@
 ---
 gsd_state_version: 1.0
-milestone: v0.1
-milestone_name: Foundation
-current_phase: 4 — Layout e Navegacao
+milestone: v0.2
+milestone_name: Core Business
+current_phase: 4 — Layout e Navegação
 status: completed
-stopped_at: Phase 4 complete — all 3 plans finished
-last_updated: "2026-07-19T14:04:05.000Z"
+stopped_at: Phase 05 context gathered
+last_updated: "2026-07-19T21:15:17.163Z"
 last_activity: Plan 03 — Polish completed (2026-07-19)
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 14
+  total_phases: 5
+  completed_phases: 3
+  total_plans: 16
   completed_plans: 14
-  percent: 100
+  percent: 60
 ---
 
 # State: LabControl
@@ -60,6 +60,7 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 | 03 — Polish | 3 | ✅ Completed | Permission filtering, mobile Drawer, accessibility, build verification |
 
 **Decisões de design:**
+
 - **Sidebar:** PanelMenu accordion (PrimeVue), colapsável 240px/64px, mobile drawer overlay
 - **Topbar:** Menu do usuário, dark/light toggle, notificações placeholder, hamburger toggle
 - **Tema:** Dark mode padrão (#0f172a), toggle manual localStorage, accent Indigo (#6366f1)
@@ -116,8 +117,19 @@ Phase 3 (Usuários e Permissões) — Planos 01-04 concluídos:
 - Plan 03: Profile page, AvatarService, alteração de senha
 - Plan 04: ActivityLog model, LogsActivity trait, UserObserver, ActivityLogService, 8 auth event hooks no AuthController, ActivityLogController com 3 endpoints de consulta, AuditLogsPage.vue com Timeline PrimeVue, 10 testes
 
+Phase 4 (Layout e Navegação) — 3 planos executados:
+
+- Plan 01: Navigation types (NavModule, NavCategory), useTheme composable (localStorage), layout.css (grid, custom properties, breakpoints 768px), main.ts import
+- Plan 02: AppSidebar (PanelMenu accordion, 4 categorias, Dashboard fixo), AppTopbar (user menu, dark/light toggle, notificações placeholder, hamburger), AppLayout (shell wrapper), App.vue conditional layout (auth vs authed), routes.ts meta module
+- Plan 03: Permission filtering via hasPermission(), mobile Drawer overlay (<768px), a11y (skip-to-content, ARIA labels, keyboard navigation, v-tooltip), build passes 2.73s
+
+- Plan 01: User/Role/Permission models, controllers, seeder com roles (admin, supervisor, laboratorista, tecnico, consulta, auditor) e permissões
+- Plan 02: Frontend CRUD de usuários e roles com PrimeVue DataTable, formulários, gerenciamento de permissões
+- Plan 03: Profile page, AvatarService, alteração de senha
+- Plan 04: ActivityLog model, LogsActivity trait, UserObserver, ActivityLogService, 8 auth event hooks no AuthController, ActivityLogController com 3 endpoints de consulta, AuditLogsPage.vue com Timeline PrimeVue, 10 testes
+
 ## Session
 
-**Last session:** 2026-07-19T14:04:05.000Z
-**Stopped at:** Phase 4 complete — all 3 plans finished
-**Resume file:** .planning/phases/04-layout-navegacao/04-03-SUMMARY.md
+**Last session:** 2026-07-19T21:15:17.078Z
+**Stopped at:** Phase 05 context gathered
+**Resume file:** .planning/phases/05-equipamentos/05-CONTEXT.md
