@@ -2,6 +2,12 @@ import type { RouteRecordRaw } from 'vue-router'
 
 export const routes: RouteRecordRaw[] = [
   {
+    path: '/admin/logs',
+    name: 'admin.logs',
+    component: () => import('@/modules/admin/pages/AuditLogsPage.vue'),
+    meta: { requiresAuth: true, roles: ['admin', 'auditor'], title: 'Logs de Auditoria' },
+  },
+  {
     path: '/',
     name: 'dashboard',
     component: () => import('@/modules/dashboard/pages/DashboardPage.vue'),
