@@ -10,8 +10,8 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 ## Current Status
 
 **Current Phase:** 1 — Infraestrutura
-**Status:** Not started
-**Last activity:** Project initialization (2026-07-19)
+**Status:** Planned
+**Last activity:** Phase 1 plan created (2026-07-19)
 
 ## Decisions
 

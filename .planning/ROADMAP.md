@@ -39,7 +39,7 @@
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|---------------|--------|-----------|
-| 1. Infraestrutura | v0.1 | 0/3 | Not started | - |
+| 1. Infraestrutura | v0.1 | 0/3 | Planned | - |
 | 2. Autenticação | v0.1 | 0/4 | Not started | - |
 | 3. Usuários e Permissões | v0.1 | 0/5 | Not started | - |
 | 4. Layout e Navegação | v0.1 | 0/3 | Not started | - |
