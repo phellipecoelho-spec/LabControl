@@ -3,16 +3,16 @@ gsd_state_version: 1.0
 milestone: v0.1
 milestone_name: Foundation
 current_phase: 4 — Layout e Navegacao
-status: ui_spec_approved
-stopped_at: Phase 4 Plans created — ready for execution
-last_updated: "2026-07-19T19:30:00.000Z"
-last_activity: Phase 4 Plans created — Layout e Navegacao (2026-07-19)
+status: planned
+stopped_at: Phase 4 planned — ready for execution
+last_updated: "2026-07-19T20:15:00.000Z"
+last_activity: Phase 4 planned — Layout e Navegacao (2026-07-19)
 progress:
   total_phases: 4
   completed_phases: 3
-  total_plans: 11
+  total_plans: 14
   completed_plans: 11
-  percent: 100
+  percent: 79
 ---
 
 # State: LabControl
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 ## Current Status
 
 **Current Phase:** 4 — Layout e Navegação
-**Status:** ✅ Plans created (3 plans)
-**Last activity:** Phase 4 plans created (2026-07-19)
+**Status:** ✅ Planned (3 plans, 3 waves)
+**Last activity:** Phase 4 plans verified and approved (2026-07-19)
 
 ## Plan Progress
 
@@ -105,6 +105,6 @@ Phase 3 (Usuários e Permissões) — Planos 01-04 concluídos:
 
 ## Session
 
-**Last session:** 2026-07-19T19:30:00.000Z
-**Stopped at:** Phase 4 UI-SPEC approved — Layout e Navegação
-**Resume file:** .planning/phases/04-layout-navegacao/04-UI-SPEC.md
+**Last session:** 2026-07-19T20:15:00.000Z
+**Stopped at:** Phase 4 planned — ready for execution
+**Resume file:** .planning/phases/04-layout-navegacao/04-01-PLAN.md
