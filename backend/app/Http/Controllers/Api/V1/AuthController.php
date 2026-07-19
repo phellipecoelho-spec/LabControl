@@ -10,6 +10,7 @@ use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\VerifyEmailRequest;
 use App\Models\Role;
 use App\Models\User;
+use App\Services\ActivityLogService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,12 +19,16 @@ use Illuminate\Support\Facades\Password;
 
 class AuthController
 {
+    public function __construct(
+        private readonly ActivityLogService $activityLogService
+    ) {}
     public function login(LoginRequest $request): JsonResponse
     {
         $credentials = $request->only('email', 'password');
         $remember = $request->boolean('remember');
 
         if (!Auth::attempt($credentials, $remember)) {
+            $this->activityLogService->logAuth('login_failed', $request->email);
             return response()->json(['message' => 'Credenciais inválidas.'], 422);
         }
 
@@ -31,10 +36,13 @@ class AuthController
 
         if ($user->email_verified_at === null) {
             Auth::logout();
+            $this->activityLogService->logAuth('login_unverified', $request->email);
             return response()->json(['message' => 'Email não verificado.'], 403);
         }
 
         $request->session()->regenerate();
+
+        $this->activityLogService->logAuth('login', $request->email);
 
         return response()->json([
             'user' => $user->load('roles.permissions'),
@@ -56,6 +64,8 @@ class AuthController
 
         $user->sendEmailVerificationNotification();
 
+        $this->activityLogService->logAuth('register', $data['email'], ['user_id' => $user->id]);
+
         return response()->json([
             'user' => $user->fresh()->load('roles.permissions'),
             'message' => 'Conta criada. Email de verificação enviado.',
@@ -76,6 +86,8 @@ class AuthController
 
         $user->markEmailAsVerified();
 
+        $this->activityLogService->logAuth('email_verified', $user->email);
+
         return response()->json(['message' => 'Email verificado com sucesso.'], 200);
     }
 
@@ -90,6 +102,8 @@ class AuthController
     {
         Password::broker()->sendResetLink($request->only('email'));
 
+        $this->activityLogService->logAuth('password_reset_requested', $request->email);
+
         return response()->json([
             'message' => 'Se o email existir, enviaremos instruções de redefinição.',
         ], 200);
@@ -97,8 +111,10 @@ class AuthController
 
     public function resetPassword(ResetPasswordRequest $request): JsonResponse
     {
+        $validatedData = $request->validated();
+
         $status = Password::broker()->reset(
-            $request->validated(),
+            $validatedData,
             function (User $user, string $password) {
                 $user->forceFill([
                     'password' => Hash::make($password),
@@ -110,6 +126,7 @@ class AuthController
         );
 
         if ($status === Password::PASSWORD_RESET) {
+            $this->activityLogService->logAuth('password_reset', $validatedData['email']);
             return response()->json(['message' => 'Senha redefinida com sucesso.'], 200);
         }
 
@@ -140,6 +157,8 @@ class AuthController
                 $token->delete();
             }
         }
+
+        $this->activityLogService->logAuth('logout', $user->email);
 
         auth('web')->logout();
         $request->session()->invalidate();
