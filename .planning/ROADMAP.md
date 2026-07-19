@@ -15,6 +15,10 @@
 - [x] **Phase 2**: Autenticação (4 plans)
 - [x] **Phase 3**: Usuários e Permissões (4 plans)
 - [ ] **Phase 4**: Layout e Navegação (3 plans)
+  Plans:
+  - [ ] 04-01-PLAN.md — Foundation: Theme system + Type definitions + Layout CSS
+  - [ ] 04-02-PLAN.md — App Shell: Layout components + Conditional rendering + Route meta
+  - [ ] 04-03-PLAN.md — Permissions + Mobile drawer + Accessibility polish
 
 ### 📋 v0.2 Core Business (Planned)
 
@@ -42,7 +46,7 @@
 | 1. Infraestrutura | v0.1 | 3/3 | Complete | 2026-07-19 |
 | 2. Autenticação | v0.1 | 4/4 | Complete | 2026-07-19 |
 | 3. Usuários e Permissões | v0.1 | 4/4 | Complete | 2026-07-19 |
-| 4. Layout e Navegação | v0.1 | 0/3 | Not started | - |
+| 4. Layout e Navegação | v0.1 | 0/3 | Planned | - |
 | 5. Equipamentos | v0.2 | 0/4 | Not started | - |
 | 6. Estoque | v0.2 | 0/3 | Not started | - |
 | 7. Empréstimos | v0.2 | 0/3 | Not started | - |

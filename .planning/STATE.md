@@ -4,9 +4,9 @@ milestone: v0.1
 milestone_name: Foundation
 current_phase: 4 — Layout e Navegacao
 status: ui_spec_approved
-stopped_at: Phase 4 UI-SPEC approved
+stopped_at: Phase 4 Plans created — ready for execution
 last_updated: "2026-07-19T19:30:00.000Z"
-last_activity: Phase 4 UI-SPEC approved — Layout e Navegacao (2026-07-19)
+last_activity: Phase 4 Plans created — Layout e Navegacao (2026-07-19)
 progress:
   total_phases: 4
   completed_phases: 3
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 ## Current Status
 
 **Current Phase:** 4 — Layout e Navegação
-**Status:** ✅ UI-SPEC approved
-**Last activity:** Phase 4 UI design contract approved (2026-07-19)
+**Status:** ✅ Plans created (3 plans)
+**Last activity:** Phase 4 plans created (2026-07-19)
 
 ## Plan Progress
 
@@ -47,9 +47,17 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 | 03 - Profile & Avatar | ✅ Completed | Profile page, AvatarService, password change |
 | 04 - Activity Logging | ✅ Completed | ActivityLog model, LogsActivity trait, auth event hooks, Timeline viewer, 10 tests |
 
-## Phase 4 — Layout e Navegação (UI-SPEC Approved ✓)
+## Phase 4 — Layout e Navegação (3 Plans Created ✓)
 
-**UI design contract aprovado** em 2026-07-19. 6/6 dimensões verificadas (1 FLAG não-bloqueante).
+**3 plans created** em 2026-07-19 para execução sequencial por wave.
+
+### Plans
+
+| Plan | Wave | Description |
+|------|------|-------------|
+| 01 — Foundation | 1 | Navigation types, useTheme composable, layout.css, main.ts import |
+| 02 — App Shell | 2 | AppSidebar, AppTopbar, AppLayout, App.vue conditional layout, routes.ts meta |
+| 03 — Polish | 3 | Permission filtering, mobile Drawer, accessibility, build verification |
 
 **Decisões de design:**
 - **Sidebar:** PanelMenu accordion (PrimeVue), colapsável 240px/64px, mobile drawer overlay
