@@ -1,0 +1,273 @@
+/* ==========================================================================
+   Layout — App Shell (sidebar + topbar + content area)
+   Global stylesheet — NOT scoped per component.
+   Toggle dark mode via .app-dark class on <html> element.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Reset additions
+   -------------------------------------------------------------------------- */
+html,
+body {
+  height: 100%;
+}
+
+#app {
+  height: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   2. CSS Custom Properties — Dark mode (default)
+   -------------------------------------------------------------------------- */
+.app-dark {
+  --app-bg: #0f172a;              /* slate-900 — body background, sidebar */
+  --app-surface: #1e293b;         /* slate-800 — topbar, cards, elevated */
+  --app-border: #334155;          /* slate-700 — borders */
+  --app-text-primary: #e2e8f0;    /* slate-200 */
+  --app-text-secondary: #94a3b8;  /* slate-400 */
+  --app-text-disabled: #64748b;   /* slate-500 */
+  --app-accent: #6366f1;          /* indigo-500 */
+  --app-accent-soft: rgba(99, 102, 241, 0.1);  /* indigo-500 @ 10% */
+  --app-sidebar-width: 240px;
+  --app-sidebar-collapsed-width: 64px;
+  --app-topbar-height: 64px;
+}
+
+/* --------------------------------------------------------------------------
+   3. CSS Custom Properties — Light mode overrides
+   -------------------------------------------------------------------------- */
+:root {
+  --app-bg: #f8fafc;              /* slate-50 */
+  --app-surface: #ffffff;         /* white */
+  --app-border: #e2e8f0;          /* slate-200 */
+  --app-text-primary: #0f172a;    /* slate-900 */
+  --app-text-secondary: #64748b;  /* slate-500 */
+  --app-text-disabled: #94a3b8;   /* slate-400 */
+  --app-accent: #6366f1;          /* indigo-500 */
+  --app-accent-soft: rgba(99, 102, 241, 0.1);
+  --app-sidebar-width: 240px;
+  --app-sidebar-collapsed-width: 64px;
+  --app-topbar-height: 64px;
+}
+
+/* --------------------------------------------------------------------------
+   4. App shell layout grid
+   -------------------------------------------------------------------------- */
+.app-shell {
+  display: grid;
+  grid-template-columns: var(--app-sidebar-width) 1fr;
+  grid-template-rows: var(--app-topbar-height) 1fr;
+  grid-template-areas:
+    "sidebar topbar"
+    "sidebar content";
+  height: 100vh;
+  background: var(--app-bg);
+  color: var(--app-text-primary);
+  transition: grid-template-columns 0.2s ease;
+}
+
+.app-shell--collapsed {
+  grid-template-columns: var(--app-sidebar-collapsed-width) 1fr;
+}
+
+/* --------------------------------------------------------------------------
+   5. Sidebar styles
+   -------------------------------------------------------------------------- */
+.app-sidebar {
+  grid-area: sidebar;
+  width: var(--app-sidebar-width);
+  background: var(--app-bg);
+  border-right: 1px solid var(--app-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.2s ease;
+}
+
+.app-sidebar--collapsed {
+  width: var(--app-sidebar-collapsed-width);
+}
+
+.app-sidebar__header {
+  display: flex;
+  align-items: center;
+  height: var(--app-topbar-height);
+  padding: 0 16px;
+  border-bottom: 1px solid var(--app-border);
+}
+
+.app-sidebar__header-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--app-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.app-sidebar__nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.app-sidebar__dashboard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  color: var(--app-text-primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  margin: 4px 8px;
+  transition: background 0.15s ease;
+}
+
+.app-sidebar__dashboard:hover {
+  background: var(--app-accent-soft);
+  color: var(--app-accent);
+}
+
+.app-sidebar__dashboard i {
+  font-size: 1.25rem;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   6. Collapsed sidebar — label hiding
+   -------------------------------------------------------------------------- */
+.app-sidebar--collapsed .app-sidebar__header-title,
+.app-sidebar--collapsed .app-sidebar__dashboard span,
+.app-sidebar--collapsed .p-panelmenu-header-label,
+.app-sidebar--collapsed .p-panelmenu-item-label {
+  display: none;
+}
+
+.app-sidebar--collapsed .p-panelmenu-header-content,
+.app-sidebar--collapsed .p-panelmenu-item {
+  justify-content: center;
+  padding: 8px !important;
+}
+
+.app-sidebar--collapsed .p-panelmenu-header-icon {
+  margin-right: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. Topbar styles
+   -------------------------------------------------------------------------- */
+.app-topbar {
+  grid-area: topbar;
+  display: flex;
+  align-items: center;
+  height: var(--app-topbar-height);
+  padding: 0 16px;
+  background: var(--app-surface);
+  border-bottom: 1px solid var(--app-border);
+  gap: 12px;
+}
+
+.app-topbar__hamburger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: var(--app-text-secondary);
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 1.25rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.app-topbar__hamburger:hover {
+  background: var(--app-accent-soft);
+  color: var(--app-accent);
+}
+
+.app-topbar__spacer {
+  flex: 1;
+}
+
+.app-topbar__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: var(--app-text-secondary);
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 1.25rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.app-topbar__action:hover {
+  background: var(--app-accent-soft);
+  color: var(--app-accent);
+}
+
+.app-topbar__avatar {
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   8. Content area
+   -------------------------------------------------------------------------- */
+.app-content {
+  grid-area: content;
+  padding: 24px;
+  overflow-y: auto;
+  background: var(--app-bg);
+}
+
+/* --------------------------------------------------------------------------
+   9. Responsive breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "topbar"
+      "content";
+  }
+
+  .app-sidebar--desktop {
+    display: none;
+  }
+
+  .app-content {
+    padding: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .app-sidebar--mobile {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. Skip-to-content link (a11y)
+   -------------------------------------------------------------------------- */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--app-accent);
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 9999;
+  text-decoration: none;
+  transition: top 0.1s ease;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
