@@ -33,7 +33,7 @@
     </div>
 
     <div v-if="serverErrors.length" class="mb-3">
-      <InlineMessage v-for="(err, i) in serverErrors" :key="i" severity="error" class="mb-1">{{ err }}</InlineMessage>
+      <Message v-for="(err, i) in serverErrors" :key="i" severity="error" class="mb-1">{{ err }}</Message>
     </div>
 
     <Button label="Salvar" severity="primary" :loading="saving" @click="saveProfile" />
@@ -45,7 +45,7 @@ import { ref, onMounted } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
-import InlineMessage from 'primevue/inlinemessage'
+import Message from 'primevue/message'
 import { api } from '@/services/api'
 import { useAuthStore } from '@/stores/auth'
 

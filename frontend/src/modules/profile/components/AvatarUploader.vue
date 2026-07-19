@@ -24,10 +24,9 @@
         mode="basic"
         accept="image/*"
         :maxFileSize="2097152"
-        :auto="true"
         :customUpload="true"
         chooseLabel="Alterar Avatar"
-        @select="onAvatarSelect"
+        @uploader="onAvatarSelect"
       />
     </div>
 
@@ -42,7 +41,7 @@
     />
 
     <div v-if="uploadError" class="mt-3">
-      <InlineMessage severity="error">{{ uploadError }}</InlineMessage>
+      <Message severity="error">{{ uploadError }}</Message>
     </div>
   </div>
 </template>
@@ -53,7 +52,7 @@ import { useToast } from 'primevue/usetoast'
 import FileUpload from 'primevue/fileupload'
 import Avatar from 'primevue/avatar'
 import Button from 'primevue/button'
-import InlineMessage from 'primevue/inlinemessage'
+import Message from 'primevue/message'
 import { useAuthStore } from '@/stores/auth'
 import { api } from '@/services/api'
 

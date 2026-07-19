@@ -9,6 +9,11 @@ export interface User {
   email: string
   email_verified_at: string | null
   is_active: boolean
+  phone?: string | null
+  position?: string | null
+  department?: string | null
+  signature?: string | null
+  avatar_path?: string | null
   roles: Array<{
     id: string
     name: string

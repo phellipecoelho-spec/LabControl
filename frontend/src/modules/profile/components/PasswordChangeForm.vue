@@ -18,7 +18,7 @@
     </div>
 
     <div v-if="serverErrors.length" class="mb-3">
-      <InlineMessage v-for="(err, i) in serverErrors" :key="i" severity="error" class="mb-1">{{ err }}</InlineMessage>
+      <Message v-for="(err, i) in serverErrors" :key="i" severity="error" class="mb-1">{{ err }}</Message>
     </div>
 
     <p class="text-sm text-muted-color mb-3">
@@ -34,7 +34,7 @@ import { ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import Password from 'primevue/password'
 import Button from 'primevue/button'
-import InlineMessage from 'primevue/inlinemessage'
+import Message from 'primevue/message'
 import { api } from '@/services/api'
 
 const toast = useToast()
