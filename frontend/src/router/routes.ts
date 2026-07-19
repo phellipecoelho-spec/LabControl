@@ -5,13 +5,13 @@ export const routes: RouteRecordRaw[] = [
     path: '/admin/logs',
     name: 'admin.logs',
     component: () => import('@/modules/admin/pages/AuditLogsPage.vue'),
-    meta: { requiresAuth: true, roles: ['admin', 'auditor'], title: 'Logs de Auditoria' },
+    meta: { requiresAuth: true, roles: ['admin', 'auditor'], title: 'Logs de Auditoria', module: 'admin.logs' },
   },
   {
     path: '/',
     name: 'dashboard',
     component: () => import('@/modules/dashboard/pages/DashboardPage.vue'),
-    meta: { requiresAuth: true, title: 'Dashboard' },
+    meta: { requiresAuth: true, title: 'Dashboard', module: 'dashboard' },
   },
   {
     path: '/login',
@@ -53,13 +53,13 @@ export const routes: RouteRecordRaw[] = [
     path: '/admin/users',
     name: 'admin.users',
     component: () => import('@/modules/admin/pages/UsersPage.vue'),
-    meta: { requiresAuth: true, roles: ['admin', 'supervisor'], title: 'Usuários' },
+    meta: { requiresAuth: true, roles: ['admin', 'supervisor'], title: 'Usuários', module: 'admin.users' },
   },
   {
     path: '/admin/roles',
     name: 'admin.roles',
     component: () => import('@/modules/admin/pages/RolesPage.vue'),
-    meta: { requiresAuth: true, roles: ['admin'], title: 'Perfis de Acesso' },
+    meta: { requiresAuth: true, roles: ['admin'], title: 'Perfis de Acesso', module: 'admin.roles' },
   },
   {
     path: '/profile',
@@ -68,6 +68,7 @@ export const routes: RouteRecordRaw[] = [
     meta: {
       requiresAuth: true,
       title: 'Meu Perfil',
+      module: 'profile',
     },
   },
 ]
