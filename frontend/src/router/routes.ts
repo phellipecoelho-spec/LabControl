@@ -71,4 +71,34 @@ export const routes: RouteRecordRaw[] = [
       module: 'profile',
     },
   },
+  {
+    path: '/equipments',
+    name: 'equipments',
+    component: () => import('@/modules/equipment/pages/EquipmentListPage.vue'),
+    meta: { requiresAuth: true, module: 'gestao', title: 'Equipamentos' },
+  },
+  {
+    path: '/equipments/new',
+    name: 'equipment-create',
+    component: () => import('@/modules/equipment/pages/EquipmentFormPage.vue'),
+    meta: { requiresAuth: true, module: 'gestao', title: 'Novo Equipamento' },
+  },
+  {
+    path: '/equipments/:id/edit',
+    name: 'equipment-edit',
+    component: () => import('@/modules/equipment/pages/EquipmentFormPage.vue'),
+    meta: { requiresAuth: true, module: 'gestao', title: 'Editar Equipamento' },
+  },
+  {
+    path: '/equipments/:id',
+    name: 'equipment-detail',
+    component: () => import('@/modules/equipment/pages/EquipmentDetailPage.vue'),
+    meta: { requiresAuth: true, module: 'gestao', title: 'Detalhes do Equipamento' },
+  },
+  {
+    path: '/unauthorized',
+    name: 'unauthorized',
+    component: () => import('@/views/UnauthorizedView.vue'),
+    meta: { requiresAuth: true, title: 'Acesso Negado' },
+  },
 ]

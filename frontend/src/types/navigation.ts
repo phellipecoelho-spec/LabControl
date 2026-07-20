@@ -18,24 +18,24 @@ export type NavItem = NavCategory | NavModule
 export const navigationTree: NavItem[] = [
   {
     label: 'Dashboard',
-    icon: 'pi-home',
+    icon: 'pi pi-home',
     route: 'dashboard',
     permission: null,
   },
   {
     key: 'gestao',
     label: 'Gestão',
-    icon: 'pi-folder',
+    icon: 'pi pi-folder',
     items: [
       {
         label: 'Equipamentos',
-        icon: 'pi-box',
-        route: 'equipment.index',
+        icon: 'pi pi-microchip',
+        route: 'equipments',
         permission: 'equipamentos.view',
       },
       {
         label: 'Estoque',
-        icon: 'pi-warehouse',
+        icon: 'pi pi-warehouse',
         route: 'inventory.index',
         permission: 'estoque.view',
       },
@@ -44,35 +44,35 @@ export const navigationTree: NavItem[] = [
   {
     key: 'operacoes',
     label: 'Operações',
-    icon: 'pi-folder',
+    icon: 'pi pi-folder',
     items: [
       {
         label: 'Movimentações',
-        icon: 'pi-arrow-right-arrow-left',
+        icon: 'pi pi-arrow-right-arrow-left',
         route: 'movements.index',
         permission: 'movimentacoes.view',
       },
       {
         label: 'Empréstimos',
-        icon: 'pi-share-alt',
+        icon: 'pi pi-share-alt',
         route: 'loans.index',
         permission: 'emprestimos.view',
       },
       {
         label: 'Calibrações',
-        icon: 'pi-calendar-clock',
+        icon: 'pi pi-calendar-clock',
         route: 'calibrations.index',
         permission: 'calibracoes.view',
       },
       {
         label: 'Aferições',
-        icon: 'pi-check-circle',
+        icon: 'pi pi-check-circle',
         route: 'verifications.index',
         permission: 'afericoes.view',
       },
       {
         label: 'Manutenções',
-        icon: 'pi-wrench',
+        icon: 'pi pi-wrench',
         route: 'maintenance.index',
         permission: 'manutencoes.view',
       },
@@ -81,25 +81,25 @@ export const navigationTree: NavItem[] = [
   {
     key: 'admin',
     label: 'Administração',
-    icon: 'pi-folder',
+    icon: 'pi pi-folder',
     items: [
       {
         label: 'Usuários',
-        icon: 'pi-users',
+        icon: 'pi pi-users',
         route: 'admin.users',
         permission: null,
         roles: ['admin', 'supervisor'],
       },
       {
         label: 'Perfis de Acesso',
-        icon: 'pi-shield',
+        icon: 'pi pi-shield',
         route: 'admin.roles',
         permission: null,
         roles: ['admin'],
       },
       {
         label: 'Logs de Auditoria',
-        icon: 'pi-history',
+        icon: 'pi pi-history',
         route: 'admin.logs',
         permission: null,
         roles: ['admin', 'auditor'],
@@ -109,11 +109,11 @@ export const navigationTree: NavItem[] = [
   {
     key: 'relatorios',
     label: 'Relatórios',
-    icon: 'pi-folder',
+    icon: 'pi pi-folder',
     items: [
       {
         label: 'Relatórios',
-        icon: 'pi-file-pdf',
+        icon: 'pi pi-file-pdf',
         route: 'reports.index',
         permission: 'relatorios.view',
       },
@@ -123,6 +123,10 @@ export const navigationTree: NavItem[] = [
 
 export const routeModuleMap: Record<string, string> = {
   dashboard: 'dashboard',
+  'equipments': 'gestao',
+  'equipment-create': 'gestao',
+  'equipment-edit': 'gestao',
+  'equipment-detail': 'gestao',
   'equipment.index': 'gestao',
   'equipment.create': 'gestao',
   'equipment.edit': 'gestao',
