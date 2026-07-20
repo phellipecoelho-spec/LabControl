@@ -17,24 +17,8 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   2. CSS Custom Properties — Dark mode (default)
-   -------------------------------------------------------------------------- */
-.app-dark {
-  --app-bg: #0f172a;              /* slate-900 — body background, sidebar */
-  --app-surface: #1e293b;         /* slate-800 — topbar, cards, elevated */
-  --app-border: #334155;          /* slate-700 — borders */
-  --app-text-primary: #e2e8f0;    /* slate-200 */
-  --app-text-secondary: #94a3b8;  /* slate-400 */
-  --app-text-disabled: #64748b;   /* slate-500 */
-  --app-accent: #6366f1;          /* indigo-500 */
-  --app-accent-soft: rgba(99, 102, 241, 0.1);  /* indigo-500 @ 10% */
-  --app-sidebar-width: 240px;
-  --app-sidebar-collapsed-width: 64px;
-  --app-topbar-height: 64px;
-}
-
-/* --------------------------------------------------------------------------
-   3. CSS Custom Properties — Light mode overrides
+   2. CSS Custom Properties — Light mode (default)
+   :root MUST come BEFORE .app-dark so .app-dark overrides with same specificity
    -------------------------------------------------------------------------- */
 :root {
   --app-bg: #f8fafc;              /* slate-50 */
@@ -45,6 +29,24 @@ body {
   --app-text-disabled: #94a3b8;   /* slate-400 */
   --app-accent: #6366f1;          /* indigo-500 */
   --app-accent-soft: rgba(99, 102, 241, 0.1);
+  --app-sidebar-width: 240px;
+  --app-sidebar-collapsed-width: 64px;
+  --app-topbar-height: 64px;
+}
+
+/* --------------------------------------------------------------------------
+   3. CSS Custom Properties — Dark mode overrides
+   .app-dark comes AFTER :root so it wins when class is present on <html>
+   -------------------------------------------------------------------------- */
+.app-dark {
+  --app-bg: #0f172a;              /* slate-900 — body background, sidebar */
+  --app-surface: #1e293b;         /* slate-800 — topbar, cards, elevated */
+  --app-border: #334155;          /* slate-700 — borders */
+  --app-text-primary: #e2e8f0;    /* slate-200 */
+  --app-text-secondary: #94a3b8;  /* slate-400 */
+  --app-text-disabled: #64748b;   /* slate-500 */
+  --app-accent: #6366f1;          /* indigo-500 */
+  --app-accent-soft: rgba(99, 102, 241, 0.1);  /* indigo-500 @ 10% */
   --app-sidebar-width: 240px;
   --app-sidebar-collapsed-width: 64px;
   --app-topbar-height: 64px;

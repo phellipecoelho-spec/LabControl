@@ -11,6 +11,9 @@ export function useTheme() {
     root.classList.toggle('app-dark', isDark.value)
   }
 
+  // Aplica tema imediatamente na inicialização
+  applyTheme()
+
   function toggle() {
     isDark.value = !isDark.value
   }

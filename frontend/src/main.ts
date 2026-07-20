@@ -12,6 +12,11 @@ import './styles/global.css'
 import './styles/auth.css'
 import './styles/layout.css'
 
+// Aplica tema ANTES de inicializar PrimeVue
+const stored = localStorage.getItem('app-theme')
+const isDark = stored !== 'light'
+document.documentElement.classList.toggle('app-dark', isDark)
+
 const app = createApp(App)
 
 app.use(createPinia())

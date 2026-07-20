@@ -7,7 +7,7 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach(async (to, _from, next) => {
+router.beforeEach(async (to, _from) => {
   const auth = useAuthStore()
 
   if (!auth.loading && !auth.isAuthenticated) {
@@ -15,22 +15,20 @@ router.beforeEach(async (to, _from, next) => {
   }
 
   if (to.meta.guest && auth.isAuthenticated) {
-    return next({ name: 'dashboard' })
+    return { name: 'dashboard' }
   }
 
   if (to.meta.requiresAuth && !auth.isAuthenticated) {
-    return next({ name: 'login', query: { redirect: to.fullPath } })
+    return { name: 'login', query: { redirect: to.fullPath } }
   }
 
   if (to.meta.requiresVerified && auth.isAuthenticated && !auth.isVerified) {
-    return next({ name: 'verify-email.pending', query: { redirect: to.fullPath } })
+    return { name: 'verify-email.pending', query: { redirect: to.fullPath } }
   }
 
   if (to.meta.roles && !to.meta.roles.some((r: string) => auth.hasRole(r))) {
-    return next({ name: 'unauthorized' })
+    return { name: 'unauthorized' }
   }
-
-  next()
 })
 
 export default router

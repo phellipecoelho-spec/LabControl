@@ -16,6 +16,7 @@
   justify-content: center;
   height: 100vh;
   gap: 1rem;
+  color: var(--app-text-primary);
 }
 
 .dashboard h1 {
@@ -24,7 +25,7 @@
 }
 
 .dashboard p {
-  color: #94a3b8;
+  color: var(--app-text-secondary);
   font-size: 1.125rem;
 }
 </style>

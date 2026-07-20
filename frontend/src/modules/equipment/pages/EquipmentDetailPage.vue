@@ -47,20 +47,18 @@
           <EquipmentTechnicalTab :equipment="equipment" />
         </TabPanel>
         <TabPanel value="3">
-          <div class="card">
-            <div class="text-center py-5">
-              <i class="pi pi-images text-5xl text-400 mb-3"></i>
-              <p class="text-600">Fotos do equipamento serão disponibilizadas em breve.</p>
-            </div>
-          </div>
+          <EquipmentPhotoUploader
+            v-if="equipment"
+            :equipmentId="equipment.id"
+            :photos="(equipment.photos as any[] || [])"
+            @photos-updated="onPhotosUpdated"
+          />
         </TabPanel>
         <TabPanel value="4">
-          <div class="card">
-            <div class="text-center py-5">
-              <i class="pi pi-history text-5xl text-400 mb-3"></i>
-              <p class="text-600">Histórico de alterações será disponibilizado em breve.</p>
-            </div>
-          </div>
+          <EquipmentLogsSection
+            v-if="equipment"
+            :equipmentId="equipment.id"
+          />
         </TabPanel>
       </TabPanels>
     </Tabs>
@@ -81,8 +79,11 @@ import Tag from 'primevue/tag'
 import EquipmentInfoTab from '@/modules/equipment/components/EquipmentInfoTab.vue'
 import EquipmentLocationTab from '@/modules/equipment/components/EquipmentLocationTab.vue'
 import EquipmentTechnicalTab from '@/modules/equipment/components/EquipmentTechnicalTab.vue'
+import EquipmentPhotoUploader from '@/modules/equipment/components/EquipmentPhotoUploader.vue'
+import EquipmentLogsSection from '@/modules/equipment/components/EquipmentLogsSection.vue'
 import { useEquipmentStore } from '@/modules/equipment/store/EquipmentStore'
 import type { Equipment } from '@/modules/equipment/types/equipment'
+import type { EquipmentPhoto } from '@/modules/equipment/types/equipment'
 
 const route = useRoute()
 const router = useRouter()
@@ -116,6 +117,12 @@ function getStatusLabel(status: string): string {
     retired: 'Baixado',
   }
   return labels[status] || status
+}
+
+function onPhotosUpdated(photos: EquipmentPhoto[]) {
+  if (equipment.value) {
+    equipment.value = { ...equipment.value, photos }
+  }
 }
 
 function getSeverity(status: string): string {

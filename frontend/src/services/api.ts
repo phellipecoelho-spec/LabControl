@@ -30,10 +30,10 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       const auth = useAuthStore()
       auth.setUser(null)
-      router.push({ name: 'login', query: { expired: '1' } })
     }
     if (error.response?.status === 403 && error.response.data?.message?.includes('verificado')) {
-      router.push({ name: 'verify-email.pending', query: { redirect: router.currentRoute.value.fullPath } })
+      const auth = useAuthStore()
+      auth.setUser(null)
     }
     return Promise.reject(error)
   },
