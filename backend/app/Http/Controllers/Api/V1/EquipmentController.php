@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEquipmentRequest;
 use App\Http\Requests\UpdateEquipmentRequest;
+use App\Http\Resources\EquipmentResource;
 use App\Models\Equipment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,17 +21,17 @@ class EquipmentController extends Controller
     {
         return [
             ['middleware' => 'auth:sanctum', 'options' => ['only' => ['index', 'show', 'store', 'update', 'destroy']]],
-            ['middleware' => 'permission', 'options' => ['only' => ['index', 'show'], 'permissions' => ['equipamentos.view']]],
-            ['middleware' => 'permission', 'options' => ['only' => ['store'], 'permissions' => ['equipamentos.create']]],
-            ['middleware' => 'permission', 'options' => ['only' => ['update'], 'permissions' => ['equipamentos.edit']]],
-            ['middleware' => 'permission', 'options' => ['only' => ['destroy'], 'permissions' => ['equipamentos.delete']]],
+            ['middleware' => 'permission:equipamentos.view', 'options' => ['only' => ['index', 'show']]],
+            ['middleware' => 'permission:equipamentos.create', 'options' => ['only' => ['store']]],
+            ['middleware' => 'permission:equipamentos.edit', 'options' => ['only' => ['update']]],
+            ['middleware' => 'permission:equipamentos.delete', 'options' => ['only' => ['destroy']]],
         ];
     }
 
     /**
      * Display a listing of equipment.
      */
-    public function index(Request $request): JsonResponse
+    public function index(Request $request)
     {
         $search = $request->input('search');
         $category_id = $request->input('category_id');
@@ -52,23 +53,23 @@ class EquipmentController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(15);
 
-        return response()->json($equipments);
+        return EquipmentResource::collection($equipments);
     }
 
     /**
      * Display the specified equipment.
      */
-    public function show(Equipment $equipment): JsonResponse
+    public function show(Equipment $equipment): EquipmentResource
     {
         $equipment->load(['category', 'manufacturer', 'supplier', 'photos']);
 
-        return response()->json($equipment);
+        return new EquipmentResource($equipment);
     }
 
     /**
      * Store a newly created equipment.
      */
-    public function store(StoreEquipmentRequest $request): JsonResponse
+    public function store(StoreEquipmentRequest $request)
     {
         $data = $request->validated();
         $data['user_id'] = auth()->id();
@@ -76,13 +77,13 @@ class EquipmentController extends Controller
         $equipment = Equipment::create($data);
         $equipment->load(['category', 'manufacturer', 'supplier', 'photos']);
 
-        return response()->json($equipment, 201);
+        return (new EquipmentResource($equipment))->response()->setStatusCode(201);
     }
 
     /**
      * Update the specified equipment.
      */
-    public function update(UpdateEquipmentRequest $request, Equipment $equipment): JsonResponse
+    public function update(UpdateEquipmentRequest $request, Equipment $equipment)
     {
         $data = $request->validated();
         $data['updated_by'] = auth()->id();
@@ -90,7 +91,7 @@ class EquipmentController extends Controller
         $equipment->update($data);
         $equipment->load(['category', 'manufacturer', 'supplier', 'photos']);
 
-        return response()->json($equipment);
+        return new EquipmentResource($equipment);
     }
 
     /**

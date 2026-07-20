@@ -19,10 +19,10 @@ class ManufacturerController extends Controller
     {
         return [
             ['middleware' => 'auth:sanctum', 'options' => ['only' => ['index', 'store', 'update', 'destroy']]],
-            ['middleware' => 'permission', 'options' => ['only' => ['index'], 'permissions' => ['equipamentos.view']]],
-            ['middleware' => 'permission', 'options' => ['only' => ['store'], 'permissions' => ['equipamentos.create']]],
-            ['middleware' => 'permission', 'options' => ['only' => ['update'], 'permissions' => ['equipamentos.edit']]],
-            ['middleware' => 'permission', 'options' => ['only' => ['destroy'], 'permissions' => ['equipamentos.delete']]],
+            ['middleware' => 'permission:equipamentos.view', 'options' => ['only' => ['index']]],
+            ['middleware' => 'permission:equipamentos.create', 'options' => ['only' => ['store']]],
+            ['middleware' => 'permission:equipamentos.edit', 'options' => ['only' => ['update']]],
+            ['middleware' => 'permission:equipamentos.delete', 'options' => ['only' => ['destroy']]],
         ];
     }
 
