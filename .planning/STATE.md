@@ -2,17 +2,17 @@
 gsd_state_version: 1.0
 milestone: v0.2
 milestone_name: Core Business
-current_phase: 5 — Equipamentos
-status: completed
+current_phase: 06
+status: executing
 stopped_at: Phase 06 context gathered
-last_updated: "2026-07-21T01:04:56.995Z"
-last_activity: Plan 05-04 — Photos & History completed (2026-07-20)
+last_updated: "2026-07-21T01:34:30.000Z"
+last_activity: 2026-07-21
 progress:
   total_phases: 6
   completed_phases: 4
-  total_plans: 22
-  completed_plans: 20
-  percent: 67
+  total_plans: 26
+  completed_plans: 21
+  percent: 72
 ---
 
 # State: LabControl
@@ -25,9 +25,9 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 
 ## Current Status
 
-**Current Phase:** 5 — Equipamentos
-**Status:** ✅ Complete (6/6 plans complete)
-**Last activity:** Plan 05-04 — Photos & History completed (2026-07-20)
+**Current Phase:** 06
+**Status:** Executing Phase 06 (Plan 01 complete)
+**Last activity:** 2026-07-21
 
 ## Plan Progress
 
@@ -82,6 +82,16 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 | 03 — Frontend CRUD | Frontend | ✅ Completed | EquipmentListPage, EquipmentFormPage, EquipmentDetailPage, EquipmentStore, EquipmentService, navigation routes |
 | 04 — Photos & History | Fullstack | ✅ Completed | EquipmentPhotoService, EquipmentPhotoController, EquipmentPhotoUploader, EquipmentLogsSection |
 
+## Phase 6 — Estoque (1 Plan ✅)
+
+**Plan 01 completed** 2026-07-20 — Compound migration for inventory tables, models with computed balance accessors, transactional movement service, seed data
+
+### Plans
+
+| Plan | Subsystem | Status | Description |
+|------|-----------|--------|-------------|
+| 01 — Database & Models | Backend | ✅ Completed | Compound migration (3 tables), 3 models, InventoryMovementService, InsufficientStockException, 2 factories, seeder (5 categories, 11 items, 11 movements) |
+
 ## Decisions
 
 | Decision | Outcome |
@@ -120,6 +130,13 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 | Module-scoped router for equipment routes | ✓ Implemented |
 | 5-tab detail page (Info, Technical, Location, Photos, Logs) | ✓ Implemented |
 | Composite index equipment_photos(equipment_id, sort_order) | ✓ Implemented |
+| Inventory categories separate from equipment categories (D-02) | ✓ Implemented |
+| supplier_id NOT NULL on inventory_items (D-03, D-14) | ✓ Implemented |
+| Balance computed from movements, not stored on items (D-10) | ✓ Implemented |
+| Append-only movement ledger — no SoftDeletes on movements | ✓ Implemented |
+| balance_after denormalized per movement for O(1) reads | ✓ Implemented |
+| CHECK (balance_after >= 0) as safety net for negative stock | ✓ Implemented |
+| Three-layer negative stock defense: tx + lock + validation | ✓ Implemented |
 
 ## Blockers
 
@@ -155,8 +172,12 @@ Phase 5 (Equipamentos) — 6 planos concluídos:
 - Plan 05-03: Frontend completo — EquipmentListPage com DataTable paginada, EquipmentFormPage com formulário de abas, EquipmentDetailPage com 5 tabs, EquipmentStore (Pinia), EquipmentService (axios), roteamento aninhado por módulo
 - Plan 05-04: EquipmentPhotoService (upload/storage/thumbnails), EquipmentPhotoController (6 rotas), EquipmentPhotoUploader.vue (drag & drop, preview, sort), EquipmentLogsSection.vue (timeline de alterações)
 
+Phase 6 (Estoque) — 1 plano concluído (em andamento):
+
+- Plan 06-01: Compound migration com 3 tabelas (inventory_categories, inventory_items, inventory_movements), UUIDs, CHECK constraint, índices compostos. Models: InventoryCategory (HasUuids, SoftDeletes, LogsActivity, auto-slug), InventoryItem (HasUuids, SoftDeletes, LogsActivity, computed current_balance, is_critical, 4 scopes), InventoryMovement (HasUuids, imutável — sem SoftDeletes). InventoryMovementService com DB::transaction + lockForUpdate + InsufficientStockException. Seeder: 5 categorias, 11 itens com movimentações iniciais.
+
 ## Session
 
-**Last session:** 2026-07-21T01:04:56.978Z
-**Stopped at:** Phase 06 context gathered
-**Resume file:** .planning\phases\06-estoque\06-CONTEXT.md
+**Last session:** 2026-07-21T01:34:30.000Z
+**Stopped at:** Phase 06 Plan 01 complete
+**Resume file:** .planning\phases\06-estoque\06-01-SUMMARY.md
