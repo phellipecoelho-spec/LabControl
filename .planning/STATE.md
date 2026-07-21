@@ -11,8 +11,8 @@ progress:
   total_phases: 6
   completed_phases: 4
   total_plans: 26
-  completed_plans: 21
-  percent: 72
+  completed_plans: 22
+  percent: 73
 ---
 
 # State: LabControl
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 ## Current Status
 
 **Current Phase:** 06
-**Status:** Executing Phase 06 (Plan 01 complete)
+**Status:** Executing Phase 06 (Plan 02 complete)
 **Last activity:** 2026-07-21
 
 ## Plan Progress
@@ -82,15 +82,16 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 | 03 — Frontend CRUD | Frontend | ✅ Completed | EquipmentListPage, EquipmentFormPage, EquipmentDetailPage, EquipmentStore, EquipmentService, navigation routes |
 | 04 — Photos & History | Fullstack | ✅ Completed | EquipmentPhotoService, EquipmentPhotoController, EquipmentPhotoUploader, EquipmentLogsSection |
 
-## Phase 6 — Estoque (1 Plan ✅)
+## Phase 6 — Estoque (2 Plans ✅)
 
-**Plan 01 completed** 2026-07-20 — Compound migration for inventory tables, models with computed balance accessors, transactional movement service, seed data
+**Plan 02 completed** 2026-07-20 — REST API layer for inventory module: 3 controllers with permission middleware, 5 FormRequests with validation, 3 API Resources with computed attributes, 13 registered routes
 
 ### Plans
 
 | Plan | Subsystem | Status | Description |
 |------|-----------|--------|-------------|
 | 01 — Database & Models | Backend | ✅ Completed | Compound migration (3 tables), 3 models, InventoryMovementService, InsufficientStockException, 2 factories, seeder (5 categories, 11 items, 11 movements) |
+| 02 — REST API Layer | Backend | ✅ Completed | 3 Controllers (InventoryItem, InventoryCategory, InventoryMovement), 5 Form Requests, 3 API Resources, 13 routes under /api/v1/ with Sanctum + permission middleware |
 
 ## Decisions
 
@@ -172,12 +173,13 @@ Phase 5 (Equipamentos) — 6 planos concluídos:
 - Plan 05-03: Frontend completo — EquipmentListPage com DataTable paginada, EquipmentFormPage com formulário de abas, EquipmentDetailPage com 5 tabs, EquipmentStore (Pinia), EquipmentService (axios), roteamento aninhado por módulo
 - Plan 05-04: EquipmentPhotoService (upload/storage/thumbnails), EquipmentPhotoController (6 rotas), EquipmentPhotoUploader.vue (drag & drop, preview, sort), EquipmentLogsSection.vue (timeline de alterações)
 
-Phase 6 (Estoque) — 1 plano concluído (em andamento):
+Phase 6 (Estoque) — 2 planos concluídos (em andamento):
 
 - Plan 06-01: Compound migration com 3 tabelas (inventory_categories, inventory_items, inventory_movements), UUIDs, CHECK constraint, índices compostos. Models: InventoryCategory (HasUuids, SoftDeletes, LogsActivity, auto-slug), InventoryItem (HasUuids, SoftDeletes, LogsActivity, computed current_balance, is_critical, 4 scopes), InventoryMovement (HasUuids, imutável — sem SoftDeletes). InventoryMovementService com DB::transaction + lockForUpdate + InsufficientStockException. Seeder: 5 categorias, 11 itens com movimentações iniciais.
+- Plan 06-02: REST API layer — 3 Controllers with static permission middleware (InventoryItemController full CRUD + initial stock movement, InventoryCategoryController index/store/update/destroy, InventoryMovementController immutable index/store/show + byItem). 5 Form Requests with validation rules (StoreInventoryItemRequest validates unit list D-16, supplier_id required D-14; StoreInventoryMovementRequest validates type D-07, reason required_if adjustment/disposal D-08). 3 API Resources with computed attributes (current_balance, is_critical, quantity_display). 13 routes under /api/v1/inventory-*. All controllers enforce auth:sanctum and permission:estoque.* / permission:movimentacoes.*.
 
 ## Session
 
-**Last session:** 2026-07-21T01:34:30.000Z
-**Stopped at:** Phase 06 Plan 01 complete
-**Resume file:** .planning\phases\06-estoque\06-01-SUMMARY.md
+**Last session:** 2026-07-20
+**Stopped at:** Phase 06 Plan 02 complete
+**Resume file:** .planning\phases\06-estoque\06-02-SUMMARY.md

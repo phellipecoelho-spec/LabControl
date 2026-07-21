@@ -39,8 +39,8 @@
 
 ### Estoque
 
-- [ ] **INVT-01**: Usuário pode controlar estoque de insumos e peças
-- [ ] **INVT-02**: Usuário pode registrar movimentações de entrada e saída
+- [x] **INVT-01**: Usuário pode controlar estoque de insumos e peças
+- [x] **INVT-02**: Usuário pode registrar movimentações de entrada e saída
 - [ ] **INVT-03**: Sistema alerta quando estoque atinge mínimo
 
 ### Empréstimos
@@ -126,8 +126,8 @@
 | EQUIP-02 | Phase 5 | Pending |
 | EQUIP-03 | Phase 5 | Pending |
 | EQUIP-04 | Phase 5 | Pending |
-| INVT-01 | Phase 6 | Pending |
-| INVT-02 | Phase 6 | Pending |
+| INVT-01 | Phase 6 | Completed |
+| INVT-02 | Phase 6 | Completed |
 | INVT-03 | Phase 6 | Pending |
 | LOAN-01 | Phase 7 | Pending |
 | LOAN-02 | Phase 7 | Pending |
