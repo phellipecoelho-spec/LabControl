@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\V1\RoleController;
 use App\Http\Controllers\Api\V1\InventoryCategoryController;
 use App\Http\Controllers\Api\V1\InventoryItemController;
 use App\Http\Controllers\Api\V1\InventoryMovementController;
+use App\Http\Controllers\Api\V1\LoanController;
 use App\Http\Controllers\Api\V1\SupplierController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Support\Facades\Route;
@@ -83,5 +84,13 @@ Route::prefix('v1')->group(function () {
         // Movements (immutable — no update/destroy)
         Route::apiResource('inventory-movements', InventoryMovementController::class)
             ->only(['index', 'store', 'show']);
+
+        // Loans Module
+        Route::apiResource('loans', LoanController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+        Route::prefix('loans/{loan}')->group(function () {
+            Route::post('activate', [LoanController::class, 'activate'])->name('loans.activate');
+            Route::post('return', [LoanController::class, 'returnItem'])->name('loans.return');
+            Route::post('cancel', [LoanController::class, 'cancel'])->name('loans.cancel');
+        });
     });
 });
