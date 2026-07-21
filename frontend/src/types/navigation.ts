@@ -139,6 +139,7 @@ export const routeModuleMap: Record<string, string> = {
   'movements.create': 'operacoes',
   'loans.index': 'operacoes',
   'loans.create': 'operacoes',
+  'loans.show': 'operacoes',
   'calibrations.index': 'operacoes',
   'calibrations.create': 'operacoes',
   'verifications.index': 'operacoes',

@@ -128,8 +128,14 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/loans',
     name: 'loans.index',
-    component: () => import('@/views/PlaceholderPage.vue'),
+    component: () => import('@/modules/loans/pages/LoanListPage.vue'),
     meta: { requiresAuth: true, module: 'loans.index', title: 'Empréstimos' },
+  },
+  {
+    path: '/loans/:id',
+    name: 'loans.show',
+    component: () => import('@/modules/loans/pages/LoanDetailPage.vue'),
+    meta: { requiresAuth: true, module: 'loans.index', title: 'Detalhes do Empréstimo' },
   },
   {
     path: '/calibrations',
