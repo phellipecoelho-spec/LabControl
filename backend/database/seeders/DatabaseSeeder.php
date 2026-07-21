@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             EquipmentSeeder::class,
             InventorySeeder::class,
+            LoanSeeder::class,
         ]);
     }
 }
