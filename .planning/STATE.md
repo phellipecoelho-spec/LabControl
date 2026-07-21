@@ -4,15 +4,15 @@ milestone: v0.2
 milestone_name: Core Business
 current_phase: 07
 status: executing
-stopped_at: Phase 07 - Plan 02 completed
-last_updated: "2026-07-21T16:20:27.013Z"
+stopped_at: Phase 07 - Plan 03 completed
+last_updated: "2026-07-21T22:34:30.013Z"
 last_activity: 2026-07-21
 progress:
   total_phases: 7
   completed_phases: 5
   total_plans: 29
-  completed_plans: 25
-  percent: 71
+  completed_plans: 26
+  percent: 72
 ---
 
 # State: LabControl
@@ -180,9 +180,9 @@ Phase 6 (Estoque) — 3 planos concluídos:
 - Plan 06-02: REST API layer — 3 Controllers with static permission middleware (InventoryItemController full CRUD + initial stock movement, InventoryCategoryController index/store/update/destroy, InventoryMovementController immutable index/store/show + byItem). 5 Form Requests with validation rules (StoreInventoryItemRequest validates unit list D-16, supplier_id required D-14; StoreInventoryMovementRequest validates type D-07, reason required_if adjustment/disposal D-08). 3 API Resources with computed attributes (current_balance, is_critical, quantity_display). 13 routes under /api/v1/inventory-*. All controllers enforce auth:sanctum and permission:estoque.* / permission:movimentacoes.*.
 - Plan 06-03: Frontend module — TypeScript interfaces (InventoryItem, InventoryCategory, InventoryMovement, form data), 3 API services (item, category, movement), 2 Pinia stores (InventoryItemStore, InventoryMovementStore), 4 pages (InventoryItemListPage with filters + critical row styling, InventoryItemFormPage with 2 tabs Principal+Armazenamento, InventoryItemDetailPage with 2 tabs Dados do Item+Movimentações, InventoryMovementsPage with filters + movement dialog). 3 components (InventoryItemInfoTab, InventoryMovementTab, InventoryMovementDialog). 5 routes registered replacing placeholder pages. Vite build passes in 7.28s.
 
-## Phase 7 — Empréstimos (2 Plans ✅)
+## Phase 7 — Empréstimos (3 Plans ✅)
 
-**Plan 02 completed** 2026-07-21 — LoanController API, 3 Form Requests, 2 API Resources, 8 routes, CheckOverdueLoans command
+**Plan 03 completed** 2026-07-21 — Frontend data layer: Loan types, LoanService, LoanStore, routes, navigation
 
 ### Plans
 
@@ -190,9 +190,10 @@ Phase 6 (Estoque) — 3 planos concluídos:
 |------|-----------|--------|-------------|
 | 01 — Database & Models | Backend | ✅ Completed | Enums, migration, models, factories, seeder, LoanService, LoanException, loans + equipment_loan + notifications tables |
 | 02 — REST API Layer | Backend | ✅ Completed | LoanController (8 endpoints), 3 Form Requests, 2 API Resources, routes with Sanctum + permission middleware, CheckOverdueLoans command, daily schedule |
+| 03 — Frontend Data Layer | Frontend | ✅ Completed | Loan types, LoanService (10 methods), LoanStore (Composition API Pinia), lazy-loaded routes /loans and /loans/:id, routeModuleMap updated |
 
 ## Session
 
-**Last session:** 2026-07-21T16:20:26.995Z
-**Stopped at:** Phase 07 - Plan 02 completed
+**Last session:** 2026-07-21T22:34:30.013Z
+**Stopped at:** Phase 07 - Plan 03 completed
 **Resume file:** .planning/phases/07-emprestimos/07-CONTEXT.md
