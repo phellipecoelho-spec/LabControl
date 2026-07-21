@@ -133,6 +133,8 @@ export const routeModuleMap: Record<string, string> = {
   'equipment.show': 'gestao',
   'inventory.index': 'gestao',
   'inventory.create': 'gestao',
+  'inventory.edit': 'gestao',
+  'inventory.show': 'gestao',
   'movements.index': 'operacoes',
   'movements.create': 'operacoes',
   'loans.index': 'operacoes',
