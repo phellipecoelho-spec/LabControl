@@ -2,17 +2,17 @@
 gsd_state_version: 1.0
 milestone: v0.2
 milestone_name: Core Business
-current_phase: 4 — Layout e Navegação
+current_phase: 5 — Equipamentos
 status: completed
-stopped_at: Phase 05 context gathered
-last_updated: "2026-07-19T21:15:17.163Z"
-last_activity: Plan 03 — Polish completed (2026-07-19)
+stopped_at: Phase 06 context gathered
+last_updated: "2026-07-21T01:04:56.995Z"
+last_activity: Plan 05-04 — Photos & History completed (2026-07-20)
 progress:
-  total_phases: 5
-  completed_phases: 3
-  total_plans: 16
-  completed_plans: 14
-  percent: 60
+  total_phases: 6
+  completed_phases: 4
+  total_plans: 22
+  completed_plans: 20
+  percent: 67
 ---
 
 # State: LabControl
@@ -25,9 +25,9 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 
 ## Current Status
 
-**Current Phase:** 4 — Layout e Navegação
-**Status:** ✅ Complete (3/3 plans complete)
-**Last activity:** Plan 03 — Polish completed (2026-07-19)
+**Current Phase:** 5 — Equipamentos
+**Status:** ✅ Complete (6/6 plans complete)
+**Last activity:** Plan 05-04 — Photos & History completed (2026-07-20)
 
 ## Plan Progress
 
@@ -67,6 +67,21 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 - **Tipografia:** 4 sizes (13/14/20/28px), 2 weights (400/600)
 - **Navegação:** Módulos agrupados por categoria (Gestão, Operações, Administração, Relatórios), Dashboard fixo
 
+## Phase 5 — Equipamentos (6 Plans ✅)
+
+**Plan 05-04 completed** 2026-07-20 — Equipment photo upload service, controller, frontend uploader, logs timeline
+
+### Plans
+
+| Plan | Subsystem | Status | Description |
+|------|-----------|--------|-------------|
+| 01a — Database | Database | ✅ Completed | Migration with 5 tables (categories, manufacturers, suppliers, equipments, equipment_photos) |
+| 01b — Models | Backend | ✅ Completed | Equipment, Category, Manufacturer, Supplier, EquipmentPhoto models + factories + seeders |
+| 02a — Backend CRUD | Backend | ✅ Completed | EquipmentController, CategoryController, ManufacturerController, SupplierController, Form Requests, 21 API routes |
+| 02b — API Resources | Backend | ✅ Completed | API Resources, 8 Feature Tests (29 assertions) |
+| 03 — Frontend CRUD | Frontend | ✅ Completed | EquipmentListPage, EquipmentFormPage, EquipmentDetailPage, EquipmentStore, EquipmentService, navigation routes |
+| 04 — Photos & History | Fullstack | ✅ Completed | EquipmentPhotoService, EquipmentPhotoController, EquipmentPhotoUploader, EquipmentLogsSection |
+
 ## Decisions
 
 | Decision | Outcome |
@@ -97,6 +112,14 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 | filteredPanelMenuModel computed reactive to authStore.user | ✓ Implemented |
 | Avatar wrapped in button for keyboard accessibility | ✓ Implemented |
 | Tooltip directive registered globally for collapsed sidebar hints | ✓ Implemented |
+| Single migration for all 5 equipment tables (atomic deployment) | ✓ Implemented |
+| Equipment photos with cascade delete | ✓ Implemented |
+| equipment_photos without softDeletes or updated_at | ✓ Implemented |
+| Permission middleware via HasMiddleware trait | ✓ Implemented |
+| useInfiniteScroll composable for server-side pagination | ✓ Implemented |
+| Module-scoped router for equipment routes | ✓ Implemented |
+| 5-tab detail page (Info, Technical, Location, Photos, Logs) | ✓ Implemented |
+| Composite index equipment_photos(equipment_id, sort_order) | ✓ Implemented |
 
 ## Blockers
 
@@ -123,13 +146,17 @@ Phase 4 (Layout e Navegação) — 3 planos executados:
 - Plan 02: AppSidebar (PanelMenu accordion, 4 categorias, Dashboard fixo), AppTopbar (user menu, dark/light toggle, notificações placeholder, hamburger), AppLayout (shell wrapper), App.vue conditional layout (auth vs authed), routes.ts meta module
 - Plan 03: Permission filtering via hasPermission(), mobile Drawer overlay (<768px), a11y (skip-to-content, ARIA labels, keyboard navigation, v-tooltip), build passes 2.73s
 
-- Plan 01: User/Role/Permission models, controllers, seeder com roles (admin, supervisor, laboratorista, tecnico, consulta, auditor) e permissões
-- Plan 02: Frontend CRUD de usuários e roles com PrimeVue DataTable, formulários, gerenciamento de permissões
-- Plan 03: Profile page, AvatarService, alteração de senha
-- Plan 04: ActivityLog model, LogsActivity trait, UserObserver, ActivityLogService, 8 auth event hooks no AuthController, ActivityLogController com 3 endpoints de consulta, AuditLogsPage.vue com Timeline PrimeVue, 10 testes
+Phase 5 (Equipamentos) — 6 planos concluídos:
+
+- Plan 05-01a: Migration única com 5 tabelas (categories, manufacturers, suppliers, equipments, equipment_photos), UUIDs, softDeletes, deleted_by audit
+- Plan 05-01b: Models Equipment, Category, Manufacturer, Supplier, EquipmentPhoto com relacionamentos, factories, seeders com dados iniciais
+- Plan 05-02a: EquipmentController CRUD completo, CategoryController, ManufacturerController, SupplierController, StoreEquipmentRequest, UpdateEquipmentRequest, 21 rotas API com middleware de permissão
+- Plan 05-02b: EquipmentResource, CategoryResource, ManufacturerResource, SupplierResource, 8 Feature Tests (29 assertions)
+- Plan 05-03: Frontend completo — EquipmentListPage com DataTable paginada, EquipmentFormPage com formulário de abas, EquipmentDetailPage com 5 tabs, EquipmentStore (Pinia), EquipmentService (axios), roteamento aninhado por módulo
+- Plan 05-04: EquipmentPhotoService (upload/storage/thumbnails), EquipmentPhotoController (6 rotas), EquipmentPhotoUploader.vue (drag & drop, preview, sort), EquipmentLogsSection.vue (timeline de alterações)
 
 ## Session
 
-**Last session:** 2026-07-19T21:15:17.078Z
-**Stopped at:** Phase 05 context gathered
-**Resume file:** .planning/phases/05-equipamentos/05-CONTEXT.md
+**Last session:** 2026-07-21T01:04:56.978Z
+**Stopped at:** Phase 06 context gathered
+**Resume file:** .planning\phases\06-estoque\06-CONTEXT.md
