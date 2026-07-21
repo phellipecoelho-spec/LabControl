@@ -129,8 +129,8 @@
 | INVT-01 | Phase 6 | Completed |
 | INVT-02 | Phase 6 | Completed |
 | INVT-03 | Phase 6 | Pending |
-| LOAN-01 | Phase 7 | Pending |
-| LOAN-02 | Phase 7 | Pending |
+| LOAN-01 | Phase 7 | Completed |
+| LOAN-02 | Phase 7 | Completed |
 | LOAN-03 | Phase 7 | Pending |
 | CAL-01 | Phase 8 | Pending |
 | CAL-02 | Phase 8 | Pending |
