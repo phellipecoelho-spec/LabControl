@@ -46,7 +46,7 @@ Módulo de controle de empréstimos de equipamentos — registro de retirada e d
 
 ### 5. Permissões e Navegação
 
-- **D-15:** Permissões já seedadas: `loans.view`, `loans.create`, `loans.edit`, `loans.delete`. Middleware de permissão nos controllers (mesmo padrão Equipment/Inventory)
+- **D-15:** Permissões já seedadas: `emprestimos.view`, `emprestimos.create`, `emprestimos.edit`, `emprestimos.finalizar`. Middleware de permissão nos controllers (mesmo padrão Equipment/Inventory) — conforme RolePermissionSeeder
 - **D-16:** Sidebar já configurada: categoria "Operações" → "Empréstimos" (pi-share-alt, emprestimos.view, loans.index)
 - **D-17:** Rotas: `/loans` (index), `/loans/create` (dialog via store — mantida como ação na lista), `/loans/{id}` (show)
 
@@ -99,7 +99,7 @@ Módulo de controle de empréstimos de equipamentos — registro de retirada e d
 ### Navigation & Routes (já configurados)
 - `frontend/src/router/routes.ts` — Route `loans.index` with placeholder
 - `frontend/src/types/navigation.ts` — Sidebar entry for Empréstimos in Operações
-- `backend/database/seeders/RolePermissionSeeder.php` — Permissions loans.{view,create,edit,delete} already seeded
+- `backend/database/seeders/RolePermissionSeeder.php` — Permissions emprestimos.{view,create,edit,finalizar} already seeded
 
 </canonical_refs>
 

@@ -11,6 +11,12 @@
     "vue-echarts": "^8.0.1",
     "vue-router": "^5.2.0"
   },
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit"
+  },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.8",
     "typescript": "^5.8.3",

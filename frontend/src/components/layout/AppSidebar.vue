@@ -37,18 +37,18 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import PanelMenu from 'primevue/panelmenu'
 import { navigationTree, routeModuleMap } from '@/types/navigation'
 import type { NavCategory, NavModule } from '@/types/navigation'
 import { useAuthStore } from '@/stores/auth'
+import router from '@/router'
 
 const props = defineProps<{
   collapsed: boolean
 }>()
 
 const route = useRoute()
-const router = useRouter()
 const authStore = useAuthStore()
 
 const expandedKeys = ref<Record<string, boolean>>({})
