@@ -11,6 +11,8 @@ use App\Http\Controllers\Api\V1\RoleController;
 use App\Http\Controllers\Api\V1\InventoryCategoryController;
 use App\Http\Controllers\Api\V1\InventoryItemController;
 use App\Http\Controllers\Api\V1\InventoryMovementController;
+use App\Http\Controllers\Api\V1\CalibrationCertificateController;
+use App\Http\Controllers\Api\V1\CalibrationController;
 use App\Http\Controllers\Api\V1\LoanController;
 use App\Http\Controllers\Api\V1\SupplierController;
 use App\Http\Controllers\Api\V1\UserController;
@@ -91,6 +93,22 @@ Route::prefix('v1')->group(function () {
             Route::post('activate', [LoanController::class, 'activate'])->name('loans.activate');
             Route::post('return', [LoanController::class, 'returnItem'])->name('loans.return');
             Route::post('cancel', [LoanController::class, 'cancel'])->name('loans.cancel');
+        });
+
+        // Calibrations Module
+        Route::apiResource('calibrations', CalibrationController::class)
+            ->only(['index', 'show', 'store', 'update', 'destroy']);
+        Route::prefix('calibrations/{calibration}')->group(function () {
+            Route::post('complete', [CalibrationController::class, 'complete'])->name('calibrations.complete');
+            Route::post('cancel', [CalibrationController::class, 'cancel'])->name('calibrations.cancel');
+        });
+
+        // Calibration Certificates (nested under calibration)
+        Route::prefix('calibrations/{calibration}/certificates')->group(function () {
+            Route::get('/', [CalibrationCertificateController::class, 'index']);
+            Route::post('/', [CalibrationCertificateController::class, 'store']);
+            Route::get('/{certificate}/download', [CalibrationCertificateController::class, 'download']);
+            Route::delete('/{certificate}', [CalibrationCertificateController::class, 'destroy']);
         });
     });
 });

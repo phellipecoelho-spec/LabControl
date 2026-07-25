@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
             $schedule->command('loans:check-overdue')->daily();
+            $schedule->command('calibrations:check-due')->daily();
         });
     }
 }
