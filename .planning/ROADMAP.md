@@ -34,15 +34,17 @@
   - [x] 05-04-PLAN.md — Photo upload service, controller, frontend uploader, logs timeline
 - [x] **Phase 6**: Estoque (3/3 plans)
   Plans:
+
   - [x] 06-01-PLAN.md — Database migration (3 tables: inventory_categories, inventory_items, inventory_movements), Models, InventoryMovementService, Factories + Seeder
   - [x] 06-02-PLAN.md — Backend CRUD (InventoryItemController, InventoryCategoryController, InventoryMovementController), 5 Form Requests, 3 API Resources, API routes
   - [x] 06-03-PLAN.md — Frontend CRUD (List, Form, Detail pages), MovementsPage with filters, MovementDialog, TypeScript types, Pinia stores, routes, critical stock toast alert
 - [ ] **Phase 7**: Empréstimos (4 plans)
   Plans:
+
   - [x] 07-01-PLAN.md — Database & Models: compound migration, 2 models, LoanStatus enum, LoanService, LoanException, Factory, Seeder
   - [x] 07-02-PLAN.md — Backend CRUD & API: LoanController, 3 Form Requests, 2 API Resources, routes, CheckOverdueLoans command
-  - [ ] 07-03-PLAN.md — Frontend Module: types, service, store, LoanListPage, LoanDetailPage, LoanCreateDialog, LoanReturnDialog, 3 tab components, routes
-  - [ ] 07-04-PLAN.md — Overdue Notifications: CheckOverdueLoans command, LoanOverdue notification class, scheduling, tests
+  - [x] 07-03-PLAN.md — Frontend Module: types, service, store, LoanListPage, LoanDetailPage, LoanCreateDialog, LoanReturnDialog, 3 tab components, routes
+  - [x] 07-04-PLAN.md — Overdue Notifications: CheckOverdueLoans command, LoanOverdue notification class, scheduling, tests
 - [ ] **Phase 8**: Calibrações (4 plans)
 
 ### 📋 v0.3 Advanced Features (Planned)
@@ -67,7 +69,7 @@
 | 4. Layout e Navegação | v0.1 | 3/3 | ✅ Complete | 2026-07-19 |
 | 5. Equipamentos | v0.2 | 6/6 | ✅ Complete | 2026-07-20 |
 | 6. Estoque | v0.2 | 3/3 | ✅ Complete | 2026-07-20 |
-| 7. Empréstimos | v0.2 | 2/4 | In progress | - |
+| 7. Empréstimos | v0.2 | 4/4 | Complete    | 2026-07-25 |
 | 8. Calibrações | v0.2 | 0/4 | Not started | - |
 | 9. Aferições | v0.3 | 0/2 | Not started | - |
 | 10. Manutenções | v0.3 | 0/2 | Not started | - |
