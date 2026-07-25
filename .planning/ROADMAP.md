@@ -38,7 +38,7 @@
   - [x] 06-01-PLAN.md — Database migration (3 tables: inventory_categories, inventory_items, inventory_movements), Models, InventoryMovementService, Factories + Seeder
   - [x] 06-02-PLAN.md — Backend CRUD (InventoryItemController, InventoryCategoryController, InventoryMovementController), 5 Form Requests, 3 API Resources, API routes
   - [x] 06-03-PLAN.md — Frontend CRUD (List, Form, Detail pages), MovementsPage with filters, MovementDialog, TypeScript types, Pinia stores, routes, critical stock toast alert
-- [ ] **Phase 7**: Empréstimos (4 plans)
+- [x] **Phase 7**: Empréstimos (4 plans)
   Plans:
 
   - [x] 07-01-PLAN.md — Database & Models: compound migration, 2 models, LoanStatus enum, LoanService, LoanException, Factory, Seeder
