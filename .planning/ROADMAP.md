@@ -61,6 +61,10 @@
   - [ ] 09-01-PLAN.md — Database & Backend Foundation (migrations, models, enum, exception, service, factory, seeder, permissions)
   - [ ] 09-02-PLAN.md — API & Frontend Module (controller, requests, resources, notification, routes, types, service, store, pages, components, history tab)
 - [ ] **Phase 10**: Manutenções (2 plans)
+  Plans:
+
+  - [ ] 10-01-PLAN.md — Database & Backend Foundation (migration, enums, models, service, factory, seeder, permissions, relationships)
+  - [ ] 10-02-PLAN.md — API & Frontend Module (controller, requests, resources, notification, routes, list page, dialogs, history tab, detail page, EquipmentDetailPage tab)
 - [ ] **Phase 11**: Dashboard (2 plans)
 - [ ] **Phase 12**: Relatórios (2 plans)
 
