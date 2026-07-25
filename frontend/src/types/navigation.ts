@@ -60,7 +60,7 @@ export const navigationTree: NavItem[] = [
       },
       {
         label: 'Calibrações',
-        icon: 'pi pi-calendar-clock',
+        icon: 'pi pi-verified',
         route: 'calibrations.index',
         permission: 'calibracoes.view',
       },
@@ -142,6 +142,7 @@ export const routeModuleMap: Record<string, string> = {
   'loans.show': 'operacoes',
   'calibrations.index': 'operacoes',
   'calibrations.create': 'operacoes',
+  'calibrations.show': 'operacoes',
   'verifications.index': 'operacoes',
   'verifications.create': 'operacoes',
   'maintenance.index': 'operacoes',

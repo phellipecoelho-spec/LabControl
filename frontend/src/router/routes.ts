@@ -140,8 +140,14 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/calibrations',
     name: 'calibrations.index',
-    component: () => import('@/views/PlaceholderPage.vue'),
+    component: () => import('@/modules/calibrations/pages/CalibrationListPage.vue'),
     meta: { requiresAuth: true, module: 'calibrations.index', title: 'Calibrações' },
+  },
+  {
+    path: '/calibrations/:id',
+    name: 'calibrations.show',
+    component: () => import('@/modules/calibrations/pages/CalibrationDetailPage.vue'),
+    meta: { requiresAuth: true, module: 'calibrations.index', title: 'Detalhes da Calibração' },
   },
   {
     path: '/verifications',
