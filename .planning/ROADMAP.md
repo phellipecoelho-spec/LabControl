@@ -56,6 +56,10 @@
 ### 📋 v0.3 Advanced Features (Planned)
 
 - [ ] **Phase 9**: Aferições (2 plans)
+  Plans:
+
+  - [ ] 09-01-PLAN.md — Database & Backend Foundation (migrations, models, enum, exception, service, factory, seeder, permissions)
+  - [ ] 09-02-PLAN.md — API & Frontend Module (controller, requests, resources, notification, routes, types, service, store, pages, components, history tab)
 - [ ] **Phase 10**: Manutenções (2 plans)
 - [ ] **Phase 11**: Dashboard (2 plans)
 - [ ] **Phase 12**: Relatórios (2 plans)
