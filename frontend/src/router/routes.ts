@@ -152,7 +152,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/verifications',
     name: 'verifications.index',
-    component: () => import('@/views/PlaceholderPage.vue'),
+    component: () => import('@/modules/verifications/pages/VerificationPendingPage.vue'),
     meta: { requiresAuth: true, module: 'verifications.index', title: 'Aferições' },
   },
   {
