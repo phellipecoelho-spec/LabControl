@@ -83,27 +83,28 @@ class VerificationService
      */
     public function getPendingVerifications(): Collection
     {
-        $now = now();
+        $thresholds = [
+            'daily' => now()->subDay(),
+            'weekly' => now()->subWeek(),
+            'shift' => now()->subHours(12),
+        ];
 
         return Equipment::query()
             ->whereNotNull('verification_frequency')
-            ->where(function ($query) use ($now) {
-                $query->whereDoesntHave('verifications')
-                    ->orWhereHas('verifications', function ($q) use ($now) {
-                        $q->select('equipment_id')
-                            ->groupBy('equipment_id')
-                            ->havingRaw('MAX(verified_at) < ?', [
-                                // Convert frequency to hours for comparison
-                                $now->copy()->subHours(
-                                    DB::raw("CASE verification_frequency
-                                        WHEN 'daily' THEN 24
-                                        WHEN 'weekly' THEN 168
-                                        WHEN 'shift' THEN 12
-                                        ELSE 0
-                                    END")
-                                ),
-                            ]);
+            ->where(function ($query) use ($thresholds) {
+                foreach ($thresholds as $frequency => $threshold) {
+                    $query->orWhere(function ($q) use ($frequency, $threshold) {
+                        $q->where('verification_frequency', $frequency)
+                            ->where(function ($sub) use ($threshold) {
+                                $sub->whereDoesntHave('verifications')
+                                    ->orWhereHas('verifications', function ($h) use ($threshold) {
+                                        $h->select('equipment_id')
+                                            ->groupBy('equipment_id')
+                                            ->havingRaw('MAX(verified_at) < ?', [$threshold]);
+                                    });
+                            });
                     });
+                }
             })
             ->with(['category', 'lastVerification'])
             ->limit(100)
