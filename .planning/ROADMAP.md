@@ -50,7 +50,7 @@
 
   - [x] 08-01-PLAN.md — Database & Models: migration (calibrations + calibration_certificates), CalibrationStatus enum, Calibration/CalibrationCertificate models, CalibrationException, CalibrationService, CalibrationCertificateService, Factory, Seeder, permissions
   - [x] 08-02-PLAN.md — Backend API: CalibrationController (7 actions), CalibrationCertificateController (4 actions), 3 Form Requests, 2 API Resources, routes, CheckCalibrationDue command, CalibrationDue notification, schedule
-  - [ ] 08-03-PLAN.md — Frontend Data Layer: TypeScript types, CalibrationService (10 methods), CalibrationStore, routes registration
+  - [x] 08-03-PLAN.md — Frontend Data Layer: TypeScript types, CalibrationService (10 methods), CalibrationStore, routes registration
   - [ ] 08-04-PLAN.md — Frontend UI Components: CalibrationListPage, CalibrationDetailPage, 3 tabs (Info/Certificate/Timeline), 2 dialogs (Create/Conclude)
 
 ### 📋 v0.3 Advanced Features (Planned)

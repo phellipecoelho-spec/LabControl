@@ -4,15 +4,15 @@ milestone: v0.2
 milestone_name: Core Business
 current_phase: 08
 status: executing
-stopped_at: Completed 08-calibracoes-02-PLAN.md
+stopped_at: Completed 08-calibracoes-03-PLAN.md
 last_updated: "2026-07-25T17:45:20.216Z"
 last_activity: 2026-07-25
 progress:
   total_phases: 8
   completed_phases: 6
-  total_plans: 33
-  completed_plans: 29
-  percent: 75
+  total_plans: 34
+  completed_plans: 30
+  percent: 76
 ---
 
 # State: LabControl
@@ -193,10 +193,22 @@ Phase 6 (Estoque) — 3 planos concluídos:
 | 03 — Frontend Data Layer | Frontend | ✅ Completed | Loan types, LoanService (10 methods), LoanStore (Composition API Pinia), lazy-loaded routes /loans and /loans/:id, routeModuleMap updated |
 | 04 — UI Components | Frontend | ✅ Completed | LoanListPage with DataTable + equipment MultiSelect filter (D-11), LoanDetailPage with 3 tabs (D-12), LoanCreateDialog (D-13), LoanReturnDialog (D-14), permission-gated actions, overdue indicators |
 
+## Phase 8 — Calibrações (3 Plans ✅)
+
+**Plan 03 completed** 2026-07-25 — Frontend data layer: TypeScript types, CalibrationService (11 methods), CalibrationStore, routes, navigation icon update
+
+### Plans
+
+| Plan | Subsystem | Status | Description |
+|------|-----------|--------|-------------|
+| 01 — Database & Models | Backend | ✅ Completed | Compound migration, 2 models, CalibrationStatus enum, CalibrationException, CalibrationService, CalibrationCertificateService, Factory, Seeder, 5 permissions |
+| 02 — REST API Layer | Backend | ✅ Completed | CalibrationController (7 actions), CalibrationCertificateController (4 actions), 3 Form Requests, 2 API Resources, 11 routes, CheckCalibrationDue command, schedule |
+| 03 — Frontend Data Layer | Frontend | ✅ Completed | CalibrationType interfaces, CalibrationService (11 methods), CalibrationStore (Composition API Pinia), lazy-loaded routes, sidebar icon updated to pi-verified |
+
 ## Session
 
-**Last session:** 2026-07-25T17:45:20.191Z
-**Stopped at:** Completed 08-calibracoes-02-PLAN.md
+**Last session:** 2026-07-25T16:57:00Z
+**Stopped at:** Completed 08-calibracoes-03-PLAN.md
 **Resume file:** None
 
 ## Performance Metrics
@@ -205,3 +217,4 @@ Phase 6 (Estoque) — 3 planos concluídos:
 |-------|------|----------|-------|
 | Phase 08-calibracoes P01 | 25 min | 3 tasks | 11 files |
 | Phase 08-calibracoes P02 | 13min | 2 tasks | 11 files |
+| Phase 08-calibracoes P03 | 12min | 2 tasks | 5 files |
