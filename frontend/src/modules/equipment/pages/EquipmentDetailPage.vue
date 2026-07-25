@@ -36,6 +36,7 @@
         <Tab value="3" v-if="authStore.hasPermission('afericoes.view')">Aferições</Tab>
         <Tab value="4">Arquivos</Tab>
         <Tab value="5">Logs</Tab>
+        <Tab value="6" v-if="authStore.hasPermission('manutencoes.view')">Manutenções</Tab>
       </TabList>
       <TabPanels>
         <TabPanel value="0">
@@ -68,6 +69,13 @@
             :equipmentId="equipment.id"
           />
         </TabPanel>
+        <TabPanel value="6" v-if="authStore.hasPermission('manutencoes.view')">
+          <MaintenanceHistoryTab
+            v-if="equipment"
+            :equipmentId="equipment.id"
+            @start-maintenance="startMaintenance"
+          />
+        </TabPanel>
       </TabPanels>
     </Tabs>
 
@@ -75,6 +83,12 @@
       v-model:visible="verificationDialogVisible"
       :equipmentId="verificationEquipmentId"
       @saved="onVerificationSaved"
+    />
+
+    <MaintenanceOpenDialog
+      v-model:visible="maintenanceDialogVisible"
+      :equipmentId="maintenanceEquipmentId"
+      @saved="onMaintenanceSaved"
     />
   </div>
 </template>
@@ -97,6 +111,8 @@ import EquipmentPhotoUploader from '@/modules/equipment/components/EquipmentPhot
 import EquipmentLogsSection from '@/modules/equipment/components/EquipmentLogsSection.vue'
 import VerificationHistoryTab from '@/modules/verifications/components/VerificationHistoryTab.vue'
 import VerificationFormDialog from '@/modules/verifications/components/VerificationFormDialog.vue'
+import MaintenanceHistoryTab from '@/modules/maintenance/components/MaintenanceHistoryTab.vue'
+import MaintenanceOpenDialog from '@/modules/maintenance/components/MaintenanceOpenDialog.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useEquipmentStore } from '@/modules/equipment/store/EquipmentStore'
 import type { Equipment } from '@/modules/equipment/types/equipment'
@@ -112,6 +128,8 @@ const loading = ref(false)
 const activeTab = ref('0')
 const verificationDialogVisible = ref(false)
 const verificationEquipmentId = ref<string | null>(null)
+const maintenanceDialogVisible = ref(false)
+const maintenanceEquipmentId = ref<string | null>(null)
 
 onMounted(async () => {
   const id = route.params.id as string
@@ -167,5 +185,20 @@ function onVerificationSaved() {
   verificationEquipmentId.value = null
   // Trigger a re-fetch to update the history tab
   window.dispatchEvent(new CustomEvent('verification-saved', { detail: { equipmentId: equipment.value?.id } }))
+}
+
+function startMaintenance() {
+  if (equipment.value) {
+    maintenanceEquipmentId.value = equipment.value.id
+    maintenanceDialogVisible.value = true
+  }
+}
+
+function onMaintenanceSaved() {
+  maintenanceDialogVisible.value = false
+  maintenanceEquipmentId.value = null
+  window.dispatchEvent(new CustomEvent('maintenance-saved', {
+    detail: { equipmentId: equipment.value?.id },
+  }))
 }
 </script>
