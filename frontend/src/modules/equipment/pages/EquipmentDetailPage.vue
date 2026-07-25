@@ -33,8 +33,9 @@
         <Tab value="0">Principal</Tab>
         <Tab value="1">Localização</Tab>
         <Tab value="2">Técnica</Tab>
-        <Tab value="3">Arquivos</Tab>
-        <Tab value="4">Logs</Tab>
+        <Tab value="3" v-if="authStore.hasPermission('afericoes.view')">Aferições</Tab>
+        <Tab value="4">Arquivos</Tab>
+        <Tab value="5">Logs</Tab>
       </TabList>
       <TabPanels>
         <TabPanel value="0">
@@ -46,7 +47,14 @@
         <TabPanel value="2">
           <EquipmentTechnicalTab :equipment="equipment" />
         </TabPanel>
-        <TabPanel value="3">
+        <TabPanel value="3" v-if="authStore.hasPermission('afericoes.view')">
+          <VerificationHistoryTab
+            v-if="equipment"
+            :equipmentId="equipment.id"
+            @start-verification="startVerification"
+          />
+        </TabPanel>
+        <TabPanel value="4">
           <EquipmentPhotoUploader
             v-if="equipment"
             :equipmentId="equipment.id"
@@ -54,7 +62,7 @@
             @photos-updated="onPhotosUpdated"
           />
         </TabPanel>
-        <TabPanel value="4">
+        <TabPanel value="5">
           <EquipmentLogsSection
             v-if="equipment"
             :equipmentId="equipment.id"
@@ -62,6 +70,12 @@
         </TabPanel>
       </TabPanels>
     </Tabs>
+
+    <VerificationFormDialog
+      v-model:visible="verificationDialogVisible"
+      :equipmentId="verificationEquipmentId"
+      @saved="onVerificationSaved"
+    />
   </div>
 </template>
 
@@ -81,17 +95,23 @@ import EquipmentLocationTab from '@/modules/equipment/components/EquipmentLocati
 import EquipmentTechnicalTab from '@/modules/equipment/components/EquipmentTechnicalTab.vue'
 import EquipmentPhotoUploader from '@/modules/equipment/components/EquipmentPhotoUploader.vue'
 import EquipmentLogsSection from '@/modules/equipment/components/EquipmentLogsSection.vue'
+import VerificationHistoryTab from '@/modules/verifications/components/VerificationHistoryTab.vue'
+import VerificationFormDialog from '@/modules/verifications/components/VerificationFormDialog.vue'
+import { useAuthStore } from '@/stores/auth'
 import { useEquipmentStore } from '@/modules/equipment/store/EquipmentStore'
 import type { Equipment } from '@/modules/equipment/types/equipment'
 import type { EquipmentPhoto } from '@/modules/equipment/types/equipment'
 
 const route = useRoute()
 const router = useRouter()
+const authStore = useAuthStore()
 const equipmentStore = useEquipmentStore()
 
 const equipment = ref<Equipment | null>(null)
 const loading = ref(false)
 const activeTab = ref('0')
+const verificationDialogVisible = ref(false)
+const verificationEquipmentId = ref<string | null>(null)
 
 onMounted(async () => {
   const id = route.params.id as string
@@ -133,5 +153,19 @@ function getSeverity(status: string): string {
     retired: 'info',
   }
   return severities[status] || 'info'
+}
+
+function startVerification() {
+  if (equipment.value) {
+    verificationEquipmentId.value = equipment.value.id
+    verificationDialogVisible.value = true
+  }
+}
+
+function onVerificationSaved() {
+  verificationDialogVisible.value = false
+  verificationEquipmentId.value = null
+  // Trigger a re-fetch to update the history tab
+  window.dispatchEvent(new CustomEvent('verification-saved', { detail: { equipmentId: equipment.value?.id } }))
 }
 </script>
