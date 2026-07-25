@@ -40,6 +40,11 @@ class RolePermissionSeeder extends Seeder
             ['name' => 'Cancelar Calibrações', 'slug' => 'calibracoes.cancel', 'group' => 'calibracoes'],
             ['name' => 'Visualizar Certificados', 'slug' => 'certificados.view', 'group' => 'certificados'],
             ['name' => 'Upload Certificados', 'slug' => 'certificados.upload', 'group' => 'certificados'],
+            // Manutenções (D-14)
+            ['name' => 'Visualizar Manutenções', 'slug' => 'manutencoes.view', 'group' => 'manutencoes'],
+            ['name' => 'Criar Manutenções', 'slug' => 'manutencoes.create', 'group' => 'manutencoes'],
+            ['name' => 'Editar Manutenções', 'slug' => 'manutencoes.edit', 'group' => 'manutencoes'],
+            ['name' => 'Concluir Manutenções', 'slug' => 'manutencoes.concluir', 'group' => 'manutencoes'],
             ['name' => 'Visualizar Usuários', 'slug' => 'usuarios.view', 'group' => 'usuarios'],
             ['name' => 'Criar Usuários', 'slug' => 'usuarios.create', 'group' => 'usuarios'],
             ['name' => 'Editar Usuários', 'slug' => 'usuarios.edit', 'group' => 'usuarios'],
@@ -80,6 +85,7 @@ class RolePermissionSeeder extends Seeder
                     'calibracoes.view', 'calibracoes.create', 'calibracoes.concluir',
                     'afericoes.view', 'afericoes.create', 'afericoes.edit',
                     'certificados.view', 'certificados.upload',
+                    'manutencoes.view', 'manutencoes.create', 'manutencoes.concluir',
                 ],
             ],
             [
@@ -95,6 +101,7 @@ class RolePermissionSeeder extends Seeder
                     'emprestimos.view', 'emprestimos.create',
                     'calibracoes.view',
                     'certificados.view', 'certificados.upload',
+                    'manutencoes.view',
                 ],
             ],
             [
@@ -112,6 +119,7 @@ class RolePermissionSeeder extends Seeder
                     'calibracoes.view',
                     'afericoes.view',
                     'certificados.view',
+                    'manutencoes.view',
                 ],
             ],
             [
@@ -132,6 +140,7 @@ class RolePermissionSeeder extends Seeder
                     'afericoes.view',
                     'certificados.view',
                     'usuarios.view',
+                    'manutencoes.view',
                 ],
             ],
         ];
