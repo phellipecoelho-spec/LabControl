@@ -51,6 +51,11 @@ class InventoryItem extends Model
         return $this->hasMany(InventoryMovement::class, 'item_id');
     }
 
+    public function maintenanceOrderParts()
+    {
+        return $this->hasMany(MaintenanceOrderPart::class);
+    }
+
     public function deletedBy()
     {
         return $this->belongsTo(User::class, 'deleted_by')->withDefault();

@@ -68,6 +68,16 @@ class Equipment extends Model
         return $this->hasOne(Verification::class)->latestOfMany('verified_at');
     }
 
+    public function maintenanceOrders()
+    {
+        return $this->hasMany(MaintenanceOrder::class);
+    }
+
+    public function lastMaintenance()
+    {
+        return $this->hasOne(MaintenanceOrder::class)->latestOfMany('completed_at');
+    }
+
     public function scopeActive(Builder $query): void
     {
         $query->where('status', 'active');
