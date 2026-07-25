@@ -88,8 +88,12 @@ class MaintenanceOrderFactory extends Factory
     public function completed(): static
     {
         return $this->state(function (array $attributes) {
+            $start = $attributes['scheduled_date'] ?? null;
+            if ($start && $start >= now()) {
+                $start = '-60 days';
+            }
             $completedAt = fake()->dateTimeBetween(
-                $attributes['scheduled_date'] ?? '-60 days',
+                $start ?? '-60 days',
                 'now'
             );
             $nextDueAt = null;

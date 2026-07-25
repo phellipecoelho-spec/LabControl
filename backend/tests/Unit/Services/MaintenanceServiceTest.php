@@ -342,7 +342,7 @@ class MaintenanceServiceTest extends TestCase
         $this->assertInstanceOf(\Illuminate\Pagination\LengthAwarePaginator::class, $result);
 
         // Assert they are sorted newest first
-        $dates = $result->items()->pluck('created_at')->toArray();
+        $dates = collect($result->items())->pluck('created_at')->toArray();
         for ($i = 0; $i < count($dates) - 1; $i++) {
             $this->assertGreaterThanOrEqual($dates[$i + 1], $dates[$i]);
         }

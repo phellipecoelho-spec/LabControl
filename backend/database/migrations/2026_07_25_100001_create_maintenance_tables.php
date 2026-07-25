@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('priority', 20)->default('medium');                            // low|medium|high|critical (D-03)
             $table->text('description');                                                  // descrição do problema/serviço
             $table->timestamp('scheduled_date')->nullable();                              // data agendada (opcional)
-            $table->foreignUuid('assigned_to')->nullable()->constrained('users');         // técnico responsável (D-07)
-            $table->foreignUuid('opened_by')->nullable()->constrained('users');           // quem abriu a ordem
+            $table->uuid('assigned_to')->nullable();                                       // técnico responsável (D-07) — FK added below
+            $table->uuid('opened_by')->nullable();                                         // quem abriu a ordem — FK added below
             $table->timestamp('completed_at')->nullable();                                // preenchido na conclusão (D-09)
             $table->text('resolution')->nullable();                                       // parecer técnico (D-09)
             $table->decimal('time_spent', 10, 2)->nullable();                             // horas gastas (D-09)
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('interval_unit', 10)->nullable();                              // months|days|hours (D-04)
             $table->timestamp('next_due_at')->nullable();                                 // calculado: completed_at + interval (D-10)
             $table->text('notes')->nullable();
-            $table->foreignUuid('created_by')->nullable()->constrained('users');
+            $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
             $table->uuid('deleted_by')->nullable();
             $table->timestamps();
@@ -55,12 +55,23 @@ return new class extends Migration
             $table->foreignUuid('inventory_item_id')->constrained('inventory_items');     // restrict on delete
             $table->decimal('quantity', 12, 4);                                           // quantidade utilizada
             $table->decimal('unit_cost', 12, 2)->nullable();                              // custo unitário no momento do consumo
-            $table->foreignUuid('created_by')->nullable()->constrained('users');
+            $table->uuid('created_by')->nullable();
             $table->timestamps();
 
             // Índices
             $table->index(['maintenance_order_id']);
             $table->index(['inventory_item_id']);
+        });
+
+        // Defer all FK constraints to users to avoid deadlock on concurrent migrate:fresh
+        Schema::table('maintenance_orders', function (Blueprint $table) {
+            $table->foreign('assigned_to')->references('id')->on('users')->nullOnDelete();
+            $table->foreign('opened_by')->references('id')->on('users')->nullOnDelete();
+            $table->foreign('created_by')->references('id')->on('users')->nullOnDelete();
+        });
+
+        Schema::table('maintenance_order_parts', function (Blueprint $table) {
+            $table->foreign('created_by')->references('id')->on('users')->nullOnDelete();
         });
     }
 
