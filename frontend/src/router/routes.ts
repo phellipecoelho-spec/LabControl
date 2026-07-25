@@ -158,8 +158,14 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/maintenance',
     name: 'maintenance.index',
-    component: () => import('@/views/PlaceholderPage.vue'),
+    component: () => import('@/modules/maintenance/pages/MaintenanceListPage.vue'),
     meta: { requiresAuth: true, module: 'maintenance.index', title: 'Manutenções' },
+  },
+  {
+    path: '/maintenance/:id',
+    name: 'maintenance.show',
+    component: () => import('@/modules/maintenance/pages/MaintenanceDetailPage.vue'),
+    meta: { requiresAuth: true, module: 'maintenance.index', title: 'Detalhes da Manutenção' },
   },
   {
     path: '/reports',
