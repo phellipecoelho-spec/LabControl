@@ -45,7 +45,7 @@
   - [x] 07-02-PLAN.md — Backend CRUD & API: LoanController, 3 Form Requests, 2 API Resources, routes, CheckOverdueLoans command
   - [x] 07-03-PLAN.md — Frontend Module: types, service, store, LoanListPage, LoanDetailPage, LoanCreateDialog, LoanReturnDialog, 3 tab components, routes
   - [x] 07-04-PLAN.md — Overdue Notifications: CheckOverdueLoans command, LoanOverdue notification class, scheduling, tests
-- [ ] **Phase 8**: Calibrações (4 plans)
+- [x] **Phase 8**: Calibrações (4 plans)
   Plans:
 
   - [x] 08-01-PLAN.md — Database & Models: migration (calibrations + calibration_certificates), CalibrationStatus enum, Calibration/CalibrationCertificate models, CalibrationException, CalibrationService, CalibrationCertificateService, Factory, Seeder, permissions

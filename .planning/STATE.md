@@ -3,16 +3,16 @@ gsd_state_version: 1.0
 milestone: v0.2
 milestone_name: Core Business
 current_phase: 08
-status: executing
+status: completed
 stopped_at: Completed 08-calibracoes-04-PLAN.md
-last_updated: "2026-07-25T18:02:30.000Z"
+last_updated: "2026-07-25T20:00:54.422Z"
 last_activity: 2026-07-25
 progress:
   total_phases: 8
   completed_phases: 7
-  total_plans: 34
+  total_plans: 33
   completed_plans: 31
-  percent: 79
+  percent: 88
 ---
 
 # State: LabControl
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 ## Current Status
 
 **Current Phase:** 08
-**Status:** Executing Phase 08
+**Status:** Phase 08 complete
 **Last activity:** 2026-07-25
 
 ## Plan Progress
