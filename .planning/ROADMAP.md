@@ -60,11 +60,11 @@
 
   - [ ] 09-01-PLAN.md — Database & Backend Foundation (migrations, models, enum, exception, service, factory, seeder, permissions)
   - [ ] 09-02-PLAN.md — API & Frontend Module (controller, requests, resources, notification, routes, types, service, store, pages, components, history tab)
-- [ ] **Phase 10**: Manutenções (2 plans)
+- [x] **Phase 10**: Manutenções (2 plans)
   Plans:
 
-  - [ ] 10-01-PLAN.md — Database & Backend Foundation (migration, enums, models, service, factory, seeder, permissions, relationships)
-  - [ ] 10-02-PLAN.md — API & Frontend Module (controller, requests, resources, notification, routes, list page, dialogs, history tab, detail page, EquipmentDetailPage tab)
+  - [x] 10-01-PLAN.md — Database & Backend Foundation (migration, enums, models, service, factory, seeder, permissions, relationships)
+  - [x] 10-02-PLAN.md — API & Frontend Module (controller, requests, resources, notification, routes, list page, dialogs, history tab, detail page, EquipmentDetailPage tab)
 - [ ] **Phase 11**: Dashboard (2 plans)
 - [ ] **Phase 12**: Relatórios (2 plans)
 
@@ -86,7 +86,7 @@
 | 7. Empréstimos | v0.2 | 4/4 | Complete    | 2026-07-25 |
 | 8. Calibrações | v0.2 | 4/4 | ✅ Complete | 2026-07-25 |  |
 | 9. Aferições | v0.3 | 0/2 | Not started | - |
-| 10. Manutenções | v0.3 | 0/2 | Not started | - |
+| 10. Manutenções | v0.3 | 2/2 | ✅ Complete | 2026-07-25 |
 | 11. Dashboard | v0.3 | 0/2 | Not started | - |
 | 12. Relatórios | v0.3 | 0/2 | Not started | - |
 | 13. PWA e Offline | v1.0 | 0/2 | Not started | - |

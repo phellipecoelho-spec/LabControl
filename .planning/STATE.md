@@ -5,14 +5,14 @@ milestone_name: Core Business
 current_phase: 10
 status: executing
 stopped_at: Wave 1 (10-01) — Database & Backend Foundation — Concluído
-last_updated: "2026-07-25T23:30:00.000Z"
+last_updated: "2026-07-25T23:34:40.607Z"
 last_activity: 2026-07-25
 progress:
   total_phases: 10
-  completed_phases: 8
+  completed_phases: 10
   total_plans: 37
-  completed_plans: 34
-  percent: 83
+  completed_plans: 35
+  percent: 90
 ---
 
 # State: LabControl
@@ -206,11 +206,22 @@ Phase 6 (Estoque) — 3 planos concluídos:
 | 03 — Frontend Data Layer | Frontend | ✅ Completed | CalibrationType interfaces, CalibrationService (11 methods), CalibrationStore (Composition API Pinia), lazy-loaded routes, sidebar icon updated to pi-verified |
 | 04 — Frontend UI Components | Frontend | ✅ Completed | 7 Vue components (2 pages, 3 tabs, 2 dialogs), DataTable with 4 filters, lazy pagination, due indicators, certificate upload/download/delete, timeline tab |
 
+## Phase 10 — Manutenções (2 Plans ✅)
+
+**Plan 02 completed** 2026-07-25 — Full-stack Maintenance Orders module: API, dialogs, history tab, detail page, EquipmentDetailPage tab
+
+### Plans
+
+| Plan | Subsystem | Status | Description |
+|------|-----------|--------|-------------|
+| 01 — Database & Backend Foundation | Backend | ✅ Completed | Migration, enums, models, service, factory, seeder, permissions, unit tests |
+| 02 — API & Frontend Module | Fullstack | ✅ Completed | Controller (7 actions), 3 Form Requests, 2 Resources, Notification, routes, feature tests; Types, Service, Store, ListPage, Dialogs, HistoryTab, DetailPage, EquipmentDetailPage tab |
+
 ## Session
 
-**Last session:** 2026-07-25T22:40:18.929Z
-**Stopped at:** Phase 10 context gathered
-**Resume file:** .planning/phases/10-manutencaoes/10-CONTEXT.md
+**Last session:** 2026-07-25T23:30:00.000Z
+**Stopped at:** Phase 10 completed
+**Resume file:** None
 
 ## Performance Metrics
 
@@ -220,3 +231,6 @@ Phase 6 (Estoque) — 3 planos concluídos:
 | Phase 08-calibracoes P02 | 13min | 2 tasks | 11 files |
 | Phase 08-calibracoes P03 | 12min | 2 tasks | 5 files |
 | Phase 08-calibracoes P04 | 9min | 3 tasks | 7 files |
+| Phase 09-afericoes P01 | ~45min | 2 tasks | 11 files |
+| Phase 10-manutencaoes P01 | ~45min | 2 tasks | 13 files |
+| Phase 10-manutencaoes P02 | 14min | 3 tasks | 20 files |
