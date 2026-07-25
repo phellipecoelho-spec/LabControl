@@ -48,8 +48,8 @@
 - [ ] **Phase 8**: Calibrações (4 plans)
   Plans:
 
-  - [ ] 08-01-PLAN.md — Database & Models: migration (calibrations + calibration_certificates), CalibrationStatus enum, Calibration/CalibrationCertificate models, CalibrationException, CalibrationService, CalibrationCertificateService, Factory, Seeder, permissions
-  - [ ] 08-02-PLAN.md — Backend API: CalibrationController (7 actions), CalibrationCertificateController (4 actions), 3 Form Requests, 2 API Resources, routes, CheckCalibrationDue command, CalibrationDue notification, schedule
+  - [x] 08-01-PLAN.md — Database & Models: migration (calibrations + calibration_certificates), CalibrationStatus enum, Calibration/CalibrationCertificate models, CalibrationException, CalibrationService, CalibrationCertificateService, Factory, Seeder, permissions
+  - [x] 08-02-PLAN.md — Backend API: CalibrationController (7 actions), CalibrationCertificateController (4 actions), 3 Form Requests, 2 API Resources, routes, CheckCalibrationDue command, CalibrationDue notification, schedule
   - [ ] 08-03-PLAN.md — Frontend Data Layer: TypeScript types, CalibrationService (10 methods), CalibrationStore, routes registration
   - [ ] 08-04-PLAN.md — Frontend UI Components: CalibrationListPage, CalibrationDetailPage, 3 tabs (Info/Certificate/Timeline), 2 dialogs (Create/Conclude)
 
@@ -76,7 +76,7 @@
 | 5. Equipamentos | v0.2 | 6/6 | ✅ Complete | 2026-07-20 |
 | 6. Estoque | v0.2 | 3/3 | ✅ Complete | 2026-07-20 |
 | 7. Empréstimos | v0.2 | 4/4 | Complete    | 2026-07-25 |
-| 8. Calibrações | v0.2 | 0/4 | Not started | - |
+| 8. Calibrações | v0.2 | 2/4 | In Progress|  |
 | 9. Aferições | v0.3 | 0/2 | Not started | - |
 | 10. Manutenções | v0.3 | 0/2 | Not started | - |
 | 11. Dashboard | v0.3 | 0/2 | Not started | - |

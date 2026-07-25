@@ -2,17 +2,17 @@
 gsd_state_version: 1.0
 milestone: v0.2
 milestone_name: Core Business
-current_phase: 07
-status: completed
-stopped_at: Phase 07 - Plan 04 completed
-last_updated: "2026-07-25T15:52:04.060Z"
+current_phase: 08
+status: executing
+stopped_at: Completed 08-calibracoes-02-PLAN.md
+last_updated: "2026-07-25T17:45:20.216Z"
 last_activity: 2026-07-25
 progress:
-  total_phases: 7
+  total_phases: 8
   completed_phases: 6
-  total_plans: 29
-  completed_plans: 27
-  percent: 86
+  total_plans: 33
+  completed_plans: 29
+  percent: 75
 ---
 
 # State: LabControl
@@ -25,8 +25,8 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 
 ## Current Status
 
-**Current Phase:** 07
-**Status:** Milestone complete
+**Current Phase:** 08
+**Status:** Executing Phase 08
 **Last activity:** 2026-07-25
 
 ## Plan Progress
@@ -195,6 +195,13 @@ Phase 6 (Estoque) — 3 planos concluídos:
 
 ## Session
 
-**Last session:** 2026-07-21
-**Stopped at:** Phase 07 - Plan 04 completed
-**Resume file:** .planning/phases/07-emprestimos/07-CONTEXT.md
+**Last session:** 2026-07-25T17:45:20.191Z
+**Stopped at:** Completed 08-calibracoes-02-PLAN.md
+**Resume file:** None
+
+## Performance Metrics
+
+| Phase | Plan | Duration | Notes |
+|-------|------|----------|-------|
+| Phase 08-calibracoes P01 | 25 min | 3 tasks | 11 files |
+| Phase 08-calibracoes P02 | 13min | 2 tasks | 11 files |

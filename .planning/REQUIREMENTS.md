@@ -51,10 +51,10 @@
 
 ### Calibrações
 
-- [ ] **CAL-01**: Usuário pode gerenciar agenda de calibrações periódicas
-- [ ] **CAL-02**: Usuário pode anexar certificados de calibração
-- [ ] **CAL-03**: Sistema alerta quando calibração está vencida
-- [ ] **CAL-04**: Usuário pode consultar histórico de calibrações por equipamento
+- [x] **CAL-01**: Usuário pode gerenciar agenda de calibrações periódicas
+- [x] **CAL-02**: Usuário pode anexar certificados de calibração
+- [x] **CAL-03**: Sistema alerta quando calibração está vencida
+- [x] **CAL-04**: Usuário pode consultar histórico de calibrações por equipamento
 
 ### Aferições
 
@@ -132,10 +132,10 @@
 | LOAN-01 | Phase 7 | Completed |
 | LOAN-02 | Phase 7 | Completed |
 | LOAN-03 | Phase 7 | Pending |
-| CAL-01 | Phase 8 | Pending |
-| CAL-02 | Phase 8 | Pending |
-| CAL-03 | Phase 8 | Pending |
-| CAL-04 | Phase 8 | Pending |
+| CAL-01 | Phase 8 | Complete |
+| CAL-02 | Phase 8 | Complete |
+| CAL-03 | Phase 8 | Complete |
+| CAL-04 | Phase 8 | Complete |
 | VERF-01 | Phase 9 | Pending |
 | VERF-02 | Phase 9 | Pending |
 | MAINT-01 | Phase 10 | Pending |
@@ -150,6 +150,7 @@
 | LOGS-02 | Phase 3 | Pending |
 
 **Coverage:**
+
 - v1 requirements: 38 total
 - Mapped to phases: 38
 - Unmapped: 0 ✓
