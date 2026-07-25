@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\V1\InventoryMovementController;
 use App\Http\Controllers\Api\V1\CalibrationCertificateController;
 use App\Http\Controllers\Api\V1\CalibrationController;
 use App\Http\Controllers\Api\V1\LoanController;
+use App\Http\Controllers\Api\V1\MaintenanceOrderController;
 use App\Http\Controllers\Api\V1\SupplierController;
 use App\Http\Controllers\Api\V1\VerificationController;
 use App\Http\Controllers\Api\V1\UserController;
@@ -135,6 +136,17 @@ Route::prefix('v1')->group(function () {
                 return VerificationTemplate::where('equipment_category_id', $equipment->category_id)
                     ->orderBy('sort_order')->get();
             })->middleware('permission:afericoes.view');
+        });
+
+        // Maintenance Orders Module
+        Route::apiResource('maintenance-orders', MaintenanceOrderController::class)
+            ->only(['index', 'show', 'store', 'update', 'destroy']);
+        Route::prefix('maintenance-orders/{maintenance_order}')->group(function () {
+            Route::post('complete', [MaintenanceOrderController::class, 'complete'])->name('maintenance-orders.complete');
+            Route::post('cancel', [MaintenanceOrderController::class, 'cancel'])->name('maintenance-orders.cancel');
+        });
+        Route::prefix('equipments/{equipment}/maintenance')->group(function () {
+            Route::get('/', [MaintenanceOrderController::class, 'byEquipment'])->name('maintenance-orders.by-equipment');
         });
     });
 });

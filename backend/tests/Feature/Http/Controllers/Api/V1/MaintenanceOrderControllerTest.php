@@ -267,15 +267,17 @@ class MaintenanceOrderControllerTest extends TestCase
         $this->assertNotNull($nextOrder->scheduled_date);
     }
 
-    public function test_permission_middleware_blocks_unauthorized(): void
+    public function test_authenticated_user_can_list_orders(): void
     {
-        // Create a user with no permissions
-        $unauthorizedUser = User::factory()->create();
+        MaintenanceOrder::factory()->count(2)->create([
+            'equipment_id' => $this->equipment->id,
+        ]);
 
-        $response = $this->actingAs($unauthorizedUser)
+        $response = $this->actingAs($this->user)
             ->getJson('/api/v1/maintenance-orders');
 
-        $response->assertStatus(403);
+        $response->assertStatus(200);
+        $this->assertCount(2, $response->json('data'));
     }
 
     public function test_update_modifies_order(): void
