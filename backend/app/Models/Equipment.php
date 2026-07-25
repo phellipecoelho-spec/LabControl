@@ -19,11 +19,13 @@ class Equipment extends Model
         'name', 'patrimony_id', 'serial_number', 'category_id', 'manufacturer_id',
         'supplier_id', 'location', 'acquisition_date', 'warranty_end', 'status',
         'description', 'technical_specs', 'notes', 'user_id',
+        'verification_frequency',
     ];
 
     protected $casts = [
         'acquisition_date' => 'date',
         'warranty_end' => 'date',
+        'verification_frequency' => 'string',
     ];
 
     public function category()
@@ -54,6 +56,16 @@ class Equipment extends Model
     public function photos()
     {
         return $this->hasMany(EquipmentPhoto::class)->orderBy('sort_order');
+    }
+
+    public function verifications()
+    {
+        return $this->hasMany(Verification::class);
+    }
+
+    public function lastVerification()
+    {
+        return $this->hasOne(Verification::class)->latestOfMany('verified_at');
     }
 
     public function scopeActive(Builder $query): void

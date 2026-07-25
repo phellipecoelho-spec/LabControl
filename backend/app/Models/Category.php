@@ -17,4 +17,9 @@ class Category extends Model
     {
         return $this->hasMany(Equipment::class);
     }
+
+    public function verificationTemplates()
+    {
+        return $this->hasMany(VerificationTemplate::class, 'equipment_category_id');
+    }
 }
