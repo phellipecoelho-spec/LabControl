@@ -123,7 +123,13 @@ const toast = useToast()
 
 const saving = ref(false)
 
-const form = ref<CompleteCalibrationFormData>({
+const form = ref<{
+  completed_at: any
+  certificate_number: string
+  responsible: string
+  laboratory: string
+  notes: string
+}>({
   completed_at: new Date(),
   certificate_number: '',
   responsible: '',

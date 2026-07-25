@@ -173,7 +173,16 @@ const toast = useToast()
 const saving = ref(false)
 const submitted = ref(false)
 
-const form = ref<CalibrationFormData>({
+const form = ref<{
+  equipment_id: string
+  scheduled_date: any
+  interval_value: number
+  interval_unit: 'months' | 'days' | 'hours'
+  part_name: string
+  responsible: string
+  laboratory: string
+  notes: string
+}>({
   equipment_id: '',
   scheduled_date: '',
   interval_value: 0,
@@ -214,11 +223,12 @@ async function handleSave() {
 
   saving.value = true
   try {
-    const payload: Record<string, any> = {
+    const scheduledDate = form.value.scheduled_date instanceof Date
+      ? form.value.scheduled_date.toISOString().split('T')[0]
+      : form.value.scheduled_date
+    const payload: CalibrationFormData = {
       equipment_id: form.value.equipment_id,
-      scheduled_date: form.value.scheduled_date instanceof Date
-        ? form.value.scheduled_date.toISOString().split('T')[0]
-        : form.value.scheduled_date,
+      scheduled_date: scheduledDate,
       interval_value: form.value.interval_value,
       interval_unit: form.value.interval_unit,
     }
