@@ -126,6 +126,49 @@ class VerificationService
     }
 
     /**
+     * Update verification notes and optionally recalculate params.
+     *
+     * @param  Verification  $verification
+     * @param  array  $data
+     * @return Verification
+     */
+    public function update(Verification $verification, array $data): Verification
+    {
+        return DB::transaction(function () use ($verification, $data) {
+            $verification->update([
+                'notes' => $data['notes'] ?? $verification->notes,
+                'updated_by' => $data['updated_by'] ?? auth()->id(),
+            ]);
+
+            // If params provided, recalculate and update
+            if (isset($data['params']) && is_array($data['params'])) {
+                $templates = VerificationTemplate::whereIn('id', array_keys($data['params']))
+                    ->get()
+                    ->keyBy('id');
+
+                foreach ($data['params'] as $templateId => $value) {
+                    $param = VerificationParam::where('verification_id', $verification->id)
+                        ->where('template_id', $templateId)
+                        ->first();
+
+                    if ($param) {
+                        $template = $templates->get($templateId);
+                        $result = $this->calculateResult($value !== null ? (float) $value : null, $template);
+
+                        $param->update([
+                            'value' => $value,
+                            'result' => $result,
+                            'updated_by' => $data['updated_by'] ?? auth()->id(),
+                        ]);
+                    }
+                }
+            }
+
+            return $verification->fresh(['equipment', 'operator', 'params.template']);
+        });
+    }
+
+    /**
      * Calculate the verification result based on tolerance limits (D-05).
      *
      * @param  float|null  $value

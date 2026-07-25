@@ -15,7 +15,11 @@ use App\Http\Controllers\Api\V1\CalibrationCertificateController;
 use App\Http\Controllers\Api\V1\CalibrationController;
 use App\Http\Controllers\Api\V1\LoanController;
 use App\Http\Controllers\Api\V1\SupplierController;
+use App\Http\Controllers\Api\V1\VerificationController;
 use App\Http\Controllers\Api\V1\UserController;
+use App\Models\Equipment;
+use App\Models\VerificationTemplate;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -109,6 +113,28 @@ Route::prefix('v1')->group(function () {
             Route::post('/', [CalibrationCertificateController::class, 'store']);
             Route::get('/{certificate}/download', [CalibrationCertificateController::class, 'download']);
             Route::delete('/{certificate}', [CalibrationCertificateController::class, 'destroy']);
+        });
+
+        // Verifications Module — Aferições (D-08, D-18)
+        Route::prefix('verifications')->group(function () {
+            Route::get('pending', [VerificationController::class, 'pending'])->name('verifications.pending');
+        });
+        Route::apiResource('verifications', VerificationController::class)
+            ->only(['index', 'show', 'store', 'update', 'destroy']);
+        Route::prefix('equipments/{equipment}/verifications')->group(function () {
+            Route::get('/', [VerificationController::class, 'byEquipment'])->name('verifications.by-equipment');
+        });
+
+        // Verification Templates (lightweight inline routes for dynamic form)
+        Route::prefix('verification-templates')->group(function () {
+            Route::get('/', function (Request $request) {
+                return VerificationTemplate::where('equipment_category_id', $request->equipment_category_id)
+                    ->orderBy('sort_order')->get();
+            })->middleware('permission:afericoes.view');
+            Route::get('by-equipment/{equipment}', function (Equipment $equipment) {
+                return VerificationTemplate::where('equipment_category_id', $equipment->category_id)
+                    ->orderBy('sort_order')->get();
+            })->middleware('permission:afericoes.view');
         });
     });
 });
