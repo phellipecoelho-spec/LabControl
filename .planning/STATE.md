@@ -4,15 +4,15 @@ milestone: v0.2
 milestone_name: Core Business
 current_phase: 08
 status: completed
-stopped_at: Completed 08-calibracoes-04-PLAN.md
-last_updated: "2026-07-25T20:00:54.422Z"
+stopped_at: Phase 09 context gathered
+last_updated: "2026-07-25T21:09:15.025Z"
 last_activity: 2026-07-25
 progress:
-  total_phases: 8
+  total_phases: 9
   completed_phases: 7
   total_plans: 33
   completed_plans: 31
-  percent: 88
+  percent: 78
 ---
 
 # State: LabControl
@@ -208,9 +208,9 @@ Phase 6 (Estoque) — 3 planos concluídos:
 
 ## Session
 
-**Last session:** 2026-07-25T18:02:30Z
-**Stopped at:** Completed 08-calibracoes-04-PLAN.md
-**Resume file:** None
+**Last session:** 2026-07-25T21:09:14.953Z
+**Stopped at:** Phase 09 context gathered
+**Resume file:** .planning/phases/09-afericoes/09-CONTEXT.md
 
 ## Performance Metrics
 
