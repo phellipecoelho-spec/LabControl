@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             InventorySeeder::class,
             LoanSeeder::class,
             CalibrationSeeder::class,
+            VerificationSeeder::class,
         ]);
     }
 }
