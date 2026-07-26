@@ -10,7 +10,7 @@
           @click="goBack"
         />
         <div>
-          <h1 class="text-2xl font-bold m-0">{{ isEditing ? `Editar: ${equipment.name}` : 'Novo Equipamento' }}</h1>
+          <h1 class="text-2xl font-bold m-0">{{ isEditing ? `Editar: ${equipment?.name || ''}` : 'Novo Equipamento' }}</h1>
           <p class="text-600 text-sm mt-1">Preencha os dados do equipamento</p>
         </div>
       </div>
