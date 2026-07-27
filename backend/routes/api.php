@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\V1\LoanController;
 use App\Http\Controllers\Api\V1\MaintenanceOrderController;
 use App\Http\Controllers\Api\V1\SupplierController;
 use App\Http\Controllers\Api\V1\VerificationController;
+use App\Http\Controllers\Api\V1\ReportController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Models\Equipment;
 use App\Models\VerificationTemplate;
@@ -151,6 +152,12 @@ Route::prefix('v1')->group(function () {
         });
         Route::prefix('equipments/{equipment}/maintenance')->group(function () {
             Route::get('/', [MaintenanceOrderController::class, 'byEquipment'])->name('maintenance-orders.by-equipment');
+        });
+
+        // Reports Module
+        Route::prefix('reports')->group(function () {
+            Route::get('/', [ReportController::class, 'index'])->name('reports.index');
+            Route::get('{type}', [ReportController::class, 'download'])->name('reports.download');
         });
     });
 });
