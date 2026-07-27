@@ -4,15 +4,15 @@ milestone: v0.3
 milestone_name: Advanced Features
 current_phase: 11
 status: completed
-stopped_at: Phase 11 completed
-last_updated: "2026-07-27T19:27:28.519Z"
+stopped_at: Phase 12 context gathered
+last_updated: "2026-07-27T19:58:43.905Z"
 last_activity: 2026-07-27
 progress:
-  total_phases: 11
+  total_phases: 12
   completed_phases: 11
   total_plans: 37
   completed_plans: 37
-  percent: 100
+  percent: 92
 ---
 
 # State: LabControl
@@ -219,9 +219,9 @@ Phase 6 (Estoque) — 3 planos concluídos:
 
 ## Session
 
-**Last session:** 2026-07-27T16:23:09Z
-**Stopped at:** Phase 11, Plan 02 completed
-**Resume file:** None
+**Last session:** 2026-07-27T19:58:43.757Z
+**Stopped at:** Phase 12 context gathered
+**Resume file:** .planning/phases/12-relatorios/12-CONTEXT.md
 
 ## Phase 11 — Dashboard (2 Plans ✅)
 
