@@ -84,7 +84,7 @@
               :label="getDefaultFormatLabel(report)"
               icon="pi pi-download"
               :loading="downloading[report.type]"
-              @click="downloadReport(report.type, report.defaultFormat)"
+              @click="triggerDownload(report, report.defaultFormat)"
               :model="formatMenuItems(report)"
             />
           </template>
@@ -107,7 +107,7 @@ import Skeleton from 'primevue/skeleton'
 import { reportService } from '../services/ReportService'
 import { useDownload } from '@/composables/useDownload'
 import { useToast } from 'primevue/usetoast'
-import type { ReportMeta, ReportFormat } from '../types/report'
+import type { ReportMeta, ReportFormat, ReportFilters } from '../types/report'
 
 const { downloading, downloadReport } = useDownload()
 const toast = useToast()
@@ -154,29 +154,25 @@ function formatMenuItems(report: ReportMeta) {
   return otherFormats.map(format => ({
     label: FORMAT_LABELS[format] || format.toUpperCase(),
     icon: FORMAT_ICONS[format],
-    command: () => downloadReport(report.type, format),
+    command: () => triggerDownload(report, format),
   }))
 }
 
-async function handleDownload(type: string, format: ReportFormat) {
-  const params: Record<string, string> = {}
+async function triggerDownload(report: ReportMeta, format: ReportFormat) {
+  const filtersPayload: ReportFilters = {}
   if (filters.dateRange?.[0]) {
-    params.date_from = (filters.dateRange[0] as Date).toISOString().split('T')[0]
+    filtersPayload.date_from = (filters.dateRange[0] as Date).toISOString().split('T')[0]
   }
   if (filters.dateRange?.[1]) {
-    params.date_to = (filters.dateRange[1] as Date).toISOString().split('T')[0]
+    filtersPayload.date_to = (filters.dateRange[1] as Date).toISOString().split('T')[0]
   }
   if (filters.status) {
-    params.status = filters.status
+    filtersPayload.status = filters.status
   }
 
-  const baseUrl = reportService.getDownloadUrl(type as any, format)
-  const queryString = Object.keys(params).length > 0
-    ? '&' + new URLSearchParams(params).toString()
-    : ''
-
-  const filename = `${type}_${new Date().toISOString().split('T')[0]}.${format}`
-  await downloadReport(baseUrl + queryString, filename, `${type}-${format}`)
+  const url = reportService.getDownloadUrl(report.type, format, filtersPayload)
+  const filename = `${report.type}_${new Date().toISOString().split('T')[0]}.${format}`
+  await downloadReport(url, filename, `${report.type}-${format}`)
 }
 
 async function fetchReports() {

@@ -12,6 +12,6 @@ export const reportService = {
     if (filters?.date_from) params.append('date_from', filters.date_from)
     if (filters?.date_to) params.append('date_to', filters.date_to)
     if (filters?.status) params.append('status', filters.status)
-    return `/api/v1/reports/${type}?${params}`
+    return `/reports/${type}?${params}`
   }
 }
