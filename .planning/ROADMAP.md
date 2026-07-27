@@ -92,6 +92,6 @@
 | 9. Aferições | v0.3 | 2/2 | ✅ Complete | 2026-07-25 |
 | 10. Manutenções | v0.3 | 2/2 | ✅ Complete | 2026-07-25 |
 | 11. Dashboard | v0.3 | 2/2 | ✅ Complete | 2026-07-27 |
-| 12. Relatórios | v0.3 | 0/2 | Not started | - |
+| 12. Relatórios | v0.3 | 2/2 | Complete    | 2026-07-27 |
 | 13. PWA e Offline | v1.0 | 0/2 | Not started | - |
 | 14. Auditoria e Ajustes Finais | v1.0 | 0/2 | Not started | - |
