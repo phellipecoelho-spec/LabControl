@@ -969,14 +969,14 @@ use([
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Cache invalidação ao criar/editar registros?**
+1. **Cache invalidação ao criar/editar registros?** `RESOLVED: TTL de 5 minutos é suficiente (D-13). Cache global, não por usuário. Se necessário no futuro, adicionar observer.`
    - What we know: D-13 define cache com TTL de 5 minutos. Não há exigência de invalidação imediata.
    - What's unclear: Se o usuário espera ver dados atualizados imediatamente após criar um equipamento.
    - Recommendation: Manter TTL de 5 min conforme D-13. Se necessário no futuro, adicionar observer que invalida cache em eventos `created`/`updated` dos modelos de origem.
 
-2. **Formato da data nos gráficos?**
+2. **Formato da data nos gráficos?** `RESOLVED: Usar YYYY-MM (ISO 8601 month) no backend, formatar no frontend com toLocaleDateString('pt-BR').`
    - What we know: D-09 define período padrão de 12 meses.
    - What's unclear: Formato de retorno do mês (YYYY-MM, MM/YYYY, timestamp).
    - Recommendation: Usar `YYYY-MM` (ISO 8601 month) no backend e formatar no frontend com `toLocaleDateString('pt-BR')`.
