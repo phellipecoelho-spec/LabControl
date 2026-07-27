@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\V1\InventoryItemController;
 use App\Http\Controllers\Api\V1\InventoryMovementController;
 use App\Http\Controllers\Api\V1\CalibrationCertificateController;
 use App\Http\Controllers\Api\V1\CalibrationController;
+use App\Http\Controllers\Api\V1\DashboardController;
 use App\Http\Controllers\Api\V1\LoanController;
 use App\Http\Controllers\Api\V1\MaintenanceOrderController;
 use App\Http\Controllers\Api\V1\SupplierController;
@@ -47,6 +48,9 @@ Route::prefix('v1')->group(function () {
 
     // Authenticated routes
     Route::middleware('auth:sanctum')->group(function () {
+        // Dashboard — single endpoint
+        Route::get('dashboard', DashboardController::class)->name('dashboard');
+
         // Profile
         Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
         Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
