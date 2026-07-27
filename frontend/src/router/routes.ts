@@ -170,7 +170,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/reports',
     name: 'reports.index',
-    component: () => import('@/views/PlaceholderPage.vue'),
+    component: () => import('@/modules/reports/pages/ReportPage.vue'),
     meta: { requiresAuth: true, module: 'reports.index', title: 'Relatórios' },
   },
   {
