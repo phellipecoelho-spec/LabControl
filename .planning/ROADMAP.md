@@ -3,8 +3,8 @@
 ## Milestones
 
 - ✅ **v0.1 Foundation** — Phases 1-4 (complete)
-- 🚧 **v0.2 Core Business** — Phases 5-8 (next)
-- 📋 **v0.3 Advanced Features** — Phases 9-12 (planned)
+- ✅ **v0.2 Core Business** — Phases 5-8 (complete)
+- ✅ **v0.3 Advanced Features** — Phases 9-12 (complete)
 - 📋 **v1.0 Production** — Phases 13-14 (planned)
 
 ## Phases
@@ -21,7 +21,7 @@
   - [x] 04-02-PLAN.md — App Shell: Layout components + Conditional rendering + Route meta
   - [x] 04-03-PLAN.md — Permissions + Mobile drawer + Accessibility polish
 
-### 🚧 v0.2 Core Business (In Progress)
+### ✅ v0.2 Core Business (Complete)
 
 - [x] **Phase 5**: Equipamentos (6 plans)
   Plans:
@@ -53,7 +53,7 @@
   - [x] 08-03-PLAN.md — Frontend Data Layer: TypeScript types, CalibrationService (10 methods), CalibrationStore, routes registration
   - [x] 08-04-PLAN.md — Frontend UI Components: CalibrationListPage, CalibrationDetailPage, 3 tabs (Info/Certificate/Timeline), 2 dialogs (Create/Conclude)
 
-### 📋 v0.3 Advanced Features (Planned)
+### ✅ v0.3 Advanced Features (Complete)
 
 - [x] **Phase 9**: Aferições (2 plans)
   Plans:
@@ -70,7 +70,7 @@
 
   - [x] 11-01-PLAN.md — Backend: DashboardService + DashboardController + rota API + Redis cache + testes
   - [x] 11-02-PLAN.md — Frontend: KPIs, 3 gráficos ECharts, EmptyState, DashboardPage, toolbar
-- [ ] **Phase 12**: Relatórios (2 plans)
+- [x] **Phase 12**: Relatórios (2 plans)
 
 ### 📋 v1.0 Production (Planned)
 
@@ -92,6 +92,6 @@
 | 9. Aferições | v0.3 | 2/2 | ✅ Complete | 2026-07-25 |
 | 10. Manutenções | v0.3 | 2/2 | ✅ Complete | 2026-07-25 |
 | 11. Dashboard | v0.3 | 2/2 | ✅ Complete | 2026-07-27 |
-| 12. Relatórios | v0.3 | 2/2 | Complete    | 2026-07-27 |
+| 12. Relatórios | v0.3 | 2/2 | ✅ Complete | 2026-07-27 |
 | 13. PWA e Offline | v1.0 | 0/2 | Not started | - |
 | 14. Auditoria e Ajustes Finais | v1.0 | 0/2 | Not started | - |
