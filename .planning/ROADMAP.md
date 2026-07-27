@@ -65,7 +65,11 @@
 
   - [x] 10-01-PLAN.md — Database & Backend Foundation (migration, enums, models, service, factory, seeder, permissions, relationships)
   - [x] 10-02-PLAN.md — API & Frontend Module (controller, requests, resources, notification, routes, list page, dialogs, history tab, detail page, EquipmentDetailPage tab)
-- [ ] **Phase 11**: Dashboard (2 plans)
+- [x] **Phase 11**: Dashboard (2/2 plans)
+  Plans:
+
+  - [x] 11-01-PLAN.md — Backend: DashboardService + DashboardController + rota API + Redis cache + testes
+  - [x] 11-02-PLAN.md — Frontend: KPIs, 3 gráficos ECharts, EmptyState, DashboardPage, toolbar
 - [ ] **Phase 12**: Relatórios (2 plans)
 
 ### 📋 v1.0 Production (Planned)
@@ -85,9 +89,9 @@
 | 6. Estoque | v0.2 | 3/3 | ✅ Complete | 2026-07-20 |
 | 7. Empréstimos | v0.2 | 4/4 | Complete    | 2026-07-25 |
 | 8. Calibrações | v0.2 | 4/4 | ✅ Complete | 2026-07-25 |  |
-| 9. Aferições | v0.3 | 0/2 | Not started | - |
+| 9. Aferições | v0.3 | 2/2 | ✅ Complete | 2026-07-25 |
 | 10. Manutenções | v0.3 | 2/2 | ✅ Complete | 2026-07-25 |
-| 11. Dashboard | v0.3 | 0/2 | Not started | - |
+| 11. Dashboard | v0.3 | 2/2 | ✅ Complete | 2026-07-27 |
 | 12. Relatórios | v0.3 | 0/2 | Not started | - |
 | 13. PWA e Offline | v1.0 | 0/2 | Not started | - |
 | 14. Auditoria e Ajustes Finais | v1.0 | 0/2 | Not started | - |
