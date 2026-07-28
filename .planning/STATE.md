@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: Production
 current_phase: 13
-status: phase_1_plan_1_complete
-stopped_at: Phase 13 execution — Plan 01 complete
-last_updated: "2026-07-28T00:44:00.000Z"
+status: phase_13_plan_02_complete
+stopped_at: Phase 13 execution — Plan 02 complete
+last_updated: "2026-07-28T01:52:00.000Z"
 last_activity: 2026-07-27
 progress:
   total_phases: 13
   completed_phases: 12
-  total_plans: 40
-  completed_plans: 40
+  total_plans: 41
+  completed_plans: 41
   percent: 100
 ---
 
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 ## Current Status
 
 **Current Phase:** 13
-**Status:** Plan 01 completed — PWA Foundation
+**Status:** Plan 02 completed — Sync Engine & PWA UI
 **Last activity:** 2026-07-27
 
 ## Plan Progress
@@ -140,6 +140,15 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 | CHECK (balance_after >= 0) as safety net for negative stock | ✓ Implemented |
 | Three-layer negative stock defense: tx + lock + validation | ✓ Implemented |
 
+## Decisions Added in Plan 02
+
+| Decision | Outcome |
+|----------|---------|
+| SyncIndicator placement | Inside AppLayout slot as inline bar (not modifying AppTopbar) |
+| Conflict detection | Dexie liveQuery subscription in App.vue |
+| Auto-sync trigger | useOnline().on('online') callback |
+| SW registration | main.ts PROD-only + UpdatePrompt.vue dev-aware dynamic import |
+
 ## Blockers
 
 - None
@@ -217,23 +226,24 @@ Phase 6 (Estoque) — 3 planos concluídos:
 | 01 — Database & Backend Foundation | Backend | ✅ Completed | Migration, enums, models, service, factory, seeder, permissions, unit tests |
 | 02 — API & Frontend Module | Fullstack | ✅ Completed | Controller (7 actions), 3 Form Requests, 2 Resources, Notification, routes, feature tests; Types, Service, Store, ListPage, Dialogs, HistoryTab, DetailPage, EquipmentDetailPage tab |
 
-## Phase 13 — PWA e Offline (1/3 Plans)
+## Phase 13 — PWA e Offline (2/3 Plans)
 
 **Plan 01 completed** 2026-07-27 — PWA Foundation: Dexie IndexedDB cache, injectManifest Service Worker, VitePWA config, offline-aware Axios interceptor, useOnline composable
+**Plan 02 completed** 2026-07-27 — Sync Engine & PWA UI: SyncService, sync store, SyncIndicator, ConflictDialog, UpdatePrompt, app integration
 
 ### Plans
 
 | Plan | Wave | Status | Summary |
 |------|------|--------|---------|
 | 01 — PWA Foundation | 1 | ✅ Completed | Dexie DB schema (9 tables), injectManifest SW (NetworkFirst API + BackgroundSync mutations + CacheFirst assets), VitePWA config, offline Axios interceptor, useOnline composable, nginx PWA headers |
-| 02 — Sync Integration | 2 | ⏳ Planned | Connect useOnline events to sync store, automatic background sync replay, sync status indicator |
+| 02 — Sync Integration | 2 | ✅ Completed | SyncService (replay queue, conflict detection/auto-merge/auto-resolve), Pinia sync store, 3 PWA UI components (SyncIndicator, ConflictDialog, UpdatePrompt), App.vue integration, DashboardPage sync timestamp |
 | 03 — UI Indicators | 3 | ⏳ Planned | Offline indicator banner, sync status chip, toast notifications for sync events |
 
 ## Session
 
-**Last session:** 2026-07-28T00:44:00.000Z
-**Stopped at:** Phase 13 — Plan 01 complete (PWA Foundation)
-**Resume file:** .planning/phases/13-pwa-offline/13-02-PLAN.md
+**Last session:** 2026-07-28T01:52:00.000Z
+**Stopped at:** Phase 13 — Plan 02 complete (Sync Engine & PWA UI)
+**Resume file:** .planning/phases/13-pwa-offline/13-03-PLAN.md
 
 ## Phase 11 — Dashboard (2 Plans ✅)
 
@@ -261,3 +271,4 @@ Phase 6 (Estoque) — 3 planos concluídos:
 | Phase 11-dashboard P01 | 2min | 3 tasks | 5 files |
 | Phase 11-dashboard P02 | 5min | 3 tasks | 10 files |
 | Phase 13-pwa-offline P01 | 19min | 4 tasks | 11 files |
+| Phase 13-pwa-offline P02 | 25min | 4 tasks | 9 files |
