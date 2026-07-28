@@ -16,6 +16,10 @@
         :loading="store.loading"
         @click="refresh"
       />
+      <span v-if="syncStore.lastSyncAt" class="dashboard-toolbar__sync-info">
+        <i class="pi pi-clock"></i>
+        Última sincronização: {{ formatLastSync(syncStore.lastSyncAt) }}
+      </span>
     </div>
 
     <div v-if="store.loading" class="dashboard-loading">
@@ -51,6 +55,7 @@ import DatePicker from 'primevue/datepicker'
 import Button from 'primevue/button'
 import ProgressSpinner from 'primevue/progressspinner'
 import { useDashboardStore } from '../store/dashboardStore'
+import { useSyncStore } from '@/stores/sync'
 import KpiRow from '../components/KpiRow.vue'
 import EquipmentsByCategoryChart from '../components/EquipmentsByCategoryChart.vue'
 import CalibrationsTimelineChart from '../components/CalibrationsTimelineChart.vue'
@@ -58,7 +63,12 @@ import StockMovementsChart from '../components/StockMovementsChart.vue'
 import EmptyState from '../components/EmptyState.vue'
 
 const store = useDashboardStore()
+const syncStore = useSyncStore()
 const dateRange = ref<(Date | null)[] | null>(null)
+
+function formatLastSync(iso: string): string {
+  return new Date(iso).toLocaleString('pt-BR')
+}
 
 function refresh() {
   const params: Record<string, string> = {}
@@ -80,6 +90,16 @@ onMounted(() => refresh())
 
 .dashboard-toolbar__datepicker {
   max-width: 280px;
+}
+
+.dashboard-toolbar__sync-info {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--p-text-muted-color);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
 }
 
 .dashboard-loading {

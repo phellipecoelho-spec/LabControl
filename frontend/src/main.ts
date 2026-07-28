@@ -35,3 +35,16 @@ app.use(ConfirmationService)
 app.directive('tooltip', Tooltip)
 
 app.mount('#app')
+
+// Register service worker after mount (no component setup context needed)
+if (import.meta.env.PROD) {
+  import('virtual:pwa-register').then(({ registerSW }) => {
+    registerSW({
+      onOfflineReady() {
+        console.log('[PWA] App ready for offline use')
+      },
+    })
+  }).catch(() => {
+    // virtual:pwa-register not available in dev mode — ignore
+  })
+}
