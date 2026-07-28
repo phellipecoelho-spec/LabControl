@@ -71,14 +71,19 @@
   - [x] 11-01-PLAN.md — Backend: DashboardService + DashboardController + rota API + Redis cache + testes
   - [x] 11-02-PLAN.md — Frontend: KPIs, 3 gráficos ECharts, EmptyState, DashboardPage, toolbar
 - [x] **Phase 12**: Relatórios (2 plans)
+  Plans:
+
+  - [x] 12-01-PLAN.md — Backend: ReportService, PDF/Excel generation, ReportController, routes
+  - [x] 12-02-PLAN.md — Frontend: ReportPage, filters, SplitButton per report type, download composable
 
 ### 📋 v1.0 Production (Planned)
 
-- [ ] **Phase 13**: PWA e Offline (2 plans)
+- [x] **Phase 13**: PWA e Offline (1/3 plans)
   Plans:
 
-  - [ ] 13-01-PLAN.md — PWA Foundation: Service Worker, Dexie DB, vite-plugin-pwa config, offline API interceptor, connectivity monitor, nginx headers
-  - [ ] 13-02-PLAN.md — Sync Engine & UI: sync service, conflict detection/resolution, Pinia sync store, SyncIndicator, ConflictDialog, UpdatePrompt, app integration
+  - [x] 13-01-PLAN.md — PWA Foundation: Service Worker, Dexie DB, vite-plugin-pwa config, offline API interceptor, connectivity monitor, nginx headers
+  - [ ] 13-02-PLAN.md — Sync Engine: sync service, conflict detection/resolution, Pinia sync store, automatic background sync replay
+  - [ ] 13-03-PLAN.md — UI: offline indicator banner, sync status chip, toast notifications for sync events
 - [ ] **Phase 14**: Auditoria e Ajustes Finais (2 plans)
 
 ## Progress
@@ -97,5 +102,5 @@
 | 10. Manutenções | v0.3 | 2/2 | ✅ Complete | 2026-07-25 |
 | 11. Dashboard | v0.3 | 2/2 | ✅ Complete | 2026-07-27 |
 | 12. Relatórios | v0.3 | 2/2 | ✅ Complete | 2026-07-27 |
-| 13. PWA e Offline | v1.0 | 0/2 | Not started | - |
+| 13. PWA e Offline | v1.0 | 1/3 | In progress | 2026-07-27 |
 | 14. Auditoria e Ajustes Finais | v1.0 | 0/2 | Not started | - |
