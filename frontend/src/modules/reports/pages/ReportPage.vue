@@ -45,27 +45,14 @@
       </div>
     </Drawer>
 
-    <div v-if="loading" class="report-grid">
-      <div v-for="n in 4" :key="n" class="report-card-wrapper">
-        <Card>
-          <template #title>
-            <Skeleton width="60%" height="1.5rem" />
-          </template>
-          <template #content>
-            <Skeleton width="100%" height="3rem" />
-          </template>
-          <template #footer>
-            <Skeleton width="40%" height="2.5rem" />
-          </template>
-        </Card>
-      </div>
-    </div>
+    <LoadingSkeleton v-if="loading" variant="card" :rows="4" />
 
-    <div v-else-if="reports.length === 0" class="empty-state">
-      <i class="pi pi-file-pdf empty-state__icon"></i>
-      <h3>Nenhum relatório disponível</h3>
-      <p>No momento não há relatórios configurados no sistema.</p>
-    </div>
+    <EmptyState
+      v-else-if="reports.length === 0"
+      icon="pi pi-file-pdf"
+      title="Nenhum relatório disponível"
+      description="No momento não há relatórios configurados no sistema."
+    />
 
     <div v-else class="report-grid">
       <div v-for="report in reports" :key="report.type" class="report-card-wrapper">
@@ -103,7 +90,8 @@ import DatePicker from 'primevue/datepicker'
 import Select from 'primevue/select'
 import Card from 'primevue/card'
 import SplitButton from 'primevue/splitbutton'
-import Skeleton from 'primevue/skeleton'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
+import EmptyState from '@/components/EmptyState.vue'
 import { reportService } from '../services/ReportService'
 import { useDownload } from '@/composables/useDownload'
 import { useToast } from 'primevue/usetoast'
@@ -252,34 +240,5 @@ onMounted(() => {
 
 .filter-actions {
   margin-top: 2rem;
-}
-
-.empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 1.5rem;
-  text-align: center;
-}
-
-.empty-state__icon {
-  font-size: 3rem;
-  color: var(--p-primary-color);
-  margin-bottom: 1rem;
-}
-
-.empty-state h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0 0 0.5rem;
-  color: var(--app-text-primary, #e2e8f0);
-}
-
-.empty-state p {
-  font-size: 0.875rem;
-  color: var(--app-text-secondary, #94a3b8);
-  margin: 0;
-  line-height: 1.5;
 }
 </style>

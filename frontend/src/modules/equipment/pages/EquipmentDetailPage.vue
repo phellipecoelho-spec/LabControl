@@ -22,13 +22,19 @@
       </div>
     </div>
 
-    <div v-if="loading" class="card">
-      <Skeleton height="4rem" class="mb-3" />
-      <Skeleton height="4rem" class="mb-3" />
-      <Skeleton height="4rem" class="mb-3" />
-    </div>
+    <LoadingSkeleton v-if="loading" variant="detail" />
 
-    <Tabs v-model:value="activeTab" v-else-if="equipment">
+    <EmptyState
+      v-else-if="!equipment"
+      icon="pi pi-box"
+      title="Equipamento não encontrado"
+      description="O equipamento solicitado não existe ou foi removido."
+      actionLabel="Voltar para lista"
+      actionRoute="/equipments"
+      actionIcon="pi pi-arrow-left"
+    />
+
+    <Tabs v-model:value="activeTab" v-else>
       <TabList>
         <Tab value="0">Principal</Tab>
         <Tab value="1">Localização</Tab>
@@ -101,9 +107,10 @@ import TabList from 'primevue/tablist'
 import Tab from 'primevue/tab'
 import TabPanels from 'primevue/tabpanels'
 import TabPanel from 'primevue/tabpanel'
-import Skeleton from 'primevue/skeleton'
 import Button from 'primevue/button'
 import Tag from 'primevue/tag'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
+import EmptyState from '@/components/EmptyState.vue'
 import EquipmentInfoTab from '@/modules/equipment/components/EquipmentInfoTab.vue'
 import EquipmentLocationTab from '@/modules/equipment/components/EquipmentLocationTab.vue'
 import EquipmentTechnicalTab from '@/modules/equipment/components/EquipmentTechnicalTab.vue'

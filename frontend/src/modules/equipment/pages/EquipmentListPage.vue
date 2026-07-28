@@ -16,7 +16,19 @@
       />
     </div>
 
-    <div class="card">
+    <LoadingSkeleton v-if="loading" variant="table" />
+
+    <EmptyState
+      v-else-if="!loading && equipmentStore.equipments.length === 0"
+      icon="pi pi-box"
+      title="Nenhum equipamento encontrado"
+      description="Comece cadastrando o primeiro equipamento no laboratório."
+      actionLabel="Novo Equipamento"
+      actionRoute="/equipments/create"
+      actionIcon="pi pi-plus"
+    />
+
+    <div v-else class="card">
       <Toolbar class="mb-3">
         <template #start>
           <div class="flex gap-2 flex-wrap">
@@ -146,6 +158,8 @@ import Button from 'primevue/button'
 import Tag from 'primevue/tag'
 import { useEquipmentStore } from '@/modules/equipment/store/EquipmentStore'
 import { useAuthStore } from '@/stores/auth'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
+import EmptyState from '@/components/EmptyState.vue'
 import type { Equipment } from '@/modules/equipment/types/equipment'
 
 const router = useRouter()
@@ -153,6 +167,8 @@ const equipmentStore = useEquipmentStore()
 const authStore = useAuthStore()
 const toast = useToast()
 const confirm = useConfirm()
+
+const loading = ref(true)
 
 const filters = ref({
   search: '',
@@ -186,14 +202,19 @@ function onSearch() {
   }, 400)
 }
 
-function fetchEquipments() {
+async function fetchEquipments() {
+  loading.value = true
   const params: Record<string, any> = {
     page: 1,
   }
   if (filters.value.search) params.search = filters.value.search
   if (filters.value.category_id) params.category_id = filters.value.category_id
   if (filters.value.status) params.status = filters.value.status
-  equipmentStore.fetchAll(params)
+  try {
+    await equipmentStore.fetchAll(params)
+  } finally {
+    loading.value = false
+  }
 }
 
 function onPage(event: any) {

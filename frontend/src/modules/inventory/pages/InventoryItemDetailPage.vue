@@ -29,13 +29,19 @@
       </div>
     </div>
 
-    <div v-if="loading" class="card">
-      <Skeleton height="4rem" class="mb-3" />
-      <Skeleton height="4rem" class="mb-3" />
-      <Skeleton height="4rem" class="mb-3" />
-    </div>
+    <LoadingSkeleton v-if="loading" variant="detail" />
 
-    <Tabs v-model:value="activeTab" v-else-if="item">
+    <EmptyState
+      v-else-if="!item"
+      icon="pi pi-box"
+      title="Item não encontrado"
+      description="O item de estoque solicitado não existe ou foi removido."
+      actionLabel="Voltar para lista"
+      actionRoute="/inventory"
+      actionIcon="pi pi-arrow-left"
+    />
+
+    <Tabs v-model:value="activeTab" v-else>
       <TabList>
         <Tab value="0">Dados do Item</Tab>
         <Tab value="1">Movimentações</Tab>
@@ -60,9 +66,10 @@ import TabList from 'primevue/tablist'
 import Tab from 'primevue/tab'
 import TabPanels from 'primevue/tabpanels'
 import TabPanel from 'primevue/tabpanel'
-import Skeleton from 'primevue/skeleton'
 import Button from 'primevue/button'
 import Tag from 'primevue/tag'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
+import EmptyState from '@/components/EmptyState.vue'
 import { useToast } from 'primevue/usetoast'
 import InventoryItemInfoTab from '@/modules/inventory/components/InventoryItemInfoTab.vue'
 import InventoryMovementTab from '@/modules/inventory/components/InventoryMovementTab.vue'

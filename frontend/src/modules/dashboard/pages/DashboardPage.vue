@@ -22,10 +22,7 @@
       </span>
     </div>
 
-    <div v-if="store.loading" class="dashboard-loading">
-      <ProgressSpinner />
-      <p>Carregando dados do dashboard...</p>
-    </div>
+    <LoadingSkeleton v-if="store.loading" variant="card" :rows="2" />
 
     <EmptyState v-else-if="!store.data" />
 
@@ -53,7 +50,7 @@
 import { ref, onMounted } from 'vue'
 import DatePicker from 'primevue/datepicker'
 import Button from 'primevue/button'
-import ProgressSpinner from 'primevue/progressspinner'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
 import { useDashboardStore } from '../store/dashboardStore'
 import { useSyncStore } from '@/stores/sync'
 import KpiRow from '../components/KpiRow.vue'
@@ -100,16 +97,6 @@ onMounted(() => refresh())
   align-items: center;
   gap: 0.35rem;
   white-space: nowrap;
-}
-
-.dashboard-loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem;
-  gap: 1rem;
-  color: var(--p-text-muted-color);
 }
 
 .dashboard-grid {

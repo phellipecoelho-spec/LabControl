@@ -46,11 +46,17 @@
       </div>
     </div>
 
-    <div v-if="store.loading" class="card">
-      <Skeleton height="4rem" class="mb-3" />
-      <Skeleton height="4rem" class="mb-3" />
-      <Skeleton height="4rem" class="mb-3" />
-    </div>
+    <LoadingSkeleton v-if="store.loading" variant="detail" />
+
+    <EmptyState
+      v-else-if="!order"
+      icon="pi pi-wrench"
+      title="Manutenção não encontrada"
+      description="A ordem de manutenção solicitada não existe ou foi removida."
+      actionLabel="Voltar para lista"
+      actionRoute="/maintenance"
+      actionIcon="pi pi-arrow-left"
+    />
 
     <div v-else-if="order">
       <Tabs v-model:value="activeTab">
@@ -218,11 +224,12 @@ import TabList from 'primevue/tablist'
 import Tab from 'primevue/tab'
 import TabPanels from 'primevue/tabpanels'
 import TabPanel from 'primevue/tabpanel'
-import Skeleton from 'primevue/skeleton'
 import Button from 'primevue/button'
 import Tag from 'primevue/tag'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
+import EmptyState from '@/components/EmptyState.vue'
 import { useMaintenanceStore } from '../store/MaintenanceStore'
 import { useAuthStore } from '@/stores/auth'
 import type { MaintenanceOrder, MaintenanceOrderPart } from '../types/maintenance'

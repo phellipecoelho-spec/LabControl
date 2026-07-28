@@ -34,11 +34,17 @@ const props = withDefaults(defineProps<{
   actionIcon: 'pi pi-plus',
 })
 
+const emit = defineEmits<{
+  action: []
+}>()
+
 const router = useRouter()
 
 function handleAction() {
   if (props.actionRoute) {
     router.push(props.actionRoute)
+  } else {
+    emit('action')
   }
 }
 </script>

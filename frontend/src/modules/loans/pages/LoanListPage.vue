@@ -16,7 +16,19 @@
       />
     </div>
 
-    <div class="card">
+    <LoadingSkeleton v-if="loading" variant="table" />
+
+    <EmptyState
+      v-else-if="!loading && store.loans.length === 0"
+      icon="pi pi-briefcase"
+      title="Nenhum empréstimo encontrado"
+      description="Registre o primeiro empréstimo de equipamento para começar o controle."
+      actionLabel="Novo Empréstimo"
+      actionIcon="pi pi-plus"
+      @action="showCreateDialog = true"
+    />
+
+    <div v-else class="card">
       <Toolbar class="mb-3">
         <template #start>
           <div class="flex gap-2 flex-wrap align-items-center">
@@ -193,6 +205,8 @@ import Button from 'primevue/button'
 import Tag from 'primevue/tag'
 import { useLoanStore } from '../store/LoanStore'
 import { useAuthStore } from '@/stores/auth'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
+import EmptyState from '@/components/EmptyState.vue'
 import { LOAN_STATUS_OPTIONS } from '../types/loan'
 import type { Loan } from '../types/loan'
 import LoanCreateDialog from '../components/LoanCreateDialog.vue'
@@ -204,6 +218,7 @@ const toast = useToast()
 const confirm = useConfirm()
 
 const showCreateDialog = ref(false)
+const loading = ref(true)
 
 const filters = ref({
   search: '',
@@ -246,7 +261,8 @@ function handleFilterChange() {
   fetchLoans(1)
 }
 
-function fetchLoans(page = 1) {
+async function fetchLoans(page = 1) {
+  loading.value = true
   const params: Record<string, any> = { page }
   if (filters.value.search) params.search = filters.value.search
   if (filters.value.status) params.status = filters.value.status
@@ -255,7 +271,11 @@ function fetchLoans(page = 1) {
   }
   if (filters.value.from) params.from = filters.value.from.toISOString().split('T')[0]
   if (filters.value.to) params.to = filters.value.to.toISOString().split('T')[0]
-  store.fetchAll(params)
+  try {
+    await store.fetchAll(params)
+  } finally {
+    loading.value = false
+  }
 }
 
 function onPage(event: any) {

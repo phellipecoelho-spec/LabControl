@@ -9,12 +9,17 @@
 
     <Card>
       <template #content>
-        <div v-if="store.loading" class="flex flex-column gap-3">
-          <Skeleton height="3rem" v-for="n in 5" :key="n" />
-        </div>
+        <LoadingSkeleton v-if="store.loading" variant="table" :rows="3" />
+
+        <EmptyState
+          v-else-if="store.pendingEquipment.length === 0"
+          icon="pi pi-check-circle"
+          title="Todos os equipamentos estão em dia"
+          description="Nenhum equipamento precisa de aferição no momento."
+        />
 
         <DataTable
-          v-else-if="store.pendingEquipment.length > 0"
+          v-else
           :value="store.pendingEquipment"
           stripedRows
           :rows="15"
@@ -62,12 +67,6 @@
             </template>
           </Column>
         </DataTable>
-
-        <div v-else class="flex flex-column align-items-center py-6 text-color-secondary">
-          <i class="pi pi-check-circle text-5xl mb-3" style="opacity: 0.4"></i>
-          <p class="text-lg font-medium m-0">Todos os equipamentos estão em dia</p>
-          <p class="m-0 mt-2 text-sm">Nenhum equipamento precisa de aferição no momento.</p>
-        </div>
       </template>
     </Card>
 
@@ -88,8 +87,9 @@ import Card from 'primevue/card'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import Tag from 'primevue/tag'
-import Skeleton from 'primevue/skeleton'
 import Button from 'primevue/button'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
+import EmptyState from '@/components/EmptyState.vue'
 
 const authStore = useAuthStore()
 const store = useVerificationStore()

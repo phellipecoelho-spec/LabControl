@@ -16,7 +16,19 @@
       />
     </div>
 
-    <div class="card">
+    <LoadingSkeleton v-if="loading" variant="table" />
+
+    <EmptyState
+      v-else-if="!loading && store.items.length === 0"
+      icon="pi pi-box"
+      title="Nenhum item em estoque"
+      description="Cadastre o primeiro item para começar a controlar o estoque do laboratório."
+      actionLabel="Novo Item"
+      actionRoute="/inventory/create"
+      actionIcon="pi pi-plus"
+    />
+
+    <div v-else class="card">
       <Toolbar class="mb-3">
         <template #start>
           <div class="flex gap-2 flex-wrap">
@@ -173,6 +185,8 @@ import Button from 'primevue/button'
 import Tag from 'primevue/tag'
 import { useInventoryItemStore } from '@/modules/inventory/store/InventoryItemStore'
 import { useAuthStore } from '@/stores/auth'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
+import EmptyState from '@/components/EmptyState.vue'
 import { INVENTORY_UNITS } from '@/modules/inventory/types/inventory'
 import type { InventoryItem } from '@/modules/inventory/types/inventory'
 
@@ -181,6 +195,8 @@ const store = useInventoryItemStore()
 const authStore = useAuthStore()
 const toast = useToast()
 const confirm = useConfirm()
+
+const loading = ref(true)
 
 const filters = ref({
   search: '',
@@ -222,7 +238,8 @@ function onSearch() {
   }, 400)
 }
 
-function fetchItems() {
+async function fetchItems() {
+  loading.value = true
   const params: Record<string, any> = {
     page: 1,
   }
@@ -230,7 +247,11 @@ function fetchItems() {
   if (filters.value.category_id) params.category_id = filters.value.category_id
   if (filters.value.unit) params.unit = filters.value.unit
   if (filters.value.critical) params.critical = filters.value.critical
-  store.fetchAll(params)
+  try {
+    await store.fetchAll(params)
+  } finally {
+    loading.value = false
+  }
 }
 
 function onPage(event: any) {

@@ -58,11 +58,17 @@
       </div>
     </div>
 
-    <div v-if="loading" class="card">
-      <Skeleton height="3rem" class="mb-3" />
-      <Skeleton height="3rem" class="mb-3" />
-      <Skeleton height="3rem" class="mb-3" />
-    </div>
+    <LoadingSkeleton v-if="loading" variant="detail" />
+
+    <EmptyState
+      v-else-if="!loan"
+      icon="pi pi-briefcase"
+      title="Empréstimo não encontrado"
+      description="O empréstimo solicitado não existe ou foi removido."
+      actionLabel="Voltar para lista"
+      actionRoute="/loans"
+      actionIcon="pi pi-arrow-left"
+    />
 
     <div v-else-if="loan" class="card">
       <div class="flex align-items-center gap-3 mb-3">
@@ -111,11 +117,15 @@
       </Tabs>
     </div>
 
-    <div v-else class="card">
-      <div class="text-center text-600 p-4">
-        Empréstimo não encontrado.
-      </div>
-    </div>
+    <EmptyState
+      v-else
+      icon="pi pi-briefcase"
+      title="Empréstimo não encontrado"
+      description="O empréstimo solicitado não existe ou foi removido."
+      actionLabel="Voltar para lista"
+      actionRoute="/loans"
+      actionIcon="pi pi-arrow-left"
+    />
 
     <LoanReturnDialog
       v-model:visible="showReturnDialog"
@@ -138,11 +148,12 @@ import TabList from 'primevue/tablist'
 import Tab from 'primevue/tab'
 import TabPanels from 'primevue/tabpanels'
 import TabPanel from 'primevue/tabpanel'
-import Skeleton from 'primevue/skeleton'
 import Button from 'primevue/button'
 import Tag from 'primevue/tag'
 import Divider from 'primevue/divider'
 import ProgressBar from 'primevue/progressbar'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
+import EmptyState from '@/components/EmptyState.vue'
 import { useLoanStore } from '../store/LoanStore'
 import { useAuthStore } from '@/stores/auth'
 import type { Loan } from '../types/loan'

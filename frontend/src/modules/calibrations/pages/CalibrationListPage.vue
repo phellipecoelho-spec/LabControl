@@ -16,7 +16,19 @@
       />
     </div>
 
-    <div class="card">
+    <LoadingSkeleton v-if="loading" variant="table" />
+
+    <EmptyState
+      v-else-if="!loading && store.calibrations.length === 0"
+      icon="pi pi-verified"
+      title="Nenhuma calibração encontrada"
+      description="Agende a primeira calibração de equipamento para manter a rastreabilidade."
+      actionLabel="Nova Calibração"
+      actionIcon="pi pi-plus"
+      @action="showCreateDialog = true"
+    />
+
+    <div v-else class="card">
       <Toolbar class="mb-3">
         <template #start>
           <div class="flex gap-2 flex-wrap align-items-center">
@@ -207,6 +219,8 @@ import Button from 'primevue/button'
 import Tag from 'primevue/tag'
 import { useCalibrationStore } from '../store/CalibrationStore'
 import { useAuthStore } from '@/stores/auth'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
+import EmptyState from '@/components/EmptyState.vue'
 import { CALIBRATION_STATUS_OPTIONS } from '../types/calibration'
 import type { Calibration } from '../types/calibration'
 import CalibrationCreateDialog from '../components/CalibrationCreateDialog.vue'
@@ -221,6 +235,7 @@ const confirm = useConfirm()
 const showCreateDialog = ref(false)
 const showConcludeDialog = ref(false)
 const selectedCalibration = ref<Calibration | null>(null)
+const loading = ref(true)
 
 const filters = ref({
   equipment_id: null as string | null,
@@ -270,14 +285,19 @@ function handleFilterChange() {
   fetchCalibrations(1)
 }
 
-function fetchCalibrations(page = 1) {
+async function fetchCalibrations(page = 1) {
+  loading.value = true
   const params: Record<string, any> = { page }
   if (filters.value.equipment_id) params.equipment_id = filters.value.equipment_id
   if (filters.value.status) params.status = filters.value.status
   if (filters.value.from) params.from = filters.value.from.toISOString().split('T')[0]
   if (filters.value.to) params.to = filters.value.to.toISOString().split('T')[0]
   if (filters.value.laboratory) params.laboratory = filters.value.laboratory
-  store.fetchAll(params)
+  try {
+    await store.fetchAll(params)
+  } finally {
+    loading.value = false
+  }
 }
 
 function onPage(event: any) {

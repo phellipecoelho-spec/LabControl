@@ -16,7 +16,19 @@
       />
     </div>
 
-    <div class="card">
+    <LoadingSkeleton v-if="loading" variant="table" />
+
+    <EmptyState
+      v-else-if="!loading && store.orders.length === 0"
+      icon="pi pi-wrench"
+      title="Nenhuma manutenção encontrada"
+      description="Registre a primeira ordem de manutenção para acompanhar os serviços nos equipamentos."
+      actionLabel="Nova Manutenção"
+      actionIcon="pi pi-plus"
+      @action="showCreateDialog = true"
+    />
+
+    <div v-else class="card">
       <Toolbar class="mb-3">
         <template #start>
           <div class="flex gap-2 flex-wrap align-items-center">
@@ -181,10 +193,11 @@
           </template>
         </Column>
         <template #empty>
-          <div class="flex flex-column align-items-center py-5 text-color-secondary">
-            <i class="pi pi-wrench text-4xl mb-2" style="opacity: 0.4"></i>
-            <p class="m-0">Nenhuma manutenção encontrada.</p>
-          </div>
+          <EmptyState
+            icon="pi pi-wrench"
+            title="Nenhuma manutenção encontrada"
+            description="Nenhuma ordem de manutenção corresponde aos filtros atuais."
+          />
         </template>
       </DataTable>
     </div>
@@ -218,6 +231,8 @@ import Button from 'primevue/button'
 import Tag from 'primevue/tag'
 import { useMaintenanceStore } from '../store/MaintenanceStore'
 import { useAuthStore } from '@/stores/auth'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
+import EmptyState from '@/components/EmptyState.vue'
 import {
   MAINTENANCE_TYPE_OPTIONS,
   MAINTENANCE_STATUS_OPTIONS,
@@ -236,6 +251,7 @@ const confirm = useConfirm()
 const showCreateDialog = ref(false)
 const showCompleteDialog = ref(false)
 const selectedOrderId = ref('')
+const loading = ref(true)
 
 const filters = ref({
   equipment_id: null as string | null,
@@ -296,7 +312,8 @@ function handleFilterChange() {
   fetchOrders(1)
 }
 
-function fetchOrders(page = 1) {
+async function fetchOrders(page = 1) {
+  loading.value = true
   const params: Record<string, any> = { page }
   if (filters.value.equipment_id) params.equipment_id = filters.value.equipment_id
   if (filters.value.type) params.type = filters.value.type
@@ -304,7 +321,11 @@ function fetchOrders(page = 1) {
   if (filters.value.priority) params.priority = filters.value.priority
   if (filters.value.from) params.from = (filters.value.from as Date).toISOString().split('T')[0]
   if (filters.value.to) params.to = (filters.value.to as Date).toISOString().split('T')[0]
-  store.fetchAll(params)
+  try {
+    await store.fetchAll(params)
+  } finally {
+    loading.value = false
+  }
 }
 
 function onPage(event: any) {

@@ -56,11 +56,17 @@
       </div>
     </div>
 
-    <div v-if="loading" class="card">
-      <Skeleton height="3rem" class="mb-3" />
-      <Skeleton height="3rem" class="mb-3" />
-      <Skeleton height="3rem" class="mb-3" />
-    </div>
+    <LoadingSkeleton v-if="loading" variant="detail" />
+
+    <EmptyState
+      v-else-if="!calibration"
+      icon="pi pi-verified"
+      title="Calibração não encontrada"
+      description="A calibração solicitada não existe ou foi removida."
+      actionLabel="Voltar para lista"
+      actionRoute="/calibrations"
+      actionIcon="pi pi-arrow-left"
+    />
 
     <div v-else-if="calibration" class="card">
       <Tabs v-model:value="activeTab">
@@ -87,11 +93,15 @@
       </Tabs>
     </div>
 
-    <div v-else class="card">
-      <div class="text-center text-600 p-4">
-        Calibração não encontrada.
-      </div>
-    </div>
+    <EmptyState
+      v-else
+      icon="pi pi-verified"
+      title="Calibração não encontrada"
+      description="A calibração solicitada não existe ou foi removida."
+      actionLabel="Voltar para lista"
+      actionRoute="/calibrations"
+      actionIcon="pi pi-arrow-left"
+    />
 
     <CalibrationConcludeDialog
       v-model:visible="showConcludeDialog"
@@ -113,9 +123,10 @@ import TabList from 'primevue/tablist'
 import Tab from 'primevue/tab'
 import TabPanels from 'primevue/tabpanels'
 import TabPanel from 'primevue/tabpanel'
-import Skeleton from 'primevue/skeleton'
 import Button from 'primevue/button'
 import Tag from 'primevue/tag'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
+import EmptyState from '@/components/EmptyState.vue'
 import { useCalibrationStore } from '../store/CalibrationStore'
 import { useAuthStore } from '@/stores/auth'
 import type { Calibration } from '../types/calibration'
