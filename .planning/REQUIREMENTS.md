@@ -7,35 +7,35 @@
 
 ### Infraestrutura
 
-- [ ] **INFRA-01**: Docker Compose funcional (build PHP + composer install + containers rodando)
-- [ ] **INFRA-02**: Migrations executadas no PostgreSQL
+- [x] **INFRA-01**: Docker Compose funcional (build PHP + composer install + containers rodando)
+- [x] **INFRA-02**: Migrations executadas no PostgreSQL
 - [ ] **INFRA-03**: Script de setup automatizado funcional
 
 ### Autenticação
 
-- [ ] **AUTH-01**: Usuário pode fazer login com email e senha via Sanctum
-- [ ] **AUTH-02**: Usuário pode se registrar com verificação de email
-- [ ] **AUTH-03**: Usuário pode recuperar senha via email
-- [ ] **AUTH-04**: Sessão do usuário persiste entre atualizações (refresh token)
+- [x] **AUTH-01**: Usuário pode fazer login com email e senha via Sanctum
+- [x] **AUTH-02**: Usuário pode se registrar com verificação de email
+- [x] **AUTH-03**: Usuário pode recuperar senha via email
+- [x] **AUTH-04**: Sessão do usuário persiste entre atualizações (refresh token)
 
 ### Usuários e Permissões
 
-- [ ] **USERS-01**: Administrador pode gerenciar usuários (CRUD) com perfis (Admin, Supervisor, Laboratorista, Técnico, Consulta, Auditor)
-- [ ] **USERS-02**: Administrador pode atribuir permissões por papel
-- [ ] **USERS-03**: Usuário pode editar próprio perfil com avatar
+- [x] **USERS-01**: Administrador pode gerenciar usuários (CRUD) com perfis (Admin, Supervisor, Laboratorista, Técnico, Consulta, Auditor)
+- [x] **USERS-02**: Administrador pode atribuir permissões por papel
+- [x] **USERS-03**: Usuário pode editar próprio perfil com avatar
 
 ### Layout e Navegação
 
-- [ ] **LAYOUT-01**: Tema escuro responsivo com design moderno
-- [ ] **LAYOUT-02**: Sidebar com navegação por módulos
-- [ ] **LAYOUT-03**: Topbar com notificações e menu do usuário
+- [x] **LAYOUT-01**: Tema escuro responsivo com design moderno
+- [x] **LAYOUT-02**: Sidebar com navegação por módulos
+- [x] **LAYOUT-03**: Topbar com notificações e menu do usuário
 
 ### Equipamentos
 
-- [ ] **EQUIP-01**: Usuário pode cadastrar equipamentos com dados completos
-- [ ] **EQUIP-02**: Usuário pode gerenciar categorias, fabricantes e fornecedores
-- [ ] **EQUIP-03**: Usuário pode anexar fotos e manuais ao equipamento
-- [ ] **EQUIP-04**: Sistema registra histórico de alterações do equipamento
+- [x] **EQUIP-01**: Usuário pode cadastrar equipamentos com dados completos
+- [x] **EQUIP-02**: Usuário pode gerenciar categorias, fabricantes e fornecedores
+- [x] **EQUIP-03**: Usuário pode anexar fotos e manuais ao equipamento
+- [x] **EQUIP-04**: Sistema registra histórico de alterações do equipamento
 
 ### Estoque
 
@@ -45,9 +45,9 @@
 
 ### Empréstimos
 
-- [ ] **LOAN-01**: Usuário pode registrar empréstimos de equipamentos
-- [ ] **LOAN-02**: Usuário pode visualizar agenda de reservas
-- [ ] **LOAN-03**: Sistema notifica quando devolução está atrasada
+- [x] **LOAN-01**: Usuário pode registrar empréstimos de equipamentos
+- [x] **LOAN-02**: Usuário pode visualizar agenda de reservas
+- [x] **LOAN-03**: Sistema notifica quando devolução está atrasada
 
 ### Calibrações
 
@@ -58,33 +58,33 @@
 
 ### Aferições
 
-- [ ] **VERF-01**: Usuário pode registrar aferições diárias
-- [ ] **VERF-02**: Sistema alerta quando limites de tolerância são excedidos
+- [x] **VERF-01**: Usuário pode registrar aferições diárias
+- [x] **VERF-02**: Sistema alerta quando limites de tolerância são excedidos
 
 ### Manutenções
 
-- [ ] **MAINT-01**: Usuário pode abrir ordens de manutenção
-- [ ] **MAINT-02**: Sistema mantém histórico de manutenções preventivas e corretivas
+- [x] **MAINT-01**: Usuário pode abrir ordens de manutenção
+- [x] **MAINT-02**: Sistema mantém histórico de manutenções preventivas e corretivas
 
 ### Dashboard
 
-- [ ] **DASH-01**: Usuário visualiza dashboard com indicadores (ECharts)
-- [ ] **DASH-02**: Dashboard exibe gráficos de equipamentos, calibrações e movimentações
+- [x] **DASH-01**: Usuário visualiza dashboard com indicadores (ECharts)
+- [x] **DASH-02**: Dashboard exibe gráficos de equipamentos, calibrações e movimentações
 
 ### Relatórios
 
-- [ ] **REPT-01**: Usuário pode gerar relatórios em PDF, Excel e CSV
-- [ ] **REPT-02**: Usuário pode exportar dados do sistema
+- [x] **REPT-01**: Usuário pode gerar relatórios em PDF, Excel e CSV
+- [x] **REPT-02**: Usuário pode exportar dados do sistema
 
 ### PWA e Offline
 
-- [ ] **PWA-01**: Sistema funciona offline com sincronização automática
-- [ ] **PWA-02**: Sistema é instalável como aplicativo
+- [x] **PWA-01**: Sistema funciona offline com sincronização automática
+- [x] **PWA-02**: Sistema é instalável como aplicativo
 
 ### Auditoria
 
-- [ ] **LOGS-01**: Sistema audita todas as operações
-- [ ] **LOGS-02**: Usuário pode visualizar logs por módulo
+- [x] **LOGS-01**: Sistema audita todas as operações
+- [x] **LOGS-02**: Usuário pode visualizar logs por módulo
 
 ## v2 Requirements (Deferidas)
 
@@ -107,54 +107,57 @@
 
 ## Traceability
 
-| Requirement | Phase | Status |
-|-------------|-------|--------|
-| INFRA-01 | Phase 1 | Pending |
-| INFRA-02 | Phase 1 | Pending |
-| INFRA-03 | Phase 1 | Pending |
-| AUTH-01 | Phase 2 | Pending |
-| AUTH-02 | Phase 2 | Pending |
-| AUTH-03 | Phase 2 | Pending |
-| AUTH-04 | Phase 2 | Pending |
-| USERS-01 | Phase 3 | Pending |
-| USERS-02 | Phase 3 | Pending |
-| USERS-03 | Phase 3 | Pending |
-| LAYOUT-01 | Phase 4 | Pending |
-| LAYOUT-02 | Phase 4 | Pending |
-| LAYOUT-03 | Phase 4 | Pending |
-| EQUIP-01 | Phase 5 | Pending |
-| EQUIP-02 | Phase 5 | Pending |
-| EQUIP-03 | Phase 5 | Pending |
-| EQUIP-04 | Phase 5 | Pending |
-| INVT-01 | Phase 6 | Completed |
-| INVT-02 | Phase 6 | Completed |
-| INVT-03 | Phase 6 | Pending |
-| LOAN-01 | Phase 7 | Completed |
-| LOAN-02 | Phase 7 | Completed |
-| LOAN-03 | Phase 7 | Pending |
-| CAL-01 | Phase 8 | Complete |
-| CAL-02 | Phase 8 | Complete |
-| CAL-03 | Phase 8 | Complete |
-| CAL-04 | Phase 8 | Complete |
-| VERF-01 | Phase 9 | Pending |
-| VERF-02 | Phase 9 | Pending |
-| MAINT-01 | Phase 10 | Pending |
-| MAINT-02 | Phase 10 | Pending |
-| DASH-01 | Phase 11 | Pending |
-| DASH-02 | Phase 11 | Pending |
-| REPT-01 | Phase 12 | Pending |
-| REPT-02 | Phase 12 | Pending |
-| PWA-01 | Phase 13 | Pending |
-| PWA-02 | Phase 13 | Pending |
-| LOGS-01 | Phase 3 | Pending |
-| LOGS-02 | Phase 3 | Pending |
+| Requirement | Phase | Module | Status | Verified by |
+|-------------|-------|--------|--------|-------------|
+| INFRA-01 | Phase 1 | Infraestrutura | Complete | Manual |
+| INFRA-02 | Phase 1 | Infraestrutura | Complete | Manual |
+| INFRA-03 | Phase 1 | Infraestrutura | Pending | |
+| AUTH-01 | Phase 2 | Autenticação | Complete | Phase 2 — Plan 04 Tests |
+| AUTH-02 | Phase 2 | Autenticação | Complete | Phase 2 — Plan 04 Tests |
+| AUTH-03 | Phase 2 | Autenticação | Complete | Phase 2 — Plan 04 Tests |
+| AUTH-04 | Phase 2 | Autenticação | Complete | Phase 2 — Plan 04 Tests |
+| USERS-01 | Phase 3 | Usuários | Complete | Phase 3 — Plan 01 Tests |
+| USERS-02 | Phase 3 | Usuários | Complete | Phase 3 — Plan 01 Tests |
+| USERS-03 | Phase 3 | Usuários | Complete | Manual |
+| LAYOUT-01 | Phase 4 | Layout | Complete | Manual |
+| LAYOUT-02 | Phase 4 | Layout | Complete | Manual |
+| LAYOUT-03 | Phase 4 | Layout | Complete | Manual |
+| EQUIP-01 | Phase 5 | Equipamentos | Complete | Phase 5 — Plan 02b Tests |
+| EQUIP-02 | Phase 5 | Equipamentos | Complete | Manual |
+| EQUIP-03 | Phase 5 | Equipamentos | Complete | Manual |
+| EQUIP-04 | Phase 5 | Equipamentos | Complete | Phase 14 — Plan 01 AuditTests |
+| INVT-01 | Phase 6 | Estoque | Complete | Phase 6 — Plan 02 Tests |
+| INVT-02 | Phase 6 | Estoque | Complete | Phase 6 — Plan 02 Tests |
+| INVT-03 | Phase 6 | Estoque | Pending | |
+| LOAN-01 | Phase 7 | Empréstimos | Complete | Phase 14 — Plan 01 AuditTests |
+| LOAN-02 | Phase 7 | Empréstimos | Complete | Manual |
+| LOAN-03 | Phase 7 | Empréstimos | Complete | Manual |
+| CAL-01 | Phase 8 | Calibrações | Complete | Phase 14 — Plan 01 AuditTests |
+| CAL-02 | Phase 8 | Calibrações | Complete | Manual |
+| CAL-03 | Phase 8 | Calibrações | Complete | Manual |
+| CAL-04 | Phase 8 | Calibrações | Complete | Manual |
+| VERF-01 | Phase 9 | Aferições | Complete | Phase 14 — Plan 01 AuditTests |
+| VERF-02 | Phase 9 | Aferições | Complete | Manual |
+| MAINT-01 | Phase 10 | Manutenções | Complete | Phase 14 — Plan 01 AuditTests |
+| MAINT-02 | Phase 10 | Manutenções | Complete | Phase 14 — Plan 01 AuditTests |
+| DASH-01 | Phase 11 | Dashboard | Complete | Phase 11 — Plan 01 Tests |
+| DASH-02 | Phase 11 | Dashboard | Complete | Phase 11 — Plan 01 Tests |
+| REPT-01 | Phase 12 | Relatórios | Complete | Phase 12 — Plan 01 Tests |
+| REPT-02 | Phase 12 | Relatórios | Complete | Phase 12 — Plan 01 Tests |
+| PWA-01 | Phase 13 | PWA | Complete | Manual |
+| PWA-02 | Phase 13 | PWA | Complete | Manual |
+| LOGS-01 | Phase 3 | Auditoria | Complete | Phase 14 — Plan 01 AuditTests |
+| LOGS-02 | Phase 3 | Auditoria | Complete | Manual |
 
 **Coverage:**
 
 - v1 requirements: 38 total
+- Complete: 36
+- Pending: 2 (INFRA-03, INVT-03)
 - Mapped to phases: 38
 - Unmapped: 0 ✓
+- Coverage: 94.7%
 
 ---
 *Requirements defined: 2026-07-19*
-*Last updated: 2026-07-19 after initial definition*
+*Last updated: 2026-07-28 — Phase 14 Plan 01 audit*
