@@ -16,18 +16,47 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\RateLimiter;
 
 class AuthController
 {
     public function __construct(
         private readonly ActivityLogService $activityLogService
     ) {}
+
+    /**
+     * Rate limit key prefix for login attempts.
+     */
+    private const LOGIN_RATE_LIMIT_KEY = 'login:';
+
+    /**
+     * Maximum login attempts per minute per IP.
+     */
+    private const MAX_LOGIN_ATTEMPTS = 5;
+
+    /**
+     * Rate limit decay time in seconds (1 minute).
+     */
+    private const LOGIN_DECAY_SECONDS = 60;
+
     public function login(LoginRequest $request): JsonResponse
     {
+        $key = self::LOGIN_RATE_LIMIT_KEY . $request->ip();
+
+        // Check rate limit before attempting authentication
+        if (RateLimiter::tooManyAttempts($key, self::MAX_LOGIN_ATTEMPTS)) {
+            $this->activityLogService->logAuth('login_rate_limited', $request->email);
+            return response()->json([
+                'message' => 'Muitas tentativas. Aguarde 1 minuto.',
+            ], 429);
+        }
+
         $credentials = $request->only('email', 'password');
         $remember = $request->boolean('remember');
 
         if (!Auth::attempt($credentials, $remember)) {
+            // Increment rate limiter on failed attempt
+            RateLimiter::hit($key, self::LOGIN_DECAY_SECONDS);
             $this->activityLogService->logAuth('login_failed', $request->email);
             return response()->json(['message' => 'Credenciais inválidas.'], 422);
         }
@@ -39,6 +68,9 @@ class AuthController
             $this->activityLogService->logAuth('login_unverified', $request->email);
             return response()->json(['message' => 'Email não verificado.'], 403);
         }
+
+        // Clear rate limiter on successful login
+        RateLimiter::clear($key);
 
         $request->session()->regenerate();
 
