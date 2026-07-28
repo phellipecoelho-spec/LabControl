@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: Production
-current_phase: 13
-status: phase_13_plan_02_complete
-stopped_at: Phase 13 execution — Plan 02 complete
-last_updated: "2026-07-28T01:52:00.000Z"
-last_activity: 2026-07-27
+current_phase: 14
+status: phase_14_plan_02_complete
+stopped_at: Phase 14 execution — Plan 02 complete (UI Polish)
+last_updated: "2026-07-28T06:55:00.000Z"
+last_activity: 2026-07-28
 progress:
-  total_phases: 13
-  completed_phases: 12
-  total_plans: 41
-  completed_plans: 41
+  total_phases: 14
+  completed_phases: 13
+  total_plans: 42
+  completed_plans: 42
   percent: 100
 ---
 
@@ -25,9 +25,9 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 
 ## Current Status
 
-**Current Phase:** 13
-**Status:** Plan 02 completed — Sync Engine & PWA UI
-**Last activity:** 2026-07-27
+**Current Phase:** 14
+**Status:** Plan 02 completed — UI Polish (EmptyState, LoadingSkeleton, dark mode, responsive)
+**Last activity:** 2026-07-28
 
 ## Plan Progress
 
@@ -239,11 +239,34 @@ Phase 6 (Estoque) — 3 planos concluídos:
 | 02 — Sync Integration | 2 | ✅ Completed | SyncService (replay queue, conflict detection/auto-merge/auto-resolve), Pinia sync store, 3 PWA UI components (SyncIndicator, ConflictDialog, UpdatePrompt), App.vue integration, DashboardPage sync timestamp |
 | 03 — UI Indicators | 3 | ⏳ Planned | Offline indicator banner, sync status chip, toast notifications for sync events |
 
+## Phase 14 — Auditoria e Ajustes Finais (1 Plan ✅)
+
+**Plan 02 completed** 2026-07-28 — UI Polish: EmptyState, LoadingSkeleton, dark mode, responsive DataTables
+
+### Plans
+
+| Plan | Wave | Status | Description |
+|------|------|--------|-------------|
+| 01 — Missing Tests | 1 | ⏳ Planned | Complete test coverage for untested modules |
+| 02 — UI Polish | 2 | ✅ Completed | EmptyState/LoadingSkeleton components, integration in 13+ pages, dark mode, responsive |
+| 03 — Performance | 3 | ⏳ Planned | Lazy loading, memoization, build optimization |
+| 04 — Documentation | 4 | ⏳ Planned | README, deployment guide, API reference |
+| 05 — Security Audit | 5 | ⏳ Planned | CORS, headers, rate limiting, XSS/CSRF review |
+
+## Decisions Added in Plan 02
+
+| Decision | Outcome |
+|----------|---------|
+| EmptyState action emit | Emits @action when actionRoute not set (dialog CTAs like loans, calibrations, maintenance) |
+| Dashboard loading | LoadingSkeleton card variant replaces ProgressSpinner for consistency |
+| Form labels dark mode | text-color class replaces text-900 for theme-aware colors |
+| DataTable responsive | scrollable + scrollHeight='flex' on all list DataTables |
+
 ## Session
 
-**Last session:** 2026-07-28T01:52:00.000Z
-**Stopped at:** Phase 13 — Plan 02 complete (Sync Engine & PWA UI)
-**Resume file:** .planning/phases/13-pwa-offline/13-03-PLAN.md
+**Last session:** 2026-07-28T06:55:00.000Z
+**Stopped at:** Phase 14 — Plan 02 complete (UI Polish)
+**Resume file:** .planning/phases/14-auditoria-ajustes/14-03-PLAN.md
 
 ## Phase 11 — Dashboard (2 Plans ✅)
 
@@ -272,3 +295,4 @@ Phase 6 (Estoque) — 3 planos concluídos:
 | Phase 11-dashboard P02 | 5min | 3 tasks | 10 files |
 | Phase 13-pwa-offline P01 | 19min | 4 tasks | 11 files |
 | Phase 13-pwa-offline P02 | 25min | 4 tasks | 9 files |
+| Phase 14-auditoria-ajustes P02 | ~60min | 3 tasks | 19 files |
