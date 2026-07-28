@@ -1,4 +1,4 @@
-# LabControl Setup Script | v1.0 | 2026-07-18
+# LabControl Setup Script | v2.0 | 2026-07-28
 param([switch]$fresh)
 
 $root = Split-Path -Parent $PSScriptRoot
@@ -23,30 +23,30 @@ $start = Get-Date
 Write-Host "=== LabControl Setup ===" -ForegroundColor Cyan
 
 # 1. Check Docker
-Write-Host "`n--- 1/8: Verificando Docker ---" -ForegroundColor Cyan
+Write-Host "`n--- 1/9: Verificando Docker ---" -ForegroundColor Cyan
 Test-Command -Label "Docker info" -Block { docker info --format "{{.ServerVersion}}" }
 Test-Command -Label "Docker Compose" -Block { docker compose version }
 
 # 2. Check .env
-Write-Host "`n--- 2/8: Verificando .env ---" -ForegroundColor Cyan
+Write-Host "`n--- 2/9: Verificando .env ---" -ForegroundColor Cyan
 $envFile = Join-Path $backendDir ".env"
 if (-not (Test-Path $envFile)) {
-    $example = Join-Path $backendDir ".env.example"
+    $example = Join-Path $root ".env.example"
     if (Test-Path $example) {
         Copy-Item $example $envFile
         Write-Host ".env criado a partir de .env.example" -ForegroundColor Green
     } else {
-        Write-Host "ERROR: .env.example não encontrado em $example" -ForegroundColor Red
+        Write-Host "ERROR: .env.example nao encontrado em $example" -ForegroundColor Red
         exit 1
     }
 }
 $appKey = Select-String -Path $envFile -Pattern "^APP_KEY=(.+)$"
 if (-not $appKey -or [string]::IsNullOrWhiteSpace($appKey.Matches.Groups[1].Value)) {
-    Write-Host "APP_KEY vazio - será gerado no passo 5" -ForegroundColor Yellow
+    Write-Host "APP_KEY vazio - sera gerado no passo 5" -ForegroundColor Yellow
 }
 
 # 3. Build Docker
-Write-Host "`n--- 3/8: Build Docker ---" -ForegroundColor Cyan
+Write-Host "`n--- 3/9: Build Docker ---" -ForegroundColor Cyan
 Set-Location $dockerDir
 if ($fresh) {
     Test-Command -Label "Build PHP (no-cache)" -Block { docker compose build --no-cache php }
@@ -55,50 +55,56 @@ if ($fresh) {
 }
 
 # 4. Start containers
-Write-Host "`n--- 4/8: Iniciando containers ---" -ForegroundColor Cyan
+Write-Host "`n--- 4/9: Iniciando containers ---" -ForegroundColor Cyan
 Test-Command -Label "docker compose up" -Block { docker compose up -d }
-Write-Host "Aguardando PostgreSQL ficar saudável..." -ForegroundColor Yellow
+Write-Host "Aguardando PostgreSQL..." -ForegroundColor Yellow
 docker compose wait postgres
 if (-not $?) {
-    Write-Host "ERROR: PostgreSQL não ficou saudável" -ForegroundColor Red
+    Write-Host "ERROR: PostgreSQL nao ficou saudavel" -ForegroundColor Red
     exit 1
 }
-Write-Host "PostgreSQL saudável" -ForegroundColor Green
+Write-Host "PostgreSQL saudavel" -ForegroundColor Green
 
 # 5. Backend setup
-Write-Host "`n--- 5/8: Configurando backend ---" -ForegroundColor Cyan
+Write-Host "`n--- 5/9: Configurando backend ---" -ForegroundColor Cyan
 $vendorDir = Join-Path $backendDir "vendor"
 if ($fresh -or -not (Test-Path (Join-Path $vendorDir "autoload.php"))) {
     Test-Command -Label "Composer install" -Block { docker compose exec -T php composer install --no-interaction --prefer-dist }
 } else {
-    Write-Host "vendor/ já existe, pulando composer install" -ForegroundColor Yellow
+    Write-Host "vendor/ ja existe, pulando composer install" -ForegroundColor Yellow
 }
 Test-Command -Label "Key generate" -Block { docker compose exec -T php php artisan key:generate --force }
 Test-Command -Label "Migrate & seed" -Block { docker compose exec -T php php artisan migrate --seed --force }
 Test-Command -Label "Storage link" -Block { docker compose exec -T php php artisan storage:link --force }
 
 # 6. Frontend setup
-Write-Host "`n--- 6/8: Configurando frontend ---" -ForegroundColor Cyan
+Write-Host "`n--- 6/9: Configurando frontend ---" -ForegroundColor Cyan
 $nodeModules = Join-Path $frontendDir "node_modules"
 if ($fresh -or -not (Test-Path $nodeModules)) {
     Set-Location $frontendDir
     Test-Command -Label "npm install" -Block { npm install }
     Set-Location $dockerDir
 } else {
-    Write-Host "node_modules/ já existe, pulando npm install" -ForegroundColor Yellow
+    Write-Host "node_modules/ ja existe, pulando npm install" -ForegroundColor Yellow
 }
 
-# 7. Validação final
-Write-Host "`n--- 7/8: Validando setup ---" -ForegroundColor Cyan
+# 7. Build frontend for production
+Write-Host "`n--- 7/9: Building frontend ---" -ForegroundColor Cyan
+Set-Location $frontendDir
+Test-Command -Label "npm run build" -Block { npm run build }
+Set-Location $dockerDir
+
+# 8. Validation
+Write-Host "`n--- 8/9: Validando setup ---" -ForegroundColor Cyan
 Write-Host "Status dos containers:" -ForegroundColor White
 docker compose ps --format "table {{.Name}}\t{{.Status}}"
 
 $upResult = $null
-try { $upResult = Invoke-WebRequest -Uri "http://localhost/up" -UseBasicParsing -TimeoutSec 10 } catch {}
+try { $upResult = Invoke-WebRequest -Uri "http://localhost/health" -UseBasicParsing -TimeoutSec 10 } catch {}
 if ($upResult -and $upResult.StatusCode -eq 200) {
-    Write-Host "Health /up: OK (200)" -ForegroundColor Green
+    Write-Host "Health /health: OK (200)" -ForegroundColor Green
 } else {
-    Write-Host "Health /up: FALHOU" -ForegroundColor Red
+    Write-Host "Health /health: FALHOU" -ForegroundColor Red
     exit 1
 }
 
@@ -111,13 +117,13 @@ if ($healthResult -and $healthResult.StatusCode -eq 200) {
     exit 1
 }
 
-# 8. Summary
-Write-Host "`n--- 8/8: Summary ---" -ForegroundColor Cyan
+# 9. Summary
+Write-Host "`n--- 9/9: Summary ---" -ForegroundColor Cyan
 $duration = (Get-Date) - $start
-Write-Host "Setup concluído em $($duration.Minutes)m $($duration.Seconds)s" -ForegroundColor Green
+Write-Host "Setup concluido em $($duration.Minutes)m $($duration.Seconds)s" -ForegroundColor Green
 Write-Host "`nURLs e credenciais de desenvolvimento:" -ForegroundColor White
-Write-Host "  Backend:    http://localhost" -ForegroundColor Cyan
-Write-Host "  Frontend:   http://localhost:5173" -ForegroundColor Cyan
+Write-Host "  Frontend:   http://localhost" -ForegroundColor Cyan
+Write-Host "  Backend API: http://localhost/api" -ForegroundColor Cyan
 Write-Host "  PostgreSQL: localhost:5432 (labcontrol / labcontrol)" -ForegroundColor Cyan
 Write-Host "  Redis:      localhost:6379" -ForegroundColor Cyan
 Write-Host "  Admin:      admin@labcontrol.com / @dmin123" -ForegroundColor Cyan
