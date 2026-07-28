@@ -1,5 +1,8 @@
 <template>
   <div class="inventory-form-page">
+    <LoadingSkeleton v-if="isEditing && loading" variant="form" :rows="4" />
+
+    <template v-else>
     <div class="page-header mb-4">
       <div class="flex align-items-center gap-3">
         <Button
@@ -28,7 +31,7 @@
               <div class="grid">
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="name" class="block text-900 font-medium mb-2">
+                    <label for="name" class="block font-medium mb-2 text-color">
                       Nome <span class="text-red-500">*</span>
                     </label>
                     <InputText
@@ -43,7 +46,7 @@
                 </div>
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="code" class="block text-900 font-medium mb-2">
+                    <label for="code" class="block font-medium mb-2 text-color">
                       Código
                     </label>
                     <InputText
@@ -56,7 +59,7 @@
                 </div>
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="category_id" class="block text-900 font-medium mb-2">
+                    <label for="category_id" class="block font-medium mb-2 text-color">
                       Categoria <span class="text-red-500">*</span>
                     </label>
                     <Select
@@ -75,7 +78,7 @@
                 </div>
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="supplier_id" class="block text-900 font-medium mb-2">
+                    <label for="supplier_id" class="block font-medium mb-2 text-color">
                       Fornecedor
                     </label>
                     <Select
@@ -93,7 +96,7 @@
                 </div>
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="unit" class="block text-900 font-medium mb-2">
+                    <label for="unit" class="block font-medium mb-2 text-color">
                       Unidade <span class="text-red-500">*</span>
                     </label>
                     <Select
@@ -112,7 +115,7 @@
                 </div>
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="min_stock" class="block text-900 font-medium mb-2">
+                    <label for="min_stock" class="block font-medium mb-2 text-color">
                       Estoque Mínimo <span class="text-red-500">*</span>
                     </label>
                     <InputNumber
@@ -129,7 +132,7 @@
                 </div>
                 <div v-if="!isEditing" class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="initial_quantity" class="block text-900 font-medium mb-2">
+                    <label for="initial_quantity" class="block font-medium mb-2 text-color">
                       Quantidade Inicial
                     </label>
                     <InputNumber
@@ -150,7 +153,7 @@
               <div class="grid">
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="batch_lot" class="block text-900 font-medium mb-2">
+                    <label for="batch_lot" class="block font-medium mb-2 text-color">
                       Lote
                     </label>
                     <InputText
@@ -163,7 +166,7 @@
                 </div>
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="expiry_date" class="block text-900 font-medium mb-2">
+                    <label for="expiry_date" class="block font-medium mb-2 text-color">
                       Data de Validade
                     </label>
                     <DatePicker
@@ -179,7 +182,7 @@
                 </div>
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="physical_location" class="block text-900 font-medium mb-2">
+                    <label for="physical_location" class="block font-medium mb-2 text-color">
                       Localização Física
                     </label>
                     <InputText
@@ -192,7 +195,7 @@
                 </div>
                 <div class="col-12">
                   <div class="field mb-3">
-                    <label for="description" class="block text-900 font-medium mb-2">
+                    <label for="description" class="block font-medium mb-2 text-color">
                       Descrição
                     </label>
                     <Textarea
@@ -226,6 +229,8 @@
         />
       </div>
     </form>
+    </div>
+    </template>
   </div>
 </template>
 
@@ -243,6 +248,7 @@ import Select from 'primevue/select'
 import DatePicker from 'primevue/datepicker'
 import Textarea from 'primevue/textarea'
 import Button from 'primevue/button'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
 import { useToast } from 'primevue/usetoast'
 import { useInventoryItemStore } from '@/modules/inventory/store/InventoryItemStore'
 import { INVENTORY_UNITS } from '@/modules/inventory/types/inventory'
@@ -255,6 +261,7 @@ const toast = useToast()
 
 const activeTab = ref('0')
 const saving = ref(false)
+const loading = ref(false)
 
 const formData = reactive<Omit<InventoryItemFormData, 'expiry_date'> & {
   expiry_date: Date | null
@@ -304,6 +311,7 @@ onMounted(async () => {
   if (isEditing.value) {
     const id = route.params.id as string
     try {
+      loading.value = true
       const item = await store.fetchById(id)
       Object.assign(formData, {
         name: item.name,
@@ -325,6 +333,8 @@ onMounted(async () => {
         detail: 'Erro ao carregar item de estoque',
         life: 5000,
       })
+    } finally {
+      loading.value = false
     }
   }
 })

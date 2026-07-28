@@ -95,6 +95,8 @@
         :sortOrder="-1"
         stripedRows
         size="small"
+        scrollable
+        scrollHeight="flex"
         :rowClass="rowClass"
       >
         <Column header="Tomador">

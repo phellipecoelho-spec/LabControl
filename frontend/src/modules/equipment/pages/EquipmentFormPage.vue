@@ -1,5 +1,8 @@
 <template>
   <div class="equipment-form-page">
+    <LoadingSkeleton v-if="isEditing && loading" variant="form" :rows="4" />
+
+    <template v-else>
     <div class="page-header mb-4">
       <div class="flex align-items-center gap-3">
         <Button 
@@ -29,7 +32,7 @@
               <div class="grid">
                 <div class="col-12 md:col-8">
                   <div class="field mb-3">
-                    <label for="name" class="block text-900 font-medium mb-2">
+                    <label for="name" class="block font-medium mb-2 text-color">
                       Nome <span class="text-red-500">*</span>
                     </label>
                     <InputText 
@@ -44,7 +47,7 @@
                 </div>
                 <div class="col-12 md:col-4">
                   <div class="field mb-3">
-                    <label for="patrimony_id" class="block text-900 font-medium mb-2">
+                    <label for="patrimony_id" class="block font-medium mb-2 text-color">
                       Patrimônio
                     </label>
                     <InputText 
@@ -57,7 +60,7 @@
                 </div>
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="serial_number" class="block text-900 font-medium mb-2">
+                    <label for="serial_number" class="block font-medium mb-2 text-color">
                       Nº Série <span class="text-red-500">*</span>
                     </label>
                     <InputText 
@@ -72,7 +75,7 @@
                 </div>
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="category_id" class="block text-900 font-medium mb-2">
+                    <label for="category_id" class="block font-medium mb-2 text-color">
                       Categoria <span class="text-red-500">*</span>
                     </label>
                     <Select 
@@ -91,7 +94,7 @@
                 </div>
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="manufacturer_id" class="block text-900 font-medium mb-2">
+                    <label for="manufacturer_id" class="block font-medium mb-2 text-color">
                       Fabricante <span class="text-red-500">*</span>
                     </label>
                     <Select 
@@ -110,7 +113,7 @@
                 </div>
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="supplier_id" class="block text-900 font-medium mb-2">
+                    <label for="supplier_id" class="block font-medium mb-2 text-color">
                       Fornecedor
                     </label>
                     <Select 
@@ -128,7 +131,7 @@
                 </div>
                 <div class="col-12 md:col-6">
                   <div class="field mb-3">
-                    <label for="status" class="block text-900 font-medium mb-2">
+                    <label for="status" class="block font-medium mb-2 text-color">
                       Status
                     </label>
                     <SelectButton 
@@ -149,7 +152,7 @@
               <div class="grid">
                 <div class="col-12 md:col-8">
                   <div class="field mb-3">
-                    <label for="location" class="block text-900 font-medium mb-2">
+                    <label for="location" class="block font-medium mb-2 text-color">
                       Localização <span class="text-red-500">*</span>
                     </label>
                     <InputText 
@@ -164,7 +167,7 @@
                 </div>
                 <div class="col-12 md:col-4">
                   <div class="field mb-3">
-                    <label for="acquisition_date" class="block text-900 font-medium mb-2">
+                    <label for="acquisition_date" class="block font-medium mb-2 text-color">
                       Data de Aquisição
                     </label>
                     <DatePicker 
@@ -180,7 +183,7 @@
                 </div>
                 <div class="col-12 md:col-4">
                   <div class="field mb-3">
-                    <label for="warranty_end" class="block text-900 font-medium mb-2">
+                    <label for="warranty_end" class="block font-medium mb-2 text-color">
                       Fim da Garantia
                     </label>
                     <DatePicker 
@@ -200,7 +203,7 @@
           <TabPanel value="2">
             <div class="card">
               <div class="field mb-3">
-                <label for="description" class="block text-900 font-medium mb-2">
+                <label for="description" class="block font-medium mb-2 text-color">
                   Descrição
                 </label>
                 <Textarea 
@@ -213,7 +216,7 @@
                 />
               </div>
               <div class="field mb-3">
-                <label for="technical_specs" class="block text-900 font-medium mb-2">
+                <label for="technical_specs" class="block font-medium mb-2 text-color">
                   Especificações Técnicas
                 </label>
                 <Textarea 
@@ -226,7 +229,7 @@
                 />
               </div>
               <div class="field mb-3">
-                <label for="notes" class="block text-900 font-medium mb-2">
+                <label for="notes" class="block font-medium mb-2 text-color">
                   Observações
                 </label>
                 <Textarea 
@@ -258,6 +261,8 @@
         />
       </div>
     </form>
+    </div>
+    </template>
   </div>
 </template>
 
@@ -275,6 +280,7 @@ import SelectButton from 'primevue/selectbutton'
 import DatePicker from 'primevue/datepicker'
 import Textarea from 'primevue/textarea'
 import Button from 'primevue/button'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
 import { useToast } from 'primevue/usetoast'
 import { useEquipmentStore } from '@/modules/equipment/store/EquipmentStore'
 import type { EquipmentFormData } from '@/modules/equipment/types/equipment'
@@ -286,6 +292,7 @@ const toast = useToast()
 
 const activeTab = ref('0')
 const saving = ref(false)
+const loading = ref(false)
 const equipment = ref<any>(null)
 
 const formData = reactive<Omit<EquipmentFormData, 'acquisition_date' | 'warranty_end'> & {
@@ -347,6 +354,7 @@ onMounted(async () => {
   if (isEditing.value) {
     const id = route.params.id as string
     try {
+      loading.value = true
       equipment.value = await equipmentStore.fetchById(id)
       Object.assign(formData, {
         name: equipment.value.name,
@@ -370,6 +378,8 @@ onMounted(async () => {
         detail: 'Erro ao carregar equipamento',
         life: 5000,
       })
+    } finally {
+      loading.value = false
     }
   }
 })

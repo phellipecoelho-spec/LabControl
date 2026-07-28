@@ -77,6 +77,8 @@
         :sortOrder="-1"
         stripedRows
         size="small"
+        scrollable
+        scrollHeight="flex"
       >
         <Column field="name" header="Nome" sortable />
         <Column field="patrimony_id" header="Patrimônio" sortable />

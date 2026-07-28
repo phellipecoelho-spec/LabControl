@@ -24,6 +24,8 @@
           stripedRows
           :rows="15"
           :paginator="store.pendingEquipment.length > 15"
+          scrollable
+          scrollHeight="flex"
         >
           <Column field="name" header="Equipamento" sortable>
             <template #body="{ data }">

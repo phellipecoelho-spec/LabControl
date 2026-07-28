@@ -111,6 +111,8 @@
         :sortOrder="-1"
         stripedRows
         size="small"
+        scrollable
+        scrollHeight="flex"
       >
         <Column header="Equipamento">
           <template #body="{ data }">

@@ -88,6 +88,8 @@
         :sortOrder="-1"
         stripedRows
         size="small"
+        scrollable
+        scrollHeight="flex"
         :rowClass="rowClass"
       >
         <Column field="name" header="Nome" sortable />
