@@ -76,21 +76,21 @@
   - [x] 12-01-PLAN.md — Backend: ReportService, PDF/Excel generation, ReportController, routes
   - [x] 12-02-PLAN.md — Frontend: ReportPage, filters, SplitButton per report type, download composable
 
-### 📋 v1.0 Production (Planned)
+### ✅ v1.0 Production (Complete)
 
 - [x] **Phase 13**: PWA e Offline (2/2 plans)
   Plans:
 
   - [x] 13-01-PLAN.md — PWA Foundation: Service Worker, Dexie DB, vite-plugin-pwa config, offline API interceptor, connectivity monitor, nginx headers
   - [x] 13-02-PLAN.md — Sync Engine & PWA UI: sync service, conflict detection/resolution, Pinia sync store, SyncIndicator/ConflictDialog/UpdatePrompt UI, Dashboard timestamp
-- [ ] **Phase 14**: Auditoria e Ajustes Finais (5 plans)
+- [x] **Phase 14**: Auditoria e Ajustes Finais (5 plans)
   Plans:
 
-  - [ ] 14-01-PLAN.md — Auditoria Cross-Cutting + Feature Tests + Requirements Update
-  - [ ] 14-02-PLAN.md — UI Polish (EmptyState, LoadingSkeleton, responsividade, dark mode)
-  - [ ] 14-03-PLAN.md — Bug Fixes (Auth rate limit, Aferições UAT, Manutenções verification)
-  - [ ] 14-04-PLAN.md — Deploy Preparation (Docker health checks, backup, setup scripts, .env)
-  - [ ] 14-05-PLAN.md — Documentation (README, ARCHITECTURE, DEPLOY, API docs)
+  - [x] 14-01-PLAN.md — Auditoria Cross-Cutting + Feature Tests + Requirements Update
+  - [x] 14-02-PLAN.md — UI Polish (EmptyState, LoadingSkeleton, responsividade, dark mode)
+  - [x] 14-03-PLAN.md — Bug Fixes (Auth rate limit, Aferições UAT, Manutenções verification)
+  - [x] 14-04-PLAN.md — Deploy Preparation (Docker health checks, backup, setup scripts, .env)
+  - [x] 14-05-PLAN.md — Documentation (README, ARCHITECTURE, DEPLOY, API docs)
 
 ## Progress
 
@@ -109,4 +109,4 @@
 | 11. Dashboard | v0.3 | 2/2 | ✅ Complete | 2026-07-27 |
 | 12. Relatórios | v0.3 | 2/2 | ✅ Complete | 2026-07-27 |
 | 13. PWA e Offline | v1.0 | 2/2 | ✅ Complete | 2026-07-28 |
-| 14. Auditoria e Ajustes Finais | v1.0 | 0/5 | Not started | - |
+| 14. Auditoria e Ajustes Finais | v1.0 | 5/5 | ✅ Complete | 2026-07-28 |
