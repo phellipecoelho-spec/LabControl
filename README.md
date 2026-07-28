@@ -1,58 +1,86 @@
 # LabControl
 
-Plataforma modular de gestão laboratorial.
+Sistema de Gestão Laboratorial — controle de equipamentos, calibrações, aferições, empréstimos, e manutenções com auditoria completa.
 
 ## Stack
 
-| Camada | Tecnologia |
-|---|---|
-| **Frontend** | Vue 3 + Vite + TypeScript + PrimeVue |
-| **Backend** | Laravel 12 + PHP 8.3 |
-| **Banco** | PostgreSQL 17 |
-| **Cache/Filas** | Redis |
-| **Containerização** | Docker Compose |
+| Layer | Tecnologia |
+|-------|-----------|
+| Frontend | Vue 3 + Vite + TypeScript + PrimeVue 5 + Pinia |
+| Backend | Laravel 13 (API REST) + Sanctum |
+| Database | PostgreSQL 16 |
+| Cache/Queue | Redis 7 |
+| Container | Docker Compose (nginx + php-fpm + postgres + redis) |
+| Auth | Sanctum SPA (session cookies) |
+| Charts | Apache ECharts |
+| Reports | PDF (DomPDF) + Excel (Laravel Excel) |
 
-## Estrutura
+## Pré-requisitos
+
+- Docker + Docker Compose
+- Git
+
+## Setup rápido
+
+```bash
+git clone <repo-url> labcontrol
+cd labcontrol
+
+# Linux/Mac
+chmod +x scripts/setup.sh
+./scripts/setup.sh
+
+# Windows (PowerShell)
+.\scripts\setup.ps1
+```
+
+Acessar: http://localhost
+
+### Credenciais padrão
+
+| Papel | Email | Senha |
+|-------|-------|-------|
+| Admin | admin@labcontrol.com | @dmin123 |
+
+## Estrutura do Projeto
 
 ```
 labcontrol/
-├── frontend/       # SPA Vue 3
-├── backend/        # API Laravel
-├── database/       # Migrations e scripts SQL
-├── docker/         # Configuração Docker
-├── docs/           # Documentação
-├── scripts/        # Automações
-└── backups/        # Dumps do banco
+├── backend/          # Laravel 13 API
+│   ├── app/
+│   │   ├── Http/Controllers/Api/V1/  # 20 controllers
+│   │   ├── Models/                    # 16 modelos
+│   │   ├── Services/                  # Services layer
+│   │   ├── Traits/                    # Reusable traits
+│   │   └── Enums/                     # Status enums
+│   ├── database/
+│   │   ├── migrations/                # Schema definitions
+│   │   └── seeders/                   # Initial data
+│   └── tests/Feature/                 # 25+ feature tests
+├── frontend/         # Vue 3 SPA
+│   └── src/
+│       ├── modules/                   # Feature modules
+│       ├── components/                # Shared components
+│       ├── stores/                    # Pinia stores
+│       └── services/                  # API services
+├── docker/           # Docker Compose + configs
+├── scripts/          # Backup + setup scripts
+└── docs/             # Documentation
 ```
 
-## Requisitos
+## Funcionalidades
 
-- Docker + Docker Compose
-- Node.js 22 LTS
-- Git
-
-## Desenvolvimento
-
-```bash
-# Subir os containers
-docker compose -f docker/docker-compose.yml up -d
-
-# Instalar dependências do backend
-docker compose -f docker/docker-compose.yml exec php composer install
-
-# Migrações
-docker compose -f docker/docker-compose.yml exec php php artisan migrate
-
-# Frontend
-cd frontend
-npm install
-npm run dev
-```
-
-## Roadmap
-
-Consultar `docs/sprints/` para o roadmap completo.
+- **Equipamentos**: Cadastro completo com fotos, categorias, fabricantes
+- **Estoque**: Controle de insumos e peças com movimentações
+- **Empréstimos**: Reserva, ativação, devolução com controle de atrasos
+- **Calibrações**: Agenda periódica, certificados, alertas de vencimento
+- **Aferições**: Verificações diárias com controle de tolerância
+- **Manutenções**: Ordens preventivas e corretivas com histórico completo
+- **Dashboard**: Indicadores e gráficos (ECharts)
+- **Relatórios**: PDF, Excel, CSV
+- **Auditoria**: Logs detalhados de todas as operações
+- **PWA**: Funciona offline com sincronização automática
 
 ## Licença
 
-MIT
+Privado — uso interno.

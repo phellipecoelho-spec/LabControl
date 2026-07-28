@@ -15,6 +15,9 @@ use App\Services\CalibrationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Tag(name="Calibrações", description="Endpoints de gerenciamento de calibrações")
+ */
 class CalibrationController extends Controller
 {
     /**
@@ -39,6 +42,25 @@ class CalibrationController extends Controller
     /**
      * Display a paginated listing of calibrations with filters.
      */
+    /**
+     * Display a paginated listing of calibrations with filters.
+     *
+     * @OA\Get(
+     *     path="/api/v1/calibrations",
+     *     summary="Listar calibrações",
+     *     tags={"Calibrações"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(name="equipment_id", in="query", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="status", in="query", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="from", in="query", @OA\Schema(type="string", format="date")),
+     *     @OA\Parameter(name="to", in="query", @OA\Schema(type="string", format="date")),
+     *     @OA\Parameter(name="laboratory", in="query", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="per_page", in="query", @OA\Schema(type="integer", default=15)),
+     *     @OA\Response(response=200, description="Lista paginada de calibrações"),
+     *     @OA\Response(response=401, description="Não autenticado"),
+     *     @OA\Response(response=403, description="Sem permissão")
+     * )
+     */
     public function index(Request $request)
     {
         $equipment_id = $request->input('equipment_id');
@@ -61,6 +83,18 @@ class CalibrationController extends Controller
 
     /**
      * Display the specified calibration with all relationships.
+     *
+     * @OA\Get(
+     *     path="/api/v1/calibrations/{calibration}",
+     *     summary="Obter detalhes de uma calibração",
+     *     tags={"Calibrações"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(name="calibration", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Response(response=200, description="Detalhes da calibração"),
+     *     @OA\Response(response=401, description="Não autenticado"),
+     *     @OA\Response(response=403, description="Sem permissão"),
+     *     @OA\Response(response=404, description="Não encontrado")
+     * )
      */
     public function show(Calibration $calibration): CalibrationResource
     {
@@ -71,6 +105,18 @@ class CalibrationController extends Controller
 
     /**
      * Store a newly created calibration.
+     *
+     * @OA\Post(
+     *     path="/api/v1/calibrations",
+     *     summary="Criar calibração",
+     *     tags={"Calibrações"},
+     *     security={{"sanctum":{}}},
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/StoreCalibrationRequest")),
+     *     @OA\Response(response=201, description="Calibração criada"),
+     *     @OA\Response(response=401, description="Não autenticado"),
+     *     @OA\Response(response=403, description="Sem permissão"),
+     *     @OA\Response(response=422, description="Dados inválidos")
+     * )
      */
     public function store(StoreCalibrationRequest $request)
     {
@@ -93,6 +139,19 @@ class CalibrationController extends Controller
     /**
      * Update the specified calibration.
      * Only allowed when status is scheduled.
+     *
+     * @OA\Put(
+     *     path="/api/v1/calibrations/{calibration}",
+     *     summary="Atualizar calibração (apenas status agendada)",
+     *     tags={"Calibrações"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(name="calibration", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/UpdateCalibrationRequest")),
+     *     @OA\Response(response=200, description="Calibração atualizada"),
+     *     @OA\Response(response=401, description="Não autenticado"),
+     *     @OA\Response(response=403, description="Sem permissão"),
+     *     @OA\Response(response=422, description="Dados inválidos ou status não permite edição")
+     * )
      */
     public function update(UpdateCalibrationRequest $request, Calibration $calibration)
     {
@@ -114,6 +173,18 @@ class CalibrationController extends Controller
 
     /**
      * Remove the specified calibration (soft delete).
+     *
+     * @OA\Delete(
+     *     path="/api/v1/calibrations/{calibration}",
+     *     summary="Excluir calibração (soft delete)",
+     *     tags={"Calibrações"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(name="calibration", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Response(response=204, description="Calibração excluída"),
+     *     @OA\Response(response=401, description="Não autenticado"),
+     *     @OA\Response(response=403, description="Sem permissão"),
+     *     @OA\Response(response=404, description="Não encontrado")
+     * )
      */
     public function destroy(Calibration $calibration): JsonResponse
     {
@@ -126,6 +197,19 @@ class CalibrationController extends Controller
 
     /**
      * Complete a scheduled calibration.
+     *
+     * @OA\Post(
+     *     path="/api/v1/calibrations/{calibration}/complete",
+     *     summary="Concluir calibração",
+     *     tags={"Calibrações"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(name="calibration", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\RequestBody(required=true, @OA\JsonContent(ref="#/components/schemas/CompleteCalibrationRequest")),
+     *     @OA\Response(response=200, description="Calibração concluída"),
+     *     @OA\Response(response=401, description="Não autenticado"),
+     *     @OA\Response(response=403, description="Sem permissão"),
+     *     @OA\Response(response=422, description="Calibração não pode ser concluída")
+     * )
      */
     public function complete(CompleteCalibrationRequest $request, Calibration $calibration)
     {
@@ -145,6 +229,18 @@ class CalibrationController extends Controller
 
     /**
      * Cancel a scheduled calibration.
+     *
+     * @OA\Post(
+     *     path="/api/v1/calibrations/{calibration}/cancel",
+     *     summary="Cancelar calibração",
+     *     tags={"Calibrações"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(name="calibration", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Response(response=200, description="Calibração cancelada"),
+     *     @OA\Response(response=401, description="Não autenticado"),
+     *     @OA\Response(response=403, description="Sem permissão"),
+     *     @OA\Response(response=422, description="Calibração não pode ser cancelada")
+     * )
      */
     public function cancel(Calibration $calibration)
     {

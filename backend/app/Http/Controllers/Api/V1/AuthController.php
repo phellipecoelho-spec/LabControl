@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\RateLimiter;
 
+/**
+ * @OA\Tag(name="Auth", description="Endpoints de autenticação")
+ */
 class AuthController
 {
     public function __construct(
@@ -39,6 +42,35 @@ class AuthController
      */
     private const LOGIN_DECAY_SECONDS = 60;
 
+    /**
+     * Realiza login do usuário.
+     *
+     * @OA\Post(
+     *     path="/api/v1/auth/login",
+     *     summary="Login do usuário",
+     *     tags={"Auth"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"email","password"},
+     *             @OA\Property(property="email", type="string", format="email", example="admin@labcontrol.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="@dmin123"),
+     *             @OA\Property(property="remember", type="boolean", example=false)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Login realizado com sucesso",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="user", type="object"),
+     *             @OA\Property(property="message", type="string", example="Autenticado com sucesso.")
+     *         )
+     *     ),
+     *     @OA\Response(response=422, description="Credenciais inválidas"),
+     *     @OA\Response(response=403, description="Email não verificado"),
+     *     @OA\Response(response=429, description="Muitas tentativas. Aguarde 1 minuto.")
+     * )
+     */
     public function login(LoginRequest $request): JsonResponse
     {
         $key = self::LOGIN_RATE_LIMIT_KEY . $request->ip();
@@ -82,6 +114,27 @@ class AuthController
         ], 200);
     }
 
+    /**
+     * Registra novo usuário.
+     *
+     * @OA\Post(
+     *     path="/api/v1/auth/register",
+     *     summary="Registrar novo usuário",
+     *     tags={"Auth"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name","email","password","password_confirmation"},
+     *             @OA\Property(property="name", type="string", example="João Silva"),
+     *             @OA\Property(property="email", type="string", format="email", example="joao@labcontrol.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="senha123"),
+     *             @OA\Property(property="password_confirmation", type="string", format="password", example="senha123")
+     *         )
+     *     ),
+     *     @OA\Response(response=201, description="Conta criada, email de verificação enviado"),
+     *     @OA\Response(response=422, description="Dados inválidos")
+     * )
+     */
     public function register(RegisterRequest $request): JsonResponse
     {
         $data = $request->validated();
@@ -104,6 +157,19 @@ class AuthController
         ], 201);
     }
 
+    /**
+     * Verifica email do usuário.
+     *
+     * @OA\Get(
+     *     path="/api/v1/auth/verify-email/{id}/{hash}",
+     *     summary="Verificar email",
+     *     tags={"Auth"},
+     *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Parameter(name="hash", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Response(response=200, description="Email verificado com sucesso"),
+     *     @OA\Response(response=403, description="Link de verificação inválido ou email já verificado")
+     * )
+     */
     public function verifyEmail(Request $request): JsonResponse
     {
         $user = User::findOrFail($request->route('id'));
@@ -123,6 +189,18 @@ class AuthController
         return response()->json(['message' => 'Email verificado com sucesso.'], 200);
     }
 
+    /**
+     * Reenvia email de verificação.
+     *
+     * @OA\Post(
+     *     path="/api/v1/auth/email/verification-notification",
+     *     summary="Reenviar email de verificação",
+     *     tags={"Auth"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Response(response=200, description="Link de verificação reenviado"),
+     *     @OA\Response(response=401, description="Não autenticado")
+     * )
+     */
     public function resendVerification(Request $request): JsonResponse
     {
         $request->user()->sendEmailVerificationNotification();
@@ -130,6 +208,24 @@ class AuthController
         return response()->json(['message' => 'Link de verificação reenviado.'], 200);
     }
 
+    /**
+     * Solicita reset de senha.
+     *
+     * @OA\Post(
+     *     path="/api/v1/auth/forgot-password",
+     *     summary="Solicitar reset de senha",
+     *     tags={"Auth"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"email"},
+     *             @OA\Property(property="email", type="string", format="email", example="admin@labcontrol.com")
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Se o email existir, enviaremos instruções"),
+     *     @OA\Response(response=422, description="Email inválido")
+     * )
+     */
     public function forgotPassword(ForgotPasswordRequest $request): JsonResponse
     {
         Password::broker()->sendResetLink($request->only('email'));
@@ -141,6 +237,27 @@ class AuthController
         ], 200);
     }
 
+    /**
+     * Redefine senha do usuário.
+     *
+     * @OA\Post(
+     *     path="/api/v1/auth/reset-password",
+     *     summary="Redefinir senha",
+     *     tags={"Auth"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"token","email","password","password_confirmation"},
+     *             @OA\Property(property="token", type="string", example="reset-token-here"),
+     *             @OA\Property(property="email", type="string", format="email", example="admin@labcontrol.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="novaSenha123"),
+     *             @OA\Property(property="password_confirmation", type="string", format="password", example="novaSenha123")
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Senha redefinida com sucesso"),
+     *     @OA\Response(response=422, description="Token inválido ou expirado")
+     * )
+     */
     public function resetPassword(ResetPasswordRequest $request): JsonResponse
     {
         $validatedData = $request->validated();
@@ -168,6 +285,24 @@ class AuthController
         ], 422);
     }
 
+    /**
+     * Realiza logout do usuário.
+     *
+     * @OA\Post(
+     *     path="/api/v1/auth/logout",
+     *     summary="Logout do usuário",
+     *     tags={"Auth"},
+     *     security={{"sanctum":{}}},
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(
+     *             @OA\Property(property="current_password", type="string", format="password", example="senha123")
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Deslogado com sucesso"),
+     *     @OA\Response(response=401, description="Não autenticado"),
+     *     @OA\Response(response=422, description="Senha atual incorreta")
+     * )
+     */
     public function logout(LogoutRequest $request): JsonResponse
     {
         $user = $request->user();
@@ -199,6 +334,22 @@ class AuthController
         return response()->json(['message' => 'Deslogado com sucesso.'], 200);
     }
 
+    /**
+     * Retorna usuário autenticado.
+     *
+     * @OA\Get(
+     *     path="/api/v1/auth/user",
+     *     summary="Obter usuário autenticado",
+     *     tags={"Auth"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Dados do usuário",
+     *         @OA\JsonContent(type="object")
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
+     * )
+     */
     public function user(Request $request): JsonResponse
     {
         return response()->json(
