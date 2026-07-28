@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateVerificationRequest extends FormRequest
@@ -12,7 +11,7 @@ class UpdateVerificationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('afericoes.edit');
+        return auth()->check() && auth()->user()->hasPermission('afericoes.edit');
     }
 
     /**

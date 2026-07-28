@@ -36,13 +36,13 @@ class VerificationResource extends JsonResource
                 'result' => $param->result?->value,
                 'result_label' => $param->result_label,
                 'notes' => $param->notes,
-                'template' => $param->whenLoaded('template', fn () => [
+                'template' => $param->relationLoaded('template') ? [
                     'id' => $param->template->id,
                     'parameter_name' => $param->template->parameter_name,
                     'parameter_unit' => $param->template->parameter_unit,
                     'tolerance_min' => $param->template->tolerance_min,
                     'tolerance_max' => $param->template->tolerance_max,
-                ]),
+                ] : null,
             ])),
             'created_at' => $this->created_at,
         ];
