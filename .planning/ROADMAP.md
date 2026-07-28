@@ -75,6 +75,10 @@
 ### 📋 v1.0 Production (Planned)
 
 - [ ] **Phase 13**: PWA e Offline (2 plans)
+  Plans:
+
+  - [ ] 13-01-PLAN.md — PWA Foundation: Service Worker, Dexie DB, vite-plugin-pwa config, offline API interceptor, connectivity monitor, nginx headers
+  - [ ] 13-02-PLAN.md — Sync Engine & UI: sync service, conflict detection/resolution, Pinia sync store, SyncIndicator, ConflictDialog, UpdatePrompt, app integration
 - [ ] **Phase 14**: Auditoria e Ajustes Finais (2 plans)
 
 ## Progress
