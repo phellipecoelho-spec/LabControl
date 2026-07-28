@@ -65,7 +65,7 @@ class Equipment extends Model
 
     public function lastVerification()
     {
-        return $this->hasOne(Verification::class)->latestOfMany('verified_at');
+        return $this->hasOne(Verification::class)->latest('verified_at');
     }
 
     public function maintenanceOrders()
