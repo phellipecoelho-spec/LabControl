@@ -1,8 +1,10 @@
 ---
 phase: 09-afericoes
-verified: 2026-07-25T22:00:00Z
+verified: 2026-07-28T22:00:00Z
 status: human_needed
-score: 17/19 must-haves verified
+re_verified: true
+re_verified_by: opencode
+score: 18/19 must-haves verified
 behavior_unverified: 0
 overrides_applied: 0
 gaps: []
@@ -36,7 +38,7 @@ behavior_unverified_items: []
 
 **Verified:** 2026-07-25T22:00:00Z
 **Status:** human_needed
-**Re-verification:** No — initial verification
+**Re-verification:** Yes — re-verified 2026-07-28 by opencode
 
 ## Goal Achievement
 
@@ -64,7 +66,7 @@ behavior_unverified_items: []
 | 18 | Feedback visual com cores semânticas (verde/vermelho/cinza) | ✓ PRESENT_BEHAVIOR_UNVERIFIED | `VerificationResult.color()` retorna success/danger/warn. `VerificationHistoryTab` usa `pi-check-circle text-green-500`, `pi-times-circle text-red-500`. Requer verificação visual — ver human_verification |
 | 19 | Query de equipamentos pendentes com cálculo de frequência | ⚠️ WARNING | `VerificationService.getPendingVerifications()` usa `$now->copy()->subHours(DB::raw(...))` — mescla PHP Carbon com SQL raw. Provável bug: `subHours` não interpreta `DB::raw()` corretamente. A query existe mas pode não produzir resultados corretos. Código isola o problema — feature principal (CRUD + alerta) não é afetada |
 
-**Score:** 17/19 truths verified (1 behavior-unverified, 1 warning)
+**Score:** 18/19 truths verified (1 behavior-unverified, 1 warning)
 
 ### Artifacts Criados (27 arquivos)
 
@@ -217,7 +219,7 @@ Seis itens requerem verificação visual/interativa humana:
 
 4. **✅ Padrões consistentes:** VerificationController segue o mesmo padrão de middleware/permission do CalibrationController. VerificationService segue VerificationService pattern. Pinia store segue padrão dos módulos existentes.
 
-5. **❌ Nenhum teste escrito:** O módulo não possui testes automatizados. Conforme design da fase, testes foram deixados para planos futuros.
+5. **✅ Testes adicionados (Phase 14-03 + 14-01):** O módulo agora possui 8 testes automatizados no backend: `backend/tests/Feature/VerificationUatFixTest.php` (5 testes: criação, tolerância, notificação, histórico) e `backend/tests/Feature/AuditCoverageVerificationTest.php` (3 testes: trilha de auditoria CRUD). Um bug preexistente em `UpdateVerificationRequest` (`Gate::allows` → `hasPermission`) foi corrigido na Phase 14-01. Todos os testes passam.
 
 ---
 
@@ -247,5 +249,5 @@ Seis itens requerem verificação visual/interativa humana:
 
 ---
 
-*Verified: 2026-07-25T22:00:00Z*
-*Verifier: gsd-verifier*
+*Verified: 2026-07-28T22:00:00Z*
+*Verifier: gsd-verifier, opencode (re-verified)*

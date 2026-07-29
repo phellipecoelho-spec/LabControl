@@ -1,7 +1,9 @@
 ---
 phase: 10-manutencaoes
-verified: 2026-07-25T23:55:00Z
+verified: 2026-07-28
 status: human_needed
+re_verified: true
+re_verified_by: opencode
 score: 17/17 must-haves verified
 behavior_unverified: 0
 overrides_applied: 0
@@ -31,9 +33,9 @@ behavior_unverified_items: []
 - MAINT-01: Usuário pode abrir ordens de manutenção
 - MAINT-02: Sistema mantém histórico de manutenções preventivas e corretivas
 
-**Verified:** 2026-07-25T23:55:00Z
-**Status:** human_needed
-**Re-verification:** No — initial verification
+**Verified:** 2026-07-28
+**Status:** human_needed (backend automated tests added by Phase 14-03/14-01)
+**Re-verification:** Yes — re-verified 2026-07-28 by opencode
 
 ## Goal Achievement
 
@@ -65,7 +67,25 @@ behavior_unverified_items: []
 |-------|-------|------------|--------|
 | MaintenanceServiceTest (Unit) | 17 | 45 | ✓ PASSING |
 | MaintenanceOrderControllerTest (Feature) | 15 | 46 | ✓ PASSING |
-| Full Backend Suite | 76 | 190 | ✓ PASSING |
+| MaintenanceVerificationTest (Feature) — Phase 14-03 | 8 | 46 | ✓ PASSING |
+| AuditCoverageMaintenanceTest (Feature) — Phase 14-01 | 4 | 21 | ✓ PASSING |
+| Full Backend Suite | 76 → 88 | 190 → 257 | ✓ PASSING |
+
+### Tests Added by Phase 14-03 (`backend/tests/Feature/MaintenanceVerificationTest.php`)
+- `test_create_maintenance` — Cria ordem via API, verifica campos e status `open`
+- `test_complete_maintenance` — Conclui ordem com resolução, tempo, custo e peças
+- `test_cannot_complete_already_completed` — Rejeita conclusão duplicada (422)
+- `test_cannot_edit_completed_order` — Rejeita edição de ordem já concluída (422)
+- `test_maintenance_cancellation` — Cancela ordem com motivo, verifica status `cancelled`
+- `test_maintenance_history_by_equipment` — GET /maintenance-orders/history/{equipment} retista array paginado
+- `test_cannot_complete_cancelled_order` — Rejeita conclusão de ordem cancelada (422)
+- `test_cannot_edit_cancelled_order` — Rejeita edição de ordem cancelada (422)
+
+### Tests Added by Phase 14-01 (`backend/tests/Feature/AuditCoverageMaintenanceTest.php`)
+- Criação de ordem gera log de auditoria
+- Conclusão de ordem gera log de auditoria
+- Cancelamento de ordem gera log de auditoria
+- Eventos de manutenção registrados com actor, ação, entidade, metadata
 
 ### Running Tests
 ```bash
