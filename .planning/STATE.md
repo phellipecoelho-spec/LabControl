@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: Production
 current_phase: 14
-status: phase_14_verified
-stopped_at: Phase 14 verified — all 5 plans complete (Auditoria, UI, Bugs, Deploy, Docs)
-last_updated: "2026-07-28T21:00:00.000Z"
-last_activity: 2026-07-28
+status: completed
+stopped_at: Phase 14 — All 5 plans verified, VERIFICATION.md created
+last_updated: "2026-07-29T00:44:49.682Z"
+last_activity: 2026-07-29
 progress:
   total_phases: 14
   completed_phases: 14
-  total_plans: 42
-  completed_plans: 42
+  total_plans: 46
+  completed_plans: 46
   percent: 100
 ---
 
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 ## Current Status
 
 **Current Phase:** 14
-**Status:** Plan 02 completed — UI Polish (EmptyState, LoadingSkeleton, dark mode, responsive)
-**Last activity:** 2026-07-28
+**Status:** 1.0 milestone complete
+**Last activity:** 2026-07-29
 
 ## Plan Progress
 
@@ -262,11 +262,25 @@ Phase 6 (Estoque) — 3 planos concluídos:
 | Form labels dark mode | text-color class replaces text-900 for theme-aware colors |
 | DataTable responsive | scrollable + scrollHeight='flex' on all list DataTables |
 
+## Deferred Items
+
+Items acknowledged and deferred at milestone close on 2026-07-28:
+
+| Category | Item | Status |
+|----------|------|--------|
+| uat_gaps | Phase 09 (Afericoes) — 6 pending UAT scenarios | deferred |
+| verification_gap | Phase 02 (Autenticacao) — E2E tests + ForgotPasswordSentView | deferred |
+| verification_gap | Phase 09 (Afericoes) — human_needed (6 visual items) | deferred |
+| verification_gap | Phase 10 (Manutencaoes) — human_needed (5 visual items) | deferred |
+
+closeout_type: override_closeout
+Known verification overrides: 4 (see STATE.md Deferred Items)
+
 ## Session
 
 **Last session:** 2026-07-28T21:00:00.000Z
 **Stopped at:** Phase 14 — All 5 plans verified, VERIFICATION.md created
-**Resume file:** None — Phase 14 complete and verified
+**Resume file:** None — Milestone v1.0 complete
 
 ## Phase 11 — Dashboard (2 Plans ✅)
 
@@ -296,3 +310,14 @@ Phase 6 (Estoque) — 3 planos concluídos:
 | Phase 13-pwa-offline P01 | 19min | 4 tasks | 11 files |
 | Phase 13-pwa-offline P02 | 25min | 4 tasks | 9 files |
 | Phase 14-auditoria-ajustes P02 | ~60min | 3 tasks | 19 files |
+
+## Current Position
+
+Phase: Milestone 1.0 complete
+Plan: —
+Status: Awaiting next milestone
+Last activity: 2026-07-29 — Milestone 1.0 completed and archived
+
+## Operator Next Steps
+
+- Start the next milestone with /gsd-new-milestone

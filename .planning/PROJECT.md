@@ -12,56 +12,52 @@ Rastreabilidade completa de equipamentos laboratoriais — cada calibração, af
 
 ### Validated
 
-(Estrutura inicial — Sprint 0 — fundação do projeto)
-
-- ✓ Arquitetura definida (CONTEXT.md + PLANNER.md) — Sprint 0
-- ✓ Estrutura de diretórios completa (frontend, backend, docker, docs, scripts) — Sprint 0
-- ✓ Backend Laravel 13.20 com migrations iniciais (users UUID, roles, permissions, logs) — Sprint 0
-- ✓ Frontend Vue 3 + Vite 8 + TypeScript + PrimeVue + Pinia — Sprint 0
-- ✓ Docker Compose (nginx, php-fpm, postgres 17, redis 7) — Sprint 0
-- ✓ Migrações iniciais do banco — Sprint 0
+- ✓ INFRA-01: Docker Compose funcional — v1.0
+- ✓ INFRA-02: Migrations executadas no PostgreSQL — v1.0
+- ✓ INFRA-03: Script de setup automatizado funcional — v1.0
+- ✓ AUTH-01: Login com email e senha via Sanctum — v1.0
+- ✓ AUTH-02: Registro de usuário com verificação de email — v1.0
+- ✓ AUTH-03: Recuperação de senha — v1.0
+- ✓ AUTH-04: Sessão persistente com refresh token — v1.0
+- ✓ USERS-01: CRUD de usuários com perfis — v1.0
+- ✓ USERS-02: Atribuição de permissões por papel — v1.0
+- ✓ USERS-03: Perfil de usuário com avatar — v1.0
+- ✓ LAYOUT-01: Tema escuro responsivo — v1.0
+- ✓ LAYOUT-02: Sidebar com navegação por módulos — v1.0
+- ✓ LAYOUT-03: Topbar com notificações e menu do usuário — v1.0
+- ✓ EQUIP-01: Cadastro completo de equipamentos — v1.0
+- ✓ EQUIP-02: Categorias, fabricantes, fornecedores — v1.0
+- ✓ EQUIP-03: Ficha técnica com anexos (fotos) — v1.0
+- ✓ EQUIP-04: Histórico de alterações — v1.0
+- ✓ INVT-01: Controle de estoque de insumos e peças — v1.0
+- ✓ INVT-02: Movimentações de entrada e saída — v1.0
+- ✓ LOAN-01: Controle de empréstimos de equipamentos — v1.0
+- ✓ LOAN-02: Agenda de reservas — v1.0
+- ✓ LOAN-03: Notificações de devolução — v1.0
+- ✓ CAL-01: Agenda de calibrações periódicas — v1.0
+- ✓ CAL-02: Certificados de calibração (upload) — v1.0
+- ✓ CAL-03: Alertas de calibração vencida — v1.0
+- ✓ CAL-04: Histórico de calibrações por equipamento — v1.0
+- ✓ VERF-01: Registro de aferições diárias — v1.0
+- ✓ VERF-02: Limites de tolerância e alertas — v1.0
+- ✓ MAINT-01: Ordens de manutenção — v1.0
+- ✓ MAINT-02: Histórico de manutenções — v1.0
+- ✓ DASH-01: Dashboard com indicadores (ECharts) — v1.0
+- ✓ DASH-02: Gráficos de equipamentos, calibrações, movimentações — v1.0
+- ✓ REPT-01: Relatórios em PDF, Excel, CSV — v1.0
+- ✓ REPT-02: Exportação de dados — v1.0
+- ✓ PWA-01: Funcionamento offline com sincronização — v1.0
+- ✓ PWA-02: Instalável como aplicativo — v1.0
+- ✓ LOGS-01: Auditoria de todas as operações — v1.0
+- ✓ LOGS-02: Visualização de logs por módulo/usuario — v1.0
 
 ### Active
 
-- **INFRA-01**: Docker Compose funcional (build PHP + composer install + containers rodando)
-- **INFRA-02**: Migrations executadas no PostgreSQL
-- **INFRA-03**: Script de setup automatizado funcional
-- **AUTH-01**: Login com email e senha via Sanctum
-- **AUTH-02**: Registro de usuário com verificação de email
-- **AUTH-03**: Recuperação de senha
-- **AUTH-04**: Sessão persistente com refresh token
-- **USERS-01**: CRUD de usuários com perfis (Admin, Supervisor, Laboratorista, Técnico, Consulta, Auditor)
-- **USERS-02**: Atribuição de permissões por papel
-- **USERS-03**: Perfil de usuário com avatar e dados pessoais
-- **LAYOUT-01**: Tema escuro responsivo (inspirado Power BI / Linear / Notion)
-- **LAYOUT-02**: Sidebar com navegação por módulos
-- **LAYOUT-03**: Topbar com notificações e menu do usuário
-- **EQUIP-01**: Cadastro completo de equipamentos
-- **EQUIP-02**: Categorias, fabricantes, fornecedores
-- **EQUIP-03**: Ficha técnica com anexos (fotos, manuais)
-- **EQUIP-04**: Histórico de alterações
-- **INVT-01**: Controle de estoque de insumos e peças
-- **INVT-02**: Movimentações de entrada e saída
-- **INVT-03**: Alertas de estoque mínimo
-- **LOAN-01**: Controle de empréstimos de equipamentos
-- **LOAN-02**: Agenda de reservas
-- **LOAN-03**: Notificações de devolução
-- **CAL-01**: Agenda de calibrações periódicas
-- **CAL-02**: Certificados de calibração (upload e armazenamento)
-- **CAL-03**: Alertas de calibração vencida
-- **CAL-04**: Histórico de calibrações por equipamento
-- **VERF-01**: Registro de aferições diárias
-- **VERF-02**: Limites de tolerância e alertas
-- **MAINT-01**: Ordens de manutenção
-- **MAINT-02**: Histórico de manutenções preventivas e corretivas
-- **DASH-01**: Dashboard com indicadores (ECharts)
-- **DASH-02**: Gráficos de equipamentos, calibrações, movimentações
-- **REPT-01**: Relatórios em PDF, Excel, CSV
-- **REPT-02**: Exportação de dados
-- **PWA-01**: Funcionamento offline com sincronização
-- **PWA-02**: Instalável como aplicativo
-- **LOGS-01**: Auditoria de todas as operações
-- **LOGS-02**: Visualização de logs por módulo/usuario
+- [ ] INVT-03: Alertas de estoque mínimo — v1.1
+- [ ] PWA-03: UI indicators (offline banner, sync status chip) — v1.1
+- [ ] E2E tests (Playwright) — v1.1
+- [ ] ForgotPasswordSentView dedicada — v1.1
+- [ ] Auditoria visual UAT (Phases 09, 10) — v1.1
 
 ### Out of Scope
 
@@ -74,7 +70,11 @@ Rastreabilidade completa de equipamentos laboratoriais — cada calibração, af
 
 ## Context
 
+**v1.0 shipped 2026-07-28.** Sistema completo de gestão laboratorial com 14 fases, 42 planos, 510+ arquivos, ~84k linhas de código.
+
 Projeto originado de uma planilha Excel com VBA, migrado para stack web profissional. A stack foi escolhida para suportar crescimento de planilha simples (~2k linhas VBA) para plataforma empresarial (~20k+ linhas). Público-alvo: laboratórios de metrologia, calibração e ensaios que precisam de rastreabilidade documental completa.
+
+Deferred items: INVT-03 (stock alerts), PWA plan 03 (UI indicators), E2E tests, ForgotPasswordSentView UX, Phase 09/10 UAT verification. All non-blocking for v1.0.
 
 ## Constraints
 
@@ -93,10 +93,13 @@ Projeto originado de uma planilha Excel com VBA, migrado para stack web profissi
 | PostgreSQL (vs MySQL/SQLite) | Robusto, JSON, GIS, milhares de usuários | ✓ Good |
 | Docker Compose | Mesma stack local e produção | ✓ Good |
 | UUIDs (vs auto-increment) | Segurança, distributed-friendly | ✓ Good |
-| Sanctum (vs JWT) | Simplicidade, SPA-first | — Pending |
+| Sanctum (vs JWT) | Simplicidade, SPA-first | ✓ Good |
 | Módulos independentes | Permite comercialização futura por módulo | ✓ Good |
 | PWA (vs app nativo) | Custo zero, entrega contínua | ✓ Good |
+| LogsActivity trait (vs observers) | Reutilizável, bootable, sem boilerplate | ✓ Good |
+| EmptyState + LoadingSkeleton | Componentes reutilizáveis, padrão visual único | ✓ Good |
+| Rate limiting 5 req/min login | Proteção brute force básica | ✓ Good |
 
 ---
 
-*Last updated: 2026-07-19 after project initialization*
+*Last updated: 2026-07-28 after v1.0 milestone*
