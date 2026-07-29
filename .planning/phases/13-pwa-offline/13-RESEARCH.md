@@ -449,22 +449,19 @@ registerRoute(
 | A4 | Sanctum session cookie expiry is configurable to accommodate extended offline periods | Common Pitfalls | Medium — may require backend changes to session lifetime configuration |
 | A5 | The Laravel API endpoints for conflict detection (version tracking) can be added without breaking existing routes | Architecture Patterns | Medium — requires backend changes to return `lastModified` on all resources and accept version in write requests |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Conflict detection endpoint design**
-   - What we know: Backend needs to detect version conflicts and return server version vs. client version
-   - What's unclear: Whether to use HTTP 409 Conflict responses or a dedicated `/sync` endpoint for batch conflict detection
-   - Recommendation: Design a `/api/v1/sync` endpoint that accepts an array of entity changes with versions, returns merged results or conflict markers. This avoids individual 409 handling per entity.
+1. ~~**Conflict detection endpoint design**~~ **(RESOLVED)**
+   - Resolution: Use individual HTTP 409 Conflict responses per entity (standard REST practice). Each mutating endpoint accepts `X-If-Unmodified-Since` header or `updated_at` timestamp in request body. If the server version is newer, return 409 with `{ serverVersion, baseVersion }` in response body. No dedicated `/sync` endpoint needed — the sync queue replays operations individually and handles 409 per operation. This keeps backend changes minimal and avoids batch complexity.
+   - Rationale per D-19/D-20/D-21: Individual 409 handling allows field-level conflict detection. A batch `/sync` endpoint would require custom batch conflict logic that duplicates existing per-entity validation.
 
-2. **Sanctum session lifetime for offline use**
-   - What we know: Sanctum SPA sessions expire; extended offline periods may invalidate the session
-   - What's unclear: Current session lifetime configuration in the project
-   - Recommendation: Verify `SESSION_LIFETIME` in `.env`. For offline support, set to 7+ days or implement token refresh on sync.
+2. ~~**Sanctum session lifetime for offline use**~~ **(RESOLVED)**
+   - Resolution: Current `SESSION_LIFETIME=120` (2 hours) in `backend/.env:31` is insufficient for extended offline periods. Mitigation: The SyncService catches 401 responses during sync replay and pauses the queue, prompting the user to re-authenticate. For a better UX in future, `SESSION_LIFETIME` can be increased to 10080 (7 days). For v1, the 401-pause behavior is acceptable.
+   - Rationale per D-12: Session expiry is a known constraint; the auto-sync mechanism handles it gracefully by stopping and waiting for user re-auth.
 
-3. **File attachment handling offline**
-   - What we know: Equipment photos, calibration certificates are stored server-side
-   - What's unclear: Whether to cache file uploads offline or defer them
-   - Recommendation: Defer large file uploads to online-only. Show a "pending upload" indicator for files queued for upload.
+3. ~~**File attachment handling offline**~~ **(RESOLVED)**
+   - Resolution: Defer large file uploads to online-only. The API interceptor in `api.ts` checks if request data contains `File` or `Blob` objects — if so, and offline, show a warning toast "Upload disponível apenas online" and do NOT queue. Text-only CRUD operations are queued normally. File uploads sync only when online.
+   - Rationale per D-09: File attachments are not critical for offline operation; metadata and text data are sufficient for offline use.
 
 ## Environment Availability
 

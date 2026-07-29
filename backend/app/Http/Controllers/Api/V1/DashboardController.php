@@ -18,8 +18,8 @@ class DashboardController extends Controller
 
     public function __invoke(Request $request, DashboardService $service)
     {
-        $startDate = $request->date('start_date', now()->subMonths(12));
-        $endDate = $request->date('end_date', now());
+        $startDate = $request->date('start_date') ?? now()->subMonths(12);
+        $endDate = $request->date('end_date') ?? now();
 
         $data = $service->aggregate($startDate, $endDate);
 

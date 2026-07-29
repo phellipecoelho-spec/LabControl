@@ -10,6 +10,9 @@ use App\Models\Equipment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Tag(name="Equipamentos", description="Endpoints de gerenciamento de equipamentos")
+ */
 class EquipmentController extends Controller
 {
     /**
@@ -30,6 +33,22 @@ class EquipmentController extends Controller
 
     /**
      * Display a listing of equipment.
+     *
+     * @OA\Get(
+     *     path="/api/v1/equipments",
+     *     summary="Listar equipamentos",
+     *     tags={"Equipamentos"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(name="search", in="query", description="Buscar por nome, número de série ou patrimônio", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="category_id", in="query", description="Filtrar por categoria", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="manufacturer_id", in="query", description="Filtrar por fabricante", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="status", in="query", description="Filtrar por status", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="location", in="query", description="Filtrar por localização", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="per_page", in="query", description="Itens por página", @OA\Schema(type="integer", default=15)),
+     *     @OA\Response(response=200, description="Lista paginada de equipamentos", @OA\JsonContent(ref="#/components/schemas/EquipmentCollection")),
+     *     @OA\Response(response=401, description="Não autenticado"),
+     *     @OA\Response(response=403, description="Sem permissão")
+     * )
      */
     public function index(Request $request)
     {
@@ -58,6 +77,18 @@ class EquipmentController extends Controller
 
     /**
      * Display the specified equipment.
+     *
+     * @OA\Get(
+     *     path="/api/v1/equipments/{id}",
+     *     summary="Obter equipamento por ID",
+     *     tags={"Equipamentos"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(name="id", in="path", required=true, description="ID do equipamento (UUID)", @OA\Schema(type="string", format="uuid")),
+     *     @OA\Response(response=200, description="Equipamento encontrado", @OA\JsonContent(ref="#/components/schemas/EquipmentResource")),
+     *     @OA\Response(response=401, description="Não autenticado"),
+     *     @OA\Response(response=403, description="Sem permissão"),
+     *     @OA\Response(response=404, description="Equipamento não encontrado")
+     * )
      */
     public function show(Equipment $equipment): EquipmentResource
     {
@@ -68,6 +99,21 @@ class EquipmentController extends Controller
 
     /**
      * Store a newly created equipment.
+     *
+     * @OA\Post(
+     *     path="/api/v1/equipments",
+     *     summary="Criar equipamento",
+     *     tags={"Equipamentos"},
+     *     security={{"sanctum":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/StoreEquipmentRequest")
+     *     ),
+     *     @OA\Response(response=201, description="Equipamento criado", @OA\JsonContent(ref="#/components/schemas/EquipmentResource")),
+     *     @OA\Response(response=401, description="Não autenticado"),
+     *     @OA\Response(response=403, description="Sem permissão"),
+     *     @OA\Response(response=422, description="Dados inválidos")
+     * )
      */
     public function store(StoreEquipmentRequest $request)
     {
@@ -82,6 +128,23 @@ class EquipmentController extends Controller
 
     /**
      * Update the specified equipment.
+     *
+     * @OA\Put(
+     *     path="/api/v1/equipments/{id}",
+     *     summary="Atualizar equipamento",
+     *     tags={"Equipamentos"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(name="id", in="path", required=true, description="ID do equipamento (UUID)", @OA\Schema(type="string", format="uuid")),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/UpdateEquipmentRequest")
+     *     ),
+     *     @OA\Response(response=200, description="Equipamento atualizado", @OA\JsonContent(ref="#/components/schemas/EquipmentResource")),
+     *     @OA\Response(response=401, description="Não autenticado"),
+     *     @OA\Response(response=403, description="Sem permissão"),
+     *     @OA\Response(response=404, description="Equipamento não encontrado"),
+     *     @OA\Response(response=422, description="Dados inválidos")
+     * )
      */
     public function update(UpdateEquipmentRequest $request, Equipment $equipment)
     {
@@ -96,6 +159,18 @@ class EquipmentController extends Controller
 
     /**
      * Remove the specified equipment.
+     *
+     * @OA\Delete(
+     *     path="/api/v1/equipments/{id}",
+     *     summary="Excluir equipamento (soft delete)",
+     *     tags={"Equipamentos"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(name="id", in="path", required=true, description="ID do equipamento (UUID)", @OA\Schema(type="string", format="uuid")),
+     *     @OA\Response(response=204, description="Equipamento excluído"),
+     *     @OA\Response(response=401, description="Não autenticado"),
+     *     @OA\Response(response=403, description="Sem permissão"),
+     *     @OA\Response(response=404, description="Equipamento não encontrado")
+     * )
      */
     public function destroy(Equipment $equipment): JsonResponse
     {
