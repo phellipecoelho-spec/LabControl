@@ -1,9 +1,13 @@
 ---
 phase: 11
-slug: dashboard
-status: PASSED
-verified: 2026-07-28
-verifier: opencode
+name: dashboard
+status: passed
+verified_by: opencode
+verified_date: 2026-07-28
+plan_count: 2
+plan_complete: 2
+plan_failed: 0
+overall: pass
 artifacts_found: 15/15
 tests_passing: true
 ---

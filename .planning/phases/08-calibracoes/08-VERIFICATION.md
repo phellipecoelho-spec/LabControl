@@ -1,3 +1,15 @@
+---
+phase: 08
+name: calibracoes
+status: passed
+verified_by: opencode
+verified_date: 2026-07-28
+plan_count: 4
+plan_complete: 4
+plan_failed: 0
+overall: pass
+---
+
 # Phase 08 — Calibrações: Cross-Plan Verification
 
 **Date:** 2026-07-28

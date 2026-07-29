@@ -1,3 +1,15 @@
+---
+phase: 06
+name: estoque
+status: passed
+verified_by: opencode
+verified_date: 2026-07-28
+plan_count: 3
+plan_complete: 3
+plan_failed: 0
+overall: pass
+---
+
 # Phase 06 (Estoque) — Verification Report
 
 **Date:** 2026-07-28

@@ -1,3 +1,15 @@
+---
+phase: 05
+name: equipamentos
+status: passed
+verified_by: opencode
+verified_date: 2026-07-28
+plan_count: 6
+plan_complete: 6
+plan_failed: 0
+overall: pass
+---
+
 # Phase 05 — Equipamentos: Verification Report
 
 **Generated:** 2026-07-28

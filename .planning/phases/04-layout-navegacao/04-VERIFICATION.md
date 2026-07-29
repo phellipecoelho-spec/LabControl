@@ -1,9 +1,14 @@
 ---
-phase: 04-layout-navegacao
-type: verification
-timestamp: 2026-07-28
-status: PASSED
-plans_verified:
+phase: 04
+name: layout-navegacao
+status: passed
+verified_by: opencode
+verified_date: 2026-07-28
+plan_count: 3
+plan_complete: 3
+plan_failed: 0
+overall: pass
+---
   - 04-01-PLAN.md
   - 04-02-PLAN.md
   - 04-03-PLAN.md
