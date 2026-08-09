@@ -75,18 +75,20 @@ class AuthController
     {
         $key = self::LOGIN_RATE_LIMIT_KEY . $request->ip();
 
-        // Check rate limit before attempting authentication
-        if (RateLimiter::tooManyAttempts($key, self::MAX_LOGIN_ATTEMPTS)) {
-            $this->activityLogService->logAuth('login_rate_limited', $request->email);
-            return response()->json([
-                'message' => 'Muitas tentativas. Aguarde 1 minuto.',
-            ], 429);
-        }
-
         $credentials = $request->only('email', 'password');
         $remember = $request->boolean('remember');
 
         if (!Auth::attempt($credentials, $remember)) {
+            // Only failed attempts count toward the limit, and the check runs
+            // after the attempt so a successful login can never be blocked
+            // (it clears the counter instead — see below).
+            if (RateLimiter::tooManyAttempts($key, self::MAX_LOGIN_ATTEMPTS)) {
+                $this->activityLogService->logAuth('login_rate_limited', $request->email);
+                return response()->json([
+                    'message' => 'Muitas tentativas. Aguarde 1 minuto.',
+                ], 429);
+            }
+
             // Increment rate limiter on failed attempt
             RateLimiter::hit($key, self::LOGIN_DECAY_SECONDS);
             $this->activityLogService->logAuth('login_failed', $request->email);

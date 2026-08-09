@@ -35,7 +35,11 @@ Route::prefix('v1')->group(function () {
     });
 
     // Auth routes (public + throttled)
-    Route::post('/auth/login', [AuthController::class, 'login'])->name('login')->middleware('throttle:auth');
+    // Login rate-limiting is handled inside AuthController (only failed attempts
+    // count, successful login clears the counter, custom PT message). The generic
+    // throttle:auth middleware counts every request and would block successful
+    // logins after 5 attempts, so it is NOT applied here.
+    Route::post('/auth/login', [AuthController::class, 'login'])->name('login');
     Route::post('/auth/register', [AuthController::class, 'register'])->middleware('throttle:auth');
     Route::post('/auth/verify-email/{id}/{hash}', [AuthController::class, 'verifyEmail'])
         ->name('verification.verify')

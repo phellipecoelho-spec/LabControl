@@ -16,7 +16,10 @@ class RateLimitTest extends TestCase
     {
         parent::setUp();
         $this->seed();
-        RateLimiter::clear();
+        // The login limiter is keyed 'login:{ip}' inside AuthController
+        // (check-after-failed-attempt + clear on success). Reset it so each
+        // test starts with a clean counter for the test IP (127.0.0.1).
+        RateLimiter::clear('login:127.0.0.1');
     }
 
     public function test_rate_limit_blocks_after_5_failed_attempts_per_minute(): void
