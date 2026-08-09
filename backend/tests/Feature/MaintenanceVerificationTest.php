@@ -135,7 +135,7 @@ class MaintenanceVerificationTest extends TestCase
         ]);
 
         $response = $this->actingAs($this->user)
-            ->getJson("/api/v1/maintenance-orders/by-equipment/{$this->equipment->id}");
+            ->getJson("/api/v1/equipments/{$this->equipment->id}/maintenance");
 
         $response->assertStatus(200)
             ->assertJsonStructure(['data', 'meta' => ['current_page', 'last_page', 'total', 'per_page']]);

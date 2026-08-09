@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Equipment;
-use App\Models\EquipmentCategory;
+use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Models\Supplier;
 use App\Models\User;
@@ -14,7 +14,7 @@ use App\Notifications\ToleranceExceeded;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Support\Facades\Notification;
-use Spatie\Permission\Models\Role;
+use App\Models\Role;
 
 class VerificationUatFixTest extends TestCase
 {
@@ -28,19 +28,23 @@ class VerificationUatFixTest extends TestCase
 
     private function createAdminUser(): User
     {
-        return User::factory()->create([
+        $user = User::factory()->create([
             'email' => 'admin@test.com',
             'email_verified_at' => now(),
         ]);
+
+        // RBAC enforcement (15-01): users without a role receive 403 on module endpoints
+        $user->roles()->attach(Role::where('slug', 'admin')->value('id'));
+
+        return $user;
     }
 
     private function createEquipmentWithTemplate(): array
     {
         $admin = $this->createAdminUser();
         
-        $category = EquipmentCategory::factory()->create([
+        $category = Category::factory()->create([
             'name' => 'Multímetro',
-            'verification_frequency' => 'daily',
         ]);
 
         $manufacturer = Manufacturer::factory()->create(['name' => 'Fluke']);
@@ -57,9 +61,8 @@ class VerificationUatFixTest extends TestCase
 
         $template = VerificationTemplate::factory()->create([
             'equipment_category_id' => $category->id,
-            'name' => 'Tensão DC',
-            'parameter' => 'voltage_dc',
-            'unit' => 'V',
+            'parameter_name' => 'Tensão DC',
+            'parameter_unit' => 'V',
             'tolerance_min' => '4.9',
             'tolerance_max' => '5.1',
         ]);
@@ -86,7 +89,6 @@ class VerificationUatFixTest extends TestCase
             ->assertJsonStructure([
                 'data' => [
                     'id',
-                    'equipment_id',
                     'verified_at',
                     'notes',
                     'params',
@@ -117,7 +119,8 @@ class VerificationUatFixTest extends TestCase
 
         $response->assertStatus(201);
 
-        $verification = Verification::latest()->first();
+        // Scope to this equipment to avoid picking a seeded verification with the same created_at
+        $verification = Verification::where('equipment_id', $equipment->id)->latest()->first();
         $this->assertNotNull($verification);
 
         // Check that the param result is WithinRange
@@ -143,7 +146,7 @@ class VerificationUatFixTest extends TestCase
 
         $response->assertStatus(201);
 
-        $verification = Verification::latest()->first();
+        $verification = Verification::where('equipment_id', $equipment->id)->latest()->first();
         $param = $verification->params->first();
         $this->assertEquals('outside_range', $param->result->value);
     }
@@ -159,7 +162,7 @@ class VerificationUatFixTest extends TestCase
             'email' => 'supervisor@test.com',
             'email_verified_at' => now(),
         ]);
-        $supervisor->assignRole('supervisor');
+        $supervisor->roles()->attach(Role::where('slug', 'supervisor')->value('id'));
 
         // Value outside range should trigger notification
         $response = $this->actingAs($admin, 'sanctum')
@@ -201,14 +204,13 @@ class VerificationUatFixTest extends TestCase
         // Get history by equipment
         $response = $this->actingAs($admin, 'sanctum')
             ->withHeader('Accept', 'application/json')
-            ->getJson("/api/v1/verifications/by-equipment/{$equipment->id}");
+            ->getJson("/api/v1/equipments/{$equipment->id}/verifications");
 
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
                     '*' => [
                         'id',
-                        'equipment_id',
                         'verified_at',
                         'params',
                     ],
