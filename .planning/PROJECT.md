@@ -1,5 +1,17 @@
 # LabControl
 
+## Current Milestone: v1.1 Verificação, Revisão e Ajustes de Layout
+
+**Goal:** Garantir funcionamento adequado da aplicação aplicando todas as verificações/revisões pendentes de v1.0 e revisar/ajustar o layout da interface.
+
+**Target features:**
+- UAT pendente de Aferições (Fase 09) — 6 cenários
+- UAT pendente de Manutenções (Fase 10) — 5 itens visuais
+- E2E tests com Playwright
+- ForgotPasswordSentView dedicada
+- Correções de bugs de funcionamento (ex.: seeders em ambiente limpo)
+- Revisão e ajuste de layout/UI
+
 ## What This Is
 
 Plataforma modular de gestão laboratorial (ERP) para controle patrimonial, estoque, metrologia, calibrações, aferições, empréstimos, controle documental, dashboards e relatórios. Sistema multiusuário com autenticação, controle de permissões por perfis, PWA com sincronização offline, preparado para múltiplos laboratórios e multiempresa.
@@ -53,11 +65,14 @@ Rastreabilidade completa de equipamentos laboratoriais — cada calibração, af
 
 ### Active
 
-- [ ] INVT-03: Alertas de estoque mínimo — v1.1
-- [ ] PWA-03: UI indicators (offline banner, sync status chip) — v1.1
-- [ ] E2E tests (Playwright) — v1.1
+- [ ] UAT-01: 6 cenários UAT de Aferições (Fase 09) verificados — v1.1
+- [ ] UAT-02: 5 itens visuais UAT de Manutenções (Fase 10) verificados — v1.1
+- [ ] E2E tests (Playwright) cobrindo fluxos críticos — v1.1
 - [ ] ForgotPasswordSentView dedicada — v1.1
-- [ ] Auditoria visual UAT (Phases 09, 10) — v1.1
+- [ ] BUG-01: Seeders funcionam em ambiente limpo (login admin pós-setup) — v1.1
+- [ ] LAYOUT-01: Revisão e ajuste de layout/UI — v1.1
+- [ ] PWA-03: UI indicators (offline banner, sync status chip) — v1.1 (deferido, se couber)
+- [ ] INVT-03: Alertas de estoque mínimo — v1.1 (deferido, se couber)
 
 ### Out of Scope
 
@@ -100,6 +115,23 @@ Deferred items: INVT-03 (stock alerts), PWA plan 03 (UI indicators), E2E tests, 
 | EmptyState + LoadingSkeleton | Componentes reutilizáveis, padrão visual único | ✓ Good |
 | Rate limiting 5 req/min login | Proteção brute force básica | ✓ Good |
 
+## Evolution
+
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `/gsd-transition`):
+1. Requirements invalidated? → Move to Out of Scope with reason
+2. Requirements validated? → Move to Validated with phase reference
+3. New requirements emerged? → Add to Active
+4. Decisions to log? → Add to Key Decisions
+5. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd-complete-milestone`):
+1. Full review of all sections
+2. Core Value check — still the right priority?
+3. Audit Out of Scope — reasons still valid?
+4. Update Context with current state
+
 ---
 
-*Last updated: 2026-07-28 after v1.0 milestone*
+*Last updated: 2026-08-09 after starting milestone v1.1*

@@ -1,18 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: Production
-current_phase: 14
-status: completed
-stopped_at: Phase 14 — All 5 plans verified, VERIFICATION.md created
-last_updated: "2026-07-29T00:44:49.682Z"
-last_activity: 2026-07-29
+milestone: v1.1
+milestone_name: Verificação, Revisão e Ajustes de Layout
+status: planning
+last_updated: "2026-08-09T15:03:48.810Z"
+last_activity: 2026-08-09
 progress:
-  total_phases: 14
-  completed_phases: 14
-  total_plans: 46
-  completed_plans: 46
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # State: LabControl
@@ -313,10 +311,10 @@ Known verification overrides: 4 (see STATE.md Deferred Items)
 
 ## Current Position
 
-Phase: Milestone 1.0 complete
+Phase: Not started (defining requirements)
 Plan: —
-Status: Awaiting next milestone
-Last activity: 2026-07-29 — Milestone 1.0 completed and archived
+Status: Defining requirements
+Last activity: 2026-08-09 — Milestone v1.1 started
 
 ## Operator Next Steps
 
