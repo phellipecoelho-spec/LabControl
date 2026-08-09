@@ -13,6 +13,13 @@ class MaintenanceSeeder extends Seeder
      */
     public function run(): void
     {
+        // Idempotency guard: only seed when no maintenance orders exist yet
+        if (MaintenanceOrder::count() > 0) {
+            $this->command->info('Maintenance orders already seeded. Skipping MaintenanceSeeder.');
+
+            return;
+        }
+
         // Create 50 mixed orders with various types, statuses, and priorities
         $orders = MaintenanceOrder::factory()
             ->count(20)

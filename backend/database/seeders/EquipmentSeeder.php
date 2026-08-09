@@ -21,7 +21,7 @@ class EquipmentSeeder extends Seeder
         ];
 
         foreach ($categories as $cat) {
-            Category::create($cat);
+            Category::firstOrCreate(['slug' => $cat['slug']], $cat);
         }
 
         $manufacturers = [
@@ -31,7 +31,7 @@ class EquipmentSeeder extends Seeder
         ];
 
         foreach ($manufacturers as $man) {
-            Manufacturer::create($man);
+            Manufacturer::firstOrCreate(['name' => $man['name']], $man);
         }
 
         $suppliers = [
@@ -52,9 +52,11 @@ class EquipmentSeeder extends Seeder
         ];
 
         foreach ($suppliers as $sup) {
-            Supplier::create($sup);
+            Supplier::firstOrCreate(['cnpj' => $sup['cnpj']], $sup);
         }
 
-        Equipment::factory(10)->create();
+        if (Equipment::count() === 0) {
+            Equipment::factory(10)->create();
+        }
     }
 }

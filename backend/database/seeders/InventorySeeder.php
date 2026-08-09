@@ -34,11 +34,14 @@ class InventorySeeder extends Seeder
         ];
 
         foreach ($categoryNames as $name => $slug) {
-            $categories[$slug] = InventoryCategory::create([
-                'name' => $name,
-                'slug' => $slug,
-                'created_by' => $admin->id,
-            ]);
+            $categories[$slug] = InventoryCategory::firstOrCreate(
+                ['slug' => $slug],
+                [
+                    'name' => $name,
+                    'slug' => $slug,
+                    'created_by' => $admin->id,
+                ]
+            );
             $this->command->info("  - Category: {$name}");
         }
 
@@ -46,6 +49,12 @@ class InventorySeeder extends Seeder
         $suppliers = Supplier::all();
         if ($suppliers->isEmpty()) {
             $this->command->warn('No suppliers found. Skipping item creation.');
+            return;
+        }
+
+        // Idempotency guard: only seed items/movements when the inventory is empty
+        if (InventoryItem::count() > 0) {
+            $this->command->info('Inventory already seeded. Skipping item creation.');
             return;
         }
 

@@ -19,6 +19,12 @@ class LoanSeeder extends Seeder
             return;
         }
 
+        // Idempotency guard: only seed when no loans exist yet
+        if (\App\Models\Loan::count() > 0) {
+            $this->command->info('Loans already seeded. Skipping LoanSeeder.');
+            return;
+        }
+
         // Garantir pelo menos 5 equipamentos existentes para referência
         $equipmentCount = Equipment::count();
         if ($equipmentCount < 5) {

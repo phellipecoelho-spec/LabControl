@@ -13,6 +13,13 @@ class CalibrationSeeder extends Seeder
      */
     public function run(): void
     {
+        // Idempotency guard: only seed when no calibrations exist yet
+        if (Calibration::count() > 0) {
+            $this->command->info('Calibrations already seeded. Skipping CalibrationSeeder.');
+
+            return;
+        }
+
         // Create 15 sample calibrations
         $calibrations = Calibration::factory()
             ->count(9)

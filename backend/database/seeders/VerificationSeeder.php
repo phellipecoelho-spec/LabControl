@@ -15,6 +15,13 @@ class VerificationSeeder extends Seeder
      */
     public function run(): void
     {
+        // Idempotency guard: only seed when no verifications exist yet
+        if (Verification::count() > 0) {
+            $this->command->info('Verifications already seeded. Skipping VerificationSeeder.');
+
+            return;
+        }
+
         // Ensure we have categories with equipment
         $categories = Category::inRandomOrder()->limit(3)->get();
 
