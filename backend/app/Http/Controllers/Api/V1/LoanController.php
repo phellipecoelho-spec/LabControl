@@ -13,25 +13,27 @@ use App\Models\Loan;
 use App\Services\LoanService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class LoanController extends Controller
+class LoanController extends Controller implements HasMiddleware
 {
     /**
      * Get the middleware that should be applied to the controller.
      *
-     * @return array<int, array<string, mixed>>
+     * @return array<int, \Illuminate\Routing\Controllers\Middleware>
      */
     public static function middleware(): array
     {
         return [
-            ['middleware' => 'auth:sanctum', 'options' => ['only' => [
+            new Middleware('auth:sanctum', only: [
                 'index', 'show', 'store', 'update', 'destroy',
                 'activate', 'returnItem', 'cancel',
-            ]]],
-            ['middleware' => 'permission:emprestimos.view', 'options' => ['only' => ['index', 'show']]],
-            ['middleware' => 'permission:emprestimos.create', 'options' => ['only' => ['store']]],
-            ['middleware' => 'permission:emprestimos.edit', 'options' => ['only' => ['update', 'destroy']]],
-            ['middleware' => 'permission:emprestimos.finalizar', 'options' => ['only' => ['activate', 'returnItem', 'cancel']]],
+            ]),
+            new Middleware('permission:emprestimos.view', only: ['index', 'show']),
+            new Middleware('permission:emprestimos.create', only: ['store']),
+            new Middleware('permission:emprestimos.edit', only: ['update', 'destroy']),
+            new Middleware('permission:emprestimos.finalizar', only: ['activate', 'returnItem', 'cancel']),
         ];
     }
 

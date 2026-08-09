@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Services\DashboardService;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class DashboardController extends Controller
+class DashboardController extends Controller implements HasMiddleware
 {
     public static function middleware(): array
     {
         return [
-            ['middleware' => 'auth:sanctum'],
-            ['middleware' => 'permission:dashboard.view'],
+            new Middleware('auth:sanctum'),
+            new Middleware('permission:dashboard.view'),
         ];
     }
 

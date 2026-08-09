@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ReportRequest;
 use App\Services\ReportService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -17,14 +19,14 @@ class ReportController extends Controller implements HasMiddleware
     /**
      * Get the middleware that should be applied to the controller.
      *
-     * @return array<int, array<string, mixed>>
+     * @return array<int, \Illuminate\Routing\Controllers\Middleware>
      */
     public static function middleware(): array
     {
         return [
-            ['middleware' => 'auth:sanctum'],
-            ['middleware' => 'permission:relatorios.view', 'only' => ['index']],
-            ['middleware' => 'permission:relatorios.export', 'only' => ['download']],
+            new Middleware('auth:sanctum'),
+            new Middleware('permission:relatorios.view', only: ['index']),
+            new Middleware('permission:relatorios.export', only: ['download']),
         ];
     }
 
@@ -68,9 +70,9 @@ class ReportController extends Controller implements HasMiddleware
      *
      * @param  string        $type     Report type (equipments, calibrations, inventory-movements, dashboard)
      * @param  ReportRequest $request  Validated request with format and filter parameters
-     * @return StreamedResponse|BinaryFileResponse
+     * @return StreamedResponse|BinaryFileResponse|Response
      */
-    public function download(string $type, ReportRequest $request): StreamedResponse|BinaryFileResponse
+    public function download(string $type, ReportRequest $request): StreamedResponse|BinaryFileResponse|Response
     {
         if (!in_array($type, self::VALID_TYPES, true)) {
             abort(400, 'Tipo de relatório inválido.');

@@ -8,20 +8,22 @@ use App\Models\CalibrationCertificate;
 use App\Services\CalibrationCertificateService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
 
-class CalibrationCertificateController extends Controller
+class CalibrationCertificateController extends Controller implements HasMiddleware
 {
     /**
      * Get the middleware that should be applied to the controller.
      *
-     * @return array<int, array<string, mixed>>
+     * @return array<int, \Illuminate\Routing\Controllers\Middleware>
      */
     public static function middleware(): array
     {
         return [
-            ['middleware' => 'auth:sanctum'],
-            ['middleware' => 'permission:calibracoes.edit'],
+            new Middleware('auth:sanctum'),
+            new Middleware('permission:calibracoes.edit'),
         ];
     }
 

@@ -18,6 +18,7 @@ class RoleController implements HasMiddleware
     {
         return [
             new Middleware('auth:sanctum'),
+            new Middleware('permission:roles.manage', only: ['store', 'update', 'destroy', 'syncPermissions']),
         ];
     }
 

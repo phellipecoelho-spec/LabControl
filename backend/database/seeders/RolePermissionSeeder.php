@@ -49,6 +49,7 @@ class RolePermissionSeeder extends Seeder
             ['name' => 'Criar Usuários', 'slug' => 'usuarios.create', 'group' => 'usuarios'],
             ['name' => 'Editar Usuários', 'slug' => 'usuarios.edit', 'group' => 'usuarios'],
             ['name' => 'Excluir Usuários', 'slug' => 'usuarios.delete', 'group' => 'usuarios'],
+            ['name' => 'Gerenciar Perfis', 'slug' => 'roles.manage', 'group' => 'usuarios'],
             ['name' => 'Visualizar Logs de Auditoria', 'slug' => 'auditoria.view', 'group' => 'auditoria'],
             ['name' => 'Gerenciar Configurações', 'slug' => 'configuracoes.manage', 'group' => 'configuracoes'],
         ];

@@ -16,25 +16,27 @@ use App\Notifications\MaintenanceOrderCreated;
 use App\Services\MaintenanceService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Notification;
 
-class MaintenanceOrderController extends Controller
+class MaintenanceOrderController extends Controller implements HasMiddleware
 {
     /**
      * Get the middleware that should be applied to the controller.
      *
-     * @return array<int, array<string, mixed>>
+     * @return array<int, \Illuminate\Routing\Controllers\Middleware>
      */
     public static function middleware(): array
     {
         return [
-            ['middleware' => 'auth:sanctum', 'options' => ['only' => [
+            new Middleware('auth:sanctum', only: [
                 'index', 'show', 'store', 'update', 'destroy', 'complete', 'cancel', 'byEquipment',
-            ]]],
-            ['middleware' => 'permission:manutencoes.view', 'options' => ['only' => ['index', 'show', 'byEquipment']]],
-            ['middleware' => 'permission:manutencoes.create', 'options' => ['only' => ['store']]],
-            ['middleware' => 'permission:manutencoes.edit', 'options' => ['only' => ['update', 'destroy']]],
-            ['middleware' => 'permission:manutencoes.concluir', 'options' => ['only' => ['complete', 'cancel']]],
+            ]),
+            new Middleware('permission:manutencoes.view', only: ['index', 'show', 'byEquipment']),
+            new Middleware('permission:manutencoes.create', only: ['store']),
+            new Middleware('permission:manutencoes.edit', only: ['update', 'destroy']),
+            new Middleware('permission:manutencoes.concluir', only: ['complete', 'cancel']),
         ];
     }
 

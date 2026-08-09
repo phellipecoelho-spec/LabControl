@@ -10,6 +10,7 @@ use App\Models\Calibration;
 use App\Models\Equipment;
 use App\Models\InventoryMovement;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -23,9 +24,9 @@ class ReportService
      * Generate the equipments report in the requested format.
      *
      * @param  array  $filters  Format, status, date_from, date_to
-     * @return StreamedResponse|BinaryFileResponse
+     * @return StreamedResponse|BinaryFileResponse|Response
      */
-    public function equipmentsReport(array $filters): StreamedResponse|BinaryFileResponse
+    public function equipmentsReport(array $filters): StreamedResponse|BinaryFileResponse|Response
     {
         $format = $this->resolveFormat($filters);
         $filename = sprintf('equipments_%s.%s', now()->format('Y-m-d'), $format);
@@ -75,9 +76,9 @@ class ReportService
      * Generate the calibrations report in the requested format.
      *
      * @param  array  $filters  Format, status, date_from, date_to
-     * @return StreamedResponse|BinaryFileResponse
+     * @return StreamedResponse|BinaryFileResponse|Response
      */
-    public function calibrationsReport(array $filters): StreamedResponse|BinaryFileResponse
+    public function calibrationsReport(array $filters): StreamedResponse|BinaryFileResponse|Response
     {
         $format = $this->resolveFormat($filters);
         $filename = sprintf('calibrations_%s.%s', now()->format('Y-m-d'), $format);
@@ -126,9 +127,9 @@ class ReportService
      * Generate the inventory movements report in the requested format.
      *
      * @param  array  $filters  Format, type, date_from, date_to
-     * @return StreamedResponse|BinaryFileResponse
+     * @return StreamedResponse|BinaryFileResponse|Response
      */
-    public function inventoryMovementsReport(array $filters): StreamedResponse|BinaryFileResponse
+    public function inventoryMovementsReport(array $filters): StreamedResponse|BinaryFileResponse|Response
     {
         $format = $this->resolveFormat($filters);
         $filename = sprintf('inventory-movements_%s.%s', now()->format('Y-m-d'), $format);
@@ -178,9 +179,9 @@ class ReportService
      * Generate the dashboard export in the requested format.
      *
      * @param  array  $filters  Format, date_from, date_to
-     * @return StreamedResponse|BinaryFileResponse
+     * @return StreamedResponse|BinaryFileResponse|Response
      */
-    public function dashboardExport(array $filters): StreamedResponse|BinaryFileResponse
+    public function dashboardExport(array $filters): StreamedResponse|BinaryFileResponse|Response
     {
         $format = $this->resolveFormat($filters);
 
@@ -247,9 +248,9 @@ class ReportService
      * @param  string  $view
      * @param  array   $data
      * @param  string  $filename
-     * @return StreamedResponse
+     * @return Response
      */
-    private function streamPdf(string $view, array $data, string $filename): StreamedResponse
+    private function streamPdf(string $view, array $data, string $filename): Response
     {
         $generatedAt = now()->format('d/m/Y H:i');
         $rows = $data['rows'] ?? collect();
@@ -257,7 +258,7 @@ class ReportService
 
         $pdf = Pdf::loadView($view, compact('rows', 'title', 'generatedAt'))
             ->setPaper('a4', 'portrait')
-            ->setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+            ->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
 
         return $pdf->download($filename);
     }

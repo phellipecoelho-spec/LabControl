@@ -11,20 +11,22 @@ use App\Models\InventoryMovement;
 use App\Services\InventoryMovementService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class InventoryMovementController extends Controller
+class InventoryMovementController extends Controller implements HasMiddleware
 {
     /**
      * Get the middleware that should be applied to the controller.
      *
-     * @return array<int, array<string, mixed>>
+     * @return array<int, \Illuminate\Routing\Controllers\Middleware>
      */
     public static function middleware(): array
     {
         return [
-            ['middleware' => 'auth:sanctum', 'options' => ['only' => ['index', 'show', 'store', 'byItem']]],
-            ['middleware' => 'permission:movimentacoes.view', 'options' => ['only' => ['index', 'show', 'byItem']]],
-            ['middleware' => 'permission:movimentacoes.create', 'options' => ['only' => ['store']]],
+            new Middleware('auth:sanctum', only: ['index', 'show', 'store', 'byItem']),
+            new Middleware('permission:movimentacoes.view', only: ['index', 'show', 'byItem']),
+            new Middleware('permission:movimentacoes.create', only: ['store']),
         ];
     }
 

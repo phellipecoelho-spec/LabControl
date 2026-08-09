@@ -14,24 +14,26 @@ use App\Notifications\ToleranceExceeded;
 use App\Services\VerificationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Notification;
 
-class VerificationController extends Controller
+class VerificationController extends Controller implements HasMiddleware
 {
     /**
      * Get the middleware that should be applied to the controller.
      *
-     * @return array<int, array<string, mixed>>
+     * @return array<int, \Illuminate\Routing\Controllers\Middleware>
      */
     public static function middleware(): array
     {
         return [
-            ['middleware' => 'auth:sanctum', 'options' => ['only' => [
+            new Middleware('auth:sanctum', only: [
                 'index', 'show', 'store', 'update', 'destroy', 'pending', 'byEquipment',
-            ]]],
-            ['middleware' => 'permission:afericoes.view', 'options' => ['only' => ['index', 'show', 'pending', 'byEquipment']]],
-            ['middleware' => 'permission:afericoes.create', 'options' => ['only' => ['store']]],
-            ['middleware' => 'permission:afericoes.edit', 'options' => ['only' => ['update', 'destroy']]],
+            ]),
+            new Middleware('permission:afericoes.view', only: ['index', 'show', 'pending', 'byEquipment']),
+            new Middleware('permission:afericoes.create', only: ['store']),
+            new Middleware('permission:afericoes.edit', only: ['update', 'destroy']),
         ];
     }
 

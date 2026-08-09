@@ -14,28 +14,30 @@ use App\Models\Calibration;
 use App\Services\CalibrationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 /**
  * @OA\Tag(name="Calibrações", description="Endpoints de gerenciamento de calibrações")
  */
-class CalibrationController extends Controller
+class CalibrationController extends Controller implements HasMiddleware
 {
     /**
      * Get the middleware that should be applied to the controller.
      *
-     * @return array<int, array<string, mixed>>
+     * @return array<int, \Illuminate\Routing\Controllers\Middleware>
      */
     public static function middleware(): array
     {
         return [
-            ['middleware' => 'auth:sanctum', 'options' => ['only' => [
+            new Middleware('auth:sanctum', only: [
                 'index', 'show', 'store', 'update', 'destroy', 'complete', 'cancel',
-            ]]],
-            ['middleware' => 'permission:calibracoes.view', 'options' => ['only' => ['index', 'show']]],
-            ['middleware' => 'permission:calibracoes.create', 'options' => ['only' => ['store']]],
-            ['middleware' => 'permission:calibracoes.edit', 'options' => ['only' => ['update', 'destroy']]],
-            ['middleware' => 'permission:calibracoes.concluir', 'options' => ['only' => ['complete']]],
-            ['middleware' => 'permission:calibracoes.cancel', 'options' => ['only' => ['cancel']]],
+            ]),
+            new Middleware('permission:calibracoes.view', only: ['index', 'show']),
+            new Middleware('permission:calibracoes.create', only: ['store']),
+            new Middleware('permission:calibracoes.edit', only: ['update', 'destroy']),
+            new Middleware('permission:calibracoes.concluir', only: ['complete']),
+            new Middleware('permission:calibracoes.cancel', only: ['cancel']),
         ];
     }
 
