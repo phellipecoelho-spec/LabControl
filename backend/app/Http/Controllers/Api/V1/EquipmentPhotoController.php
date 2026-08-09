@@ -7,14 +7,16 @@ use App\Models\Equipment;
 use App\Services\EquipmentPhotoService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class EquipmentPhotoController extends Controller
+class EquipmentPhotoController extends Controller implements HasMiddleware
 {
     public static function middleware(): array
     {
         return [
-            ['middleware' => 'auth:sanctum'],
-            ['middleware' => 'permission:equipamentos.edit'],
+            new Middleware('auth:sanctum'),
+            new Middleware('permission:equipamentos.edit'),
         ];
     }
 

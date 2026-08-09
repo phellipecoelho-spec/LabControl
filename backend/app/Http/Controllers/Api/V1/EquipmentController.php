@@ -9,25 +9,27 @@ use App\Http\Resources\EquipmentResource;
 use App\Models\Equipment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 /**
  * @OA\Tag(name="Equipamentos", description="Endpoints de gerenciamento de equipamentos")
  */
-class EquipmentController extends Controller
+class EquipmentController extends Controller implements HasMiddleware
 {
     /**
      * Get the middleware that should be applied to the controller.
      *
-     * @return array<int, array<string, mixed>>
+     * @return array<int, \Illuminate\Routing\Controllers\Middleware>
      */
     public static function middleware(): array
     {
         return [
-            ['middleware' => 'auth:sanctum', 'options' => ['only' => ['index', 'show', 'store', 'update', 'destroy']]],
-            ['middleware' => 'permission:equipamentos.view', 'options' => ['only' => ['index', 'show']]],
-            ['middleware' => 'permission:equipamentos.create', 'options' => ['only' => ['store']]],
-            ['middleware' => 'permission:equipamentos.edit', 'options' => ['only' => ['update']]],
-            ['middleware' => 'permission:equipamentos.delete', 'options' => ['only' => ['destroy']]],
+            new Middleware('auth:sanctum', only: ['index', 'show', 'store', 'update', 'destroy']),
+            new Middleware('permission:equipamentos.view', only: ['index', 'show']),
+            new Middleware('permission:equipamentos.create', only: ['store']),
+            new Middleware('permission:equipamentos.edit', only: ['update']),
+            new Middleware('permission:equipamentos.delete', only: ['destroy']),
         ];
     }
 
@@ -174,6 +176,29 @@ class EquipmentController extends Controller
      */
     public function destroy(Equipment $equipment): JsonResponse
     {
+        $hasActiveLoan = $equipment->loans()
+            ->whereIn('loans.status', [\App\Enums\LoanStatus::Reserved, \App\Enums\LoanStatus::Active])
+            ->whereNull('equipment_loan.returned_at')
+            ->exists();
+
+        if ($hasActiveLoan) {
+            return response()->json([
+                'message' => 'Não é possível excluir o equipamento pois ele possui um empréstimo ativo ou reservado.',
+                'error' => 'equipment_loaned',
+            ], 422);
+        }
+
+        $hasActiveMaintenance = $equipment->maintenanceOrders()
+            ->whereIn('status', [\App\Enums\MaintenanceStatus::Open, \App\Enums\MaintenanceStatus::InProgress])
+            ->exists();
+
+        if ($hasActiveMaintenance) {
+            return response()->json([
+                'message' => 'Não é possível excluir o equipamento pois ele possui ordens de manutenção abertas ou em andamento.',
+                'error' => 'equipment_in_maintenance',
+            ], 422);
+        }
+
         $equipment->deleted_by = auth()->id();
         $equipment->save();
         $equipment->delete();

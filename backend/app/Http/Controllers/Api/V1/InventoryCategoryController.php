@@ -9,22 +9,24 @@ use App\Http\Resources\InventoryCategoryResource;
 use App\Models\InventoryCategory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class InventoryCategoryController extends Controller
+class InventoryCategoryController extends Controller implements HasMiddleware
 {
     /**
      * Get the middleware that should be applied to the controller.
      *
-     * @return array<int, array<string, mixed>>
+     * @return array<int, \Illuminate\Routing\Controllers\Middleware>
      */
     public static function middleware(): array
     {
         return [
-            ['middleware' => 'auth:sanctum', 'options' => ['only' => ['index', 'show', 'store', 'update', 'destroy']]],
-            ['middleware' => 'permission:estoque.view', 'options' => ['only' => ['index', 'show']]],
-            ['middleware' => 'permission:estoque.create', 'options' => ['only' => ['store']]],
-            ['middleware' => 'permission:estoque.edit', 'options' => ['only' => ['update']]],
-            ['middleware' => 'permission:estoque.delete', 'options' => ['only' => ['destroy']]],
+            new Middleware('auth:sanctum', only: ['index', 'show', 'store', 'update', 'destroy']),
+            new Middleware('permission:estoque.view', only: ['index', 'show']),
+            new Middleware('permission:estoque.create', only: ['store']),
+            new Middleware('permission:estoque.edit', only: ['update']),
+            new Middleware('permission:estoque.delete', only: ['destroy']),
         ];
     }
 
