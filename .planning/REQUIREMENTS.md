@@ -72,25 +72,25 @@ Preenchido durante a criação do roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| UAT-01 | — | Pending |
-| UAT-02 | — | Pending |
-| E2E-01 | — | Pending |
-| E2E-02 | — | Pending |
-| E2E-03 | — | Pending |
-| AUTH-05 | — | Pending |
-| AUTH-06 | — | Pending |
-| BUG-01 | — | Pending |
-| BUG-02 | — | Pending |
-| LAYOUT-01 | — | Pending |
-| LAYOUT-02 | — | Pending |
-| PWA-03 | — | Pending |
-| INVT-03 | — | Pending |
+| UAT-01 | Phase 16 | Pending |
+| UAT-02 | Phase 16 | Pending |
+| E2E-01 | Phase 18 | Pending |
+| E2E-02 | Phase 18 | Pending |
+| E2E-03 | Phase 18 | Pending |
+| AUTH-05 | Phase 17 | Pending |
+| AUTH-06 | Phase 17 | Pending |
+| BUG-01 | Phase 15 | Pending |
+| BUG-02 | Phase 15 | Pending |
+| LAYOUT-01 | Phase 19 | Pending |
+| LAYOUT-02 | Phase 19 | Pending |
+| PWA-03 | Phase 20 | Pending |
+| INVT-03 | Phase 20 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 13 total
-- Mapped to phases: 0
-- Unmapped: 13 ⚠️ (aguardando roadmap)
+- Mapped to phases: 13
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-08-09*
-*Last updated: 2026-08-09 after milestone v1.1 definition*
+*Last updated: 2026-08-09 after v1.1 roadmap creation (Phases 15-20)*

@@ -3,10 +3,10 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Verificação, Revisão e Ajustes de Layout
 status: planning
-last_updated: "2026-08-09T15:03:48.810Z"
+last_updated: "2026-08-09T18:00:00.000Z"
 last_activity: 2026-08-09
 progress:
-  total_phases: 0
+  total_phases: 6
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -23,9 +23,9 @@ See: .planning/PROJECT.md (updated 2026-07-19)
 
 ## Current Status
 
-**Current Phase:** 14
-**Status:** 1.0 milestone complete
-**Last activity:** 2026-07-29
+**Current Phase:** 15
+**Status:** v1.1 roadmap created — ready to plan Phase 15
+**Last activity:** 2026-08-09
 
 ## Plan Progress
 
@@ -311,11 +311,11 @@ Known verification overrides: 4 (see STATE.md Deferred Items)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-08-09 — Milestone v1.1 started
+Phase: 15 of 20 (Correções de Funcionamento)
+Plan: — (TBD)
+Status: Ready to plan
+Last activity: 2026-08-09 — v1.1 roadmap created (Phases 15-20)
 
 ## Operator Next Steps
 
-- Start the next milestone with /gsd-new-milestone
+- Plan Phase 15 with /gsd-plan-phase 15
