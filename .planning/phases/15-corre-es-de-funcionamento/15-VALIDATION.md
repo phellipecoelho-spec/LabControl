@@ -1,8 +1,8 @@
 ---
 phase: 15
 slug: corre-es-de-funcionamento
-status: draft
-nyquist_compliant: false
+status: approved
+nyquist_compliant: true
 wave_0_complete: false
 created: 2026-08-09
 ---
@@ -39,11 +39,11 @@ created: 2026-08-09
 | Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
 | 15-01-01 | 01 | 1 | BUG-02 | T-15-01 | RBAC bypass eliminado — zero-permissão recebe 403 | feature | `php artisan test --filter=RbacRegressionTest` | ❌ W0 | ⬜ pending |
-| 15-01-02 | 01 | 1 | BUG-02 | T-15-02 | ReportController não retorna 500 | feature | `php artisan test --filter=ReportControllerTest` | ✅ (falha hoje) | ⬜ pending |
-| 15-01-03 | 01 | 1 | BUG-02 | T-15-03 | RateLimiter::clear com chave | unit | `php artisan test --filter=RateLimitTest` | ✅ (falha hoje) | ⬜ pending |
+| 15-01-02 | 01 | 1 | BUG-02 | T-15-02 | ReportController não retorna 500 + InventoryMovementFactory criada (dependência do teste) | feature | `php artisan test --filter=ReportControllerTest` | ✅ (falha hoje) | ⬜ pending |
+| 15-01-03 | 01 | 1 | BUG-02 | T-15-03 | RateLimiter::clear com chave `auth` (limiter registrado em AppServiceProvider; fallback `api`) | unit | `php artisan test --filter=RateLimitTest` | ✅ (falha hoje) | ⬜ pending |
 | 15-02-01 | 02 | 2 | BUG-01 | — | Seeders rodam 2x sem erro | unit/feature | `php artisan test --filter=SeederIdempotencyTest` | ❌ W0 | ⬜ pending |
-| 15-02-02 | 02 | 2 | BUG-02 | — | Testes de verificação usam rotas corretas | feature | `php artisan test --filter=VerificationUatFixTest` / `--filter=MaintenanceVerificationTest` | ✅ (falham hoje) | ⬜ pending |
-| 15-02-03 | 02 | 2 | BUG-02 | — | ReportServiceTest acha InventoryMovementFactory | unit | `php artisan test --filter=ReportServiceTest` | ✅ (falha hoje) | ⬜ pending |
+| 15-02-02 | 02 | 2 | BUG-02 | — | Testes de verificação usam rotas corretas (canônicas; NÃO há rotas legado a remover) | feature | `php artisan test --filter=VerificationUatFixTest` / `--filter=MaintenanceVerificationTest` | ✅ (falham hoje) | ⬜ pending |
+| 15-02-03 | 02 | 2 | BUG-02 | — | ReportServiceTest verde com InventoryMovementFactory (criada no 15-01) | unit | `php artisan test --filter=ReportServiceTest` | ✅ (falha hoje) | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -51,9 +51,9 @@ created: 2026-08-09
 
 ## Wave 0 Requirements
 
-- [ ] `backend/tests/Feature/RbacRegressionTest.php` — 403 p/ zero-permissão em todos os endpoints de módulo
+- [ ] `backend/tests/Feature/RbacRegressionTest.php` — 403 p/ zero-permissão em todos os endpoints de módulo (criado na Task 3 do 15-01, rede de regressão de fim-de-estado)
 - [ ] `backend/tests/Feature/SeederIdempotencyTest.php` — db:seed 2x sem exception
-- [ ] `backend/database/factories/InventoryMovementFactory.php` — factory faltante (ReportServiceTest)
+- [ ] `backend/database/factories/InventoryMovementFactory.php` — factory faltante (criada na Task 2 do 15-01)
 
 ---
 
@@ -72,6 +72,6 @@ created: 2026-08-09
 - [ ] Wave 0 covers all MISSING references
 - [ ] No watch-mode flags
 - [ ] Feedback latency < 120s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] `nyquist_compliant: true` set in frontmatter (planos aprovados — 15-01 e 15-02 revisados após plan-checker)
 
-**Approval:** pending
+**Approval:** approved 2026-08-09
