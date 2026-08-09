@@ -52,7 +52,7 @@
 
 **Milestone Goal:** Garantir funcionamento adequado da aplicação aplicando todas as verificações/revisões pendentes de v1.0 e revisar/ajustar o layout da interface.
 
-- [ ] **Phase 15: Correções de Funcionamento** - BUG-01, BUG-02 — Seeders funcionais em ambiente limpo + bugs da varredura corrigidos
+- [x] **Phase 15: Correções de Funcionamento** - BUG-01, BUG-02 — Seeders funcionais em ambiente limpo + bugs da varredura corrigidos (completed 2026-08-09)
 - [ ] **Phase 16: Verificação UAT** - UAT-01, UAT-02 — 6 cenários UAT de Aferições + 5 itens visuais de Manutenções verificados
 - [ ] **Phase 17: Autenticação UX** - AUTH-05, AUTH-06 — ForgotPasswordSentView dedicada + feedback claro de verificação de email
 - [ ] **Phase 18: Testes E2E** - E2E-01, E2E-02, E2E-03 — Playwright cobrindo autenticação e fluxos críticos de negócio
@@ -73,12 +73,12 @@
   3. Todos os bugs encontrados na varredura de verificação estão corrigidos e os fluxos afetados funcionam sem erros (BUG-02)
   4. Correções validadas sem regressões nos fluxos relacionados (BUG-02)
 
-**Plans**: 1/2 plans executed
+**Plans**: 2/2 plans complete
 
 Plans:
 
 - [x] 15-01-PLAN.md — RBAC Enforcement e Correções de Controllers (BUG-02)
-- [ ] 15-02-PLAN.md — Seeders Idempotentes + Reparo da Suite de Testes (BUG-01, BUG-02)
+- [x] 15-02-PLAN.md — Seeders Idempotentes + Reparo da Suite de Testes (BUG-01, BUG-02)
 
 ### Phase 16: Verificação UAT
 
@@ -170,7 +170,7 @@ Plans:
 | 12. Relatórios | v0.3 | 2/2 | Complete | 2026-07-27 |
 | 13. PWA e Offline | v1.0 | 2/2 | Complete | 2026-07-28 |
 | 14. Auditoria e Ajustes Finais | v1.0 | 5/5 | Complete | 2026-07-28 |
-| 15. Correções de Funcionamento | v1.1 | 1/2 | In Progress|  |
+| 15. Correções de Funcionamento | v1.1 | 2/2 | Complete   | 2026-08-09 |
 | 16. Verificação UAT | v1.1 | 0/0 | Not started | - |
 | 17. Autenticação UX | v1.1 | 0/0 | Not started | - |
 | 18. Testes E2E | v1.1 | 0/0 | Not started | - |
