@@ -70,7 +70,11 @@
   2. Roles e permissões criados pelos seeders aparecem aplicados — admin vê os módulos conforme perfil (BUG-01)
   3. Todos os bugs encontrados na varredura de verificação estão corrigidos e os fluxos afetados funcionam sem erros (BUG-02)
   4. Correções validadas sem regressões nos fluxos relacionados (BUG-02)
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 15-01-PLAN.md — RBAC Enforcement e Correções de Controllers (BUG-02)
+- [ ] 15-02-PLAN.md — Seeders Idempotentes + Reparo da Suite de Testes (BUG-01, BUG-02)
 
 ### Phase 16: Verificação UAT
 **Goal**: Cenários UAT pendentes de Aferições (Fase 09) e Manutenções (Fase 10) executados sem falhas
