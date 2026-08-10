@@ -95,9 +95,9 @@ Plans:
 
 Plans:
 
-- [ ] 16-01-PLAN.md — Preparação do Ambiente (W1): commit das mudanças pendentes + seed PostgreSQL idempotente + gate de suíte verde
-- [ ] 16-02-PLAN.md — Execução UAT-01 (W2): 6 cenários de Aferições com admin + usuários de permissão, registro em 16-UAT.md
-- [ ] 16-03-PLAN.md — Execução UAT-02 (W3): 5 itens visuais de Manutenções + encerramento do registro 16-UAT.md
+- [x] 16-01-PLAN.md — Preparação do Ambiente (W1): commit das mudanças pendentes + seed PostgreSQL idempotente + gate de suíte verde
+- [x] 16-02-PLAN.md — Execução UAT-01 (W2): 6 cenários de Aferições com admin + usuários de permissão, registro em 16-UAT.md
+- [x] 16-03-PLAN.md — Execução UAT-02 (W3): 5 itens visuais de Manutenções + encerramento do registro 16-UAT.md
 
 ### Phase 17: Autenticação UX
 

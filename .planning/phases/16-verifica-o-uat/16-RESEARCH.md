@@ -341,27 +341,31 @@ Fonte: [VERIFIED: repository — RolePermissionSeeder.php roles/permissions; Use
 | A6 | A suíte completa segue em 165 passed / 473 assertions com as mudanças da working tree | Validation Architecture | Médio — os 2 arquivos de apoio + RbacRegressionTest foram re-executados verdes hoje; o número total vem da 15-VERIFICATION.md (mesmo dia). Gate da fase re-roda a suíte completa. |
 | A7 | Usuário UAT participa ativamente da execução (cenários são "Usuário executa...") | Summary | Baixo — os critérios de sucesso UAT-01/UAT-02 dizem "Usuário executa"; a fase é human-in-the-loop por definição. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Mudanças não commitadas da working tree — commitar na W1?**
-   - What we know: 8 arquivos modificados (Equipment model, LoanService, MaintenanceService — sync de status; 4 páginas Vue). Afetam diretamente UAT-02 (status de equipamento "Manutenção"/"Ativo" na página de detalhe).
+   - What we know: 7 arquivos de produto modificados (Equipment model, LoanService, MaintenanceService — sync de status; 4 páginas Vue) + PLANNER.md (artefato de processo). Afetam diretamente UAT-02 (status de equipamento "Manutenção"/"Ativo" na página de detalhe).
    - What's unclear: se o usuário quer commitá-las agora (recomendado — regra "tudo versionado") ou se há mais trabalho planejado nelas.
    - Recommendation: commit na W1 como tarefa explícita; evidência de UAT sempre sobre código versionado.
+   - **RESOLVED:** commit na W1 adotado — 16-01 T1 commita os 7 arquivos de produto (PLANNER.md/TASKS.md/artefatos .planning excluídos).
 
 2. **Casos negativos de permissão sem role seedada (UAT-02 #5: ninguém deixa de ter manutencoes.view)**
    - What we know: todas as 6 roles seedadas têm `manutencoes.view`. O caso negativo do item 5 exige usuário custom.
    - What's unclear: se o executor aceita criar usuário sem roles via tinker (login funciona; sidebar vazia; API 403) ou se prefere criar uma role mínima pela tela admin.
    - Recommendation: criar via tinker usuário SEM roles para o caso negativo do sidebar e documentar o 403 esperado.
+   - **RESOLVED:** usuário sem roles via tinker adotado — 16-03 T1 cria o usuário custom e documenta o 403 esperado.
 
 3. **Corrigir os 7 erros de typecheck nesta fase?**
    - What we know: não bloqueiam o dev server nem os cenários; bloqueiam `npm run build`.
    - What's unclear: se a evidência exige build de produção (screenshots estáticos via nginx) — hoje impossível sem corrigir os 7 erros OU sem montar dist no nginx.
    - Recommendation: não corrigir (escopo da Fase 19); evidência via dev server. Perguntar ao usuário na discussão se build é critério de aceite.
+   - **RESOLVED:** não corrigir nesta fase — build não é critério de aceite; evidência via dev server :5173 (16-01 execution_context).
 
 4. **Re-executar a suíte completa como gate (277s) ou apenas os 3 filtros de apoio?**
    - What we know: 15-VERIFICATION.md (hoje) confirma 165 passed; 2 filtros re-executados verdes na pesquisa.
    - What's unclear: custo/benefício do gate completo na W1 (5 min) vs filtros (~2 min).
    - Recommendation: gate completo na W1 (evidência forte e barata de ambiente são), filtros por onda.
+   - **RESOLVED:** gate completo na W1 adotado — 16-01 T3 roda a suíte completa (165/473) + filtros por onda.
 
 ## Environment Availability
 
@@ -451,7 +455,7 @@ Fonte: [VERIFIED: repository — RolePermissionSeeder.php roles/permissions; Use
 - `backend/app/Services/VerificationService.php` (getPendingVerifications corrigido — commit 022c30b), `VerificationResource.php` (is_outside_range)
 - Frontend: `VerificationPendingPage.vue`, `VerificationFormDialog.vue`, `VerificationHistoryTab.vue`, `MaintenanceListPage.vue`, `MaintenanceOpenDialog.vue`, `MaintenanceCloseDialog.vue`, `MaintenanceHistoryTab.vue`, `EquipmentDetailPage.vue` (abas 3/6 + dialogs wiringados)
 - `backend/database/seeders/RolePermissionSeeder.php` (perfis/permissões), `AdminUserSeeder.php` (credenciais admin)
-- Probes de runtime: `docker ps` (4 containers healthy), tinker (banco vazio), HTTP :80 (500) e :5173 (200), `npm run typecheck` (7 erros), `git status` (8 arquivos modificados)
+- Probes de runtime: `docker ps` (4 containers healthy), tinker (banco vazio), HTTP :80 (500) e :5173 (200), `npm run typecheck` (7 erros), `git status` (7 arquivos de produto modificados + PLANNER.md)
 - `REQUIREMENTS.md` (UAT-01/UAT-02), `ROADMAP.md` (Fase 16 + dependência Fase 15), `STATE.md` (Deferred Items: 6+5 itens UAT)
 
 ### Secondary (MEDIUM confidence)
