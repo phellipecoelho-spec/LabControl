@@ -159,6 +159,7 @@ function getStatusLabel(status: string): string {
     active: 'Ativo',
     inactive: 'Inativo',
     maintenance: 'Manutenção',
+    loaned: 'Emprestado',
     retired: 'Baixado',
   }
   return labels[status] || status
@@ -175,6 +176,7 @@ function getSeverity(status: string): string {
     active: 'success',
     inactive: 'danger',
     maintenance: 'warning',
+    loaned: 'info',
     retired: 'info',
   }
   return severities[status] || 'info'

@@ -326,6 +326,7 @@ const statusOptions = [
   { label: 'Ativo', value: 'active' },
   { label: 'Inativo', value: 'inactive' },
   { label: 'Manutenção', value: 'maintenance' },
+  { label: 'Emprestado', value: 'loaned' },
   { label: 'Baixado', value: 'retired' },
 ]
 

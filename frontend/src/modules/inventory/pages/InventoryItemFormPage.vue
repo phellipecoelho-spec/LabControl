@@ -229,7 +229,6 @@
         />
       </div>
     </form>
-    </div>
     </template>
   </div>
 </template>

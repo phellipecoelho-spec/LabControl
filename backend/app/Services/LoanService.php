@@ -109,6 +109,11 @@ class LoanService
 
             $loan->save();
 
+            foreach ($loan->equipment as $equipment) {
+                $equipment->status = 'loaned';
+                $equipment->save();
+            }
+
             return $loan->fresh(['borrower', 'equipment', 'items']);
         });
     }
@@ -153,6 +158,12 @@ class LoanService
             $pivot->returned_at = $returnedAt ?: now();
             $pivot->notes = $notes;
             $pivot->save();
+
+            $equipment = \App\Models\Equipment::find($equipmentId);
+            if ($equipment) {
+                $equipment->status = 'active';
+                $equipment->save();
+            }
 
             // Verifica se TODOS os itens foram devolvidos
             $allReturned = $loan->items()
@@ -223,6 +234,11 @@ class LoanService
             $loan->status = LoanStatus::Returned;
             $loan->returned_at = $now;
             $loan->save();
+
+            foreach ($loan->equipment as $equipment) {
+                $equipment->status = 'active';
+                $equipment->save();
+            }
 
             return $loan->fresh(['borrower', 'equipment', 'items']);
         });

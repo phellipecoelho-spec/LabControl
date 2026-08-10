@@ -183,6 +183,7 @@ const statusOptions = [
   { label: 'Ativo', value: 'active' },
   { label: 'Inativo', value: 'inactive' },
   { label: 'Manutenção', value: 'maintenance' },
+  { label: 'Emprestado', value: 'loaned' },
   { label: 'Baixado', value: 'retired' },
 ]
 
@@ -234,6 +235,7 @@ function getStatusLabel(status: string): string {
     active: 'Ativo',
     inactive: 'Inativo',
     maintenance: 'Manutenção',
+    loaned: 'Emprestado',
     retired: 'Baixado',
   }
   return labels[status] || status
@@ -244,6 +246,7 @@ function getSeverity(status: string): string {
     active: 'success',
     inactive: 'danger',
     maintenance: 'warning',
+    loaned: 'info',
     retired: 'info',
   }
   return severities[status] || 'info'

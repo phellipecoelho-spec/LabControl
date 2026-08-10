@@ -78,6 +78,13 @@ class Equipment extends Model
         return $this->hasOne(MaintenanceOrder::class)->latestOfMany('completed_at');
     }
 
+    public function loans()
+    {
+        return $this->belongsToMany(Loan::class, 'equipment_loan')
+            ->withPivot('returned_at', 'notes')
+            ->withTimestamps();
+    }
+
     public function scopeActive(Builder $query): void
     {
         $query->where('status', 'active');

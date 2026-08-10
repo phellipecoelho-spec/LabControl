@@ -41,6 +41,12 @@ class MaintenanceService
                 'created_by' => auth()->id(),
             ]);
 
+            $equipment = \App\Models\Equipment::find($data['equipment_id']);
+            if ($equipment) {
+                $equipment->status = 'maintenance';
+                $equipment->save();
+            }
+
             return $order->fresh(['equipment:id,name,patrimony_id', 'openedBy:id,name']);
         });
     }
@@ -169,6 +175,12 @@ class MaintenanceService
                 $this->createNextPreventive($order, $nextDueAt);
             }
 
+            $equipment = $order->equipment;
+            if ($equipment) {
+                $equipment->status = 'active';
+                $equipment->save();
+            }
+
             return $order->fresh(['equipment:id,name,patrimony_id', 'parts.item']);
         });
     }
@@ -201,6 +213,12 @@ class MaintenanceService
             }
 
             $order->update($updateData);
+
+            $equipment = $order->equipment;
+            if ($equipment) {
+                $equipment->status = 'active';
+                $equipment->save();
+            }
 
             return $order->fresh();
         });
