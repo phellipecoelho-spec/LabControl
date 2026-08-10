@@ -91,7 +91,13 @@ Plans:
   2. Usuário executa os 5 itens visuais UAT de Manutenções sem falhas ou bloqueios (UAT-02)
   3. Resultado de cada cenário documentado (aprovado/reprovado) com evidência (UAT-01, UAT-02)
 
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+
+- [ ] 16-01-PLAN.md — Preparação do Ambiente (W1): commit das mudanças pendentes + seed PostgreSQL idempotente + gate de suíte verde
+- [ ] 16-02-PLAN.md — Execução UAT-01 (W2): 6 cenários de Aferições com admin + usuários de permissão, registro em 16-UAT.md
+- [ ] 16-03-PLAN.md — Execução UAT-02 (W3): 5 itens visuais de Manutenções + encerramento do registro 16-UAT.md
 
 ### Phase 17: Autenticação UX
 
@@ -171,7 +177,7 @@ Plans:
 | 13. PWA e Offline | v1.0 | 2/2 | Complete | 2026-07-28 |
 | 14. Auditoria e Ajustes Finais | v1.0 | 5/5 | Complete | 2026-07-28 |
 | 15. Correções de Funcionamento | v1.1 | 2/2 | Complete   | 2026-08-09 |
-| 16. Verificação UAT | v1.1 | 0/0 | Not started | - |
+| 16. Verificação UAT | v1.1 | 0/3 | Not started | - |
 | 17. Autenticação UX | v1.1 | 0/0 | Not started | - |
 | 18. Testes E2E | v1.1 | 0/0 | Not started | - |
 | 19. Revisão de Layout | v1.1 | 0/0 | Not started | - |
